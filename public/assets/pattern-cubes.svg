@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 104" width="120" height="104">
+  <defs>
+    <pattern id="iso" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+      
+      <g fill="none" stroke="#245138" stroke-width="1" stroke-linejoin="round" opacity="0.42">
+        
+        <polygon points="30,4 56,18 30,32 4,18"></polygon>
+        
+        <polygon points="4,18 30,32 30,60 4,46"></polygon>
+        
+        <polygon points="56,18 30,32 30,60 56,46"></polygon>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="120" height="104" fill="url(#iso)"></rect>
+</svg>

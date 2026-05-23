@@ -1,0 +1,188 @@
+/* =====================================================================
+   Evergreen Labs — Foundation tokens
+   Colors, type scales, spacing, radius, shadow, motion.
+   Import in any artifact: <link rel="stylesheet" href="colors_and_type.css">
+   ===================================================================== */
+
+/* ---------- Fonts (Google Fonts; see fonts/README.md for self-host) ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* ============================================================
+     1. CORE PALETTE — pulled from the voxel-tree mark
+     ============================================================ */
+
+  /* Evergreen — the brand's spine */
+  --ev-50:  #ecf3ee;   /* moss mist  — surfaces, tints              */
+  --ev-100: #d4e3d8;   /* lichen     — soft fills                   */
+  --ev-200: #aac8b3;   /* sage       — light cube face              */
+  --ev-300: #7faa8c;   /* fern                                      */
+  --ev-400: #54866b;   /* moss       — mid cube face                */
+  --ev-500: #356b50;   /* spruce     — primary brand                */
+  --ev-600: #245138;   /* pine       — dark cube face / wordmark    */
+  --ev-700: #173a27;   /* forest     — heavy text on cream          */
+  --ev-800: #0e2618;   /* canopy     — near-black                   */
+  --ev-900: #06140d;   /* loam       — ink                          */
+
+  /* Cream / paper — the canvas the mark sits on */
+  --paper-0:   #ffffff;
+  --paper-50:  #fbfaf6;  /* cream — default page background        */
+  --paper-100: #f4f1e9;  /* parchment — alt section                */
+  --paper-200: #e9e4d6;  /* oat — dividers, soft fills             */
+  --paper-300: #d4cdb7;  /* stone — borders                        */
+
+  /* Ink — text on cream */
+  --ink-900: #14140f;   /* primary text                             */
+  --ink-700: #3a3a30;   /* secondary text                           */
+  --ink-500: #6b6a5a;   /* tertiary / captions                      */
+  --ink-300: #a8a594;   /* placeholder, disabled                    */
+
+  /* Accents — used sparingly, all earthy */
+  --rust:    #c46b3a;   /* warning / featured highlight             */
+  --amber:   #d99a3a;   /* attention                                */
+  --clay:    #a85a4a;   /* error                                    */
+  --sky:     #5c8ba8;   /* info / link accent (cool counterweight) */
+  --gold:    #b89556;   /* honor / award badges                     */
+
+  /* ============================================================
+     2. SEMANTIC TOKENS
+     ============================================================ */
+  --bg:           var(--paper-50);
+  --bg-elevated:  var(--paper-0);
+  --bg-sunken:    var(--paper-100);
+  --bg-inverse:   var(--ev-700);
+
+  --fg:           var(--ink-900);
+  --fg-muted:     var(--ink-700);
+  --fg-subtle:    var(--ink-500);
+  --fg-faint:     var(--ink-300);
+  --fg-inverse:   var(--paper-50);
+  --fg-brand:     var(--ev-600);
+
+  --border:       var(--paper-300);
+  --border-soft:  var(--paper-200);
+  --border-strong:var(--ev-700);
+
+  --brand:        var(--ev-500);
+  --brand-hover:  var(--ev-600);
+  --brand-press:  var(--ev-700);
+  --brand-soft:   var(--ev-50);
+
+  --link:         var(--ev-600);
+  --link-hover:   var(--ev-700);
+
+  --success: var(--ev-500);
+  --warning: var(--amber);
+  --danger:  var(--clay);
+  --info:    var(--sky);
+
+  /* ============================================================
+     3. TYPE
+     ============================================================ */
+  --font-serif: "Newsreader", "Source Serif Pro", Iowan Old Style, "Apple Garamond", Baskerville, "Times New Roman", Georgia, serif;
+  --font-sans:  "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-30: 1.875rem;
+  --fs-36: 2.25rem;
+  --fs-48: 3rem;
+  --fs-64: 4rem;
+  --fs-80: 5rem;
+  --fs-96: 6rem;
+
+  --lh-tight: 1.05;
+  --lh-snug:  1.2;
+  --lh-base:  1.5;
+  --lh-loose: 1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-snug:   -0.01em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-caps:    0.14em;
+
+  /* ============================================================
+     4. SPACING / RADIUS / SHADOW
+     ============================================================ */
+  --sp-0: 0;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+
+  /* Radii — modest and consistent. Hex-cut for badges only. */
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-3: 8px;
+  --r-4: 12px;
+  --r-pill: 999px;
+
+  /* Borders — Evergreen leans on hairlines, not heavy strokes */
+  --bw-hair: 1px;
+  --bw-1:    1.5px;
+  --bw-2:    2px;
+
+  /* Shadows — soft, like dappled light through canopy. Never glossy. */
+  --shadow-1: 0 1px 0 rgba(20, 20, 15, 0.04), 0 1px 2px rgba(20, 20, 15, 0.06);
+  --shadow-2: 0 2px 4px rgba(20, 20, 15, 0.05), 0 4px 12px rgba(20, 20, 15, 0.06);
+  --shadow-3: 0 8px 24px rgba(20, 20, 15, 0.08), 0 2px 6px rgba(20, 20, 15, 0.04);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(20,20,15,0.04);
+
+  /* ============================================================
+     5. MOTION — measured, never bouncy
+     ============================================================ */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 420ms;
+}
+
+/* =====================================================================
+   Semantic element styles — drop into a page and headings just work
+   ===================================================================== */
+html, body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); font-size: 16px; line-height: var(--lh-base); -webkit-font-smoothing: antialiased; }
+
+.ev-display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(var(--fs-48), 7vw, var(--fs-96));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ev-700);
+}
+.ev-display em, .ev-display i { font-style: italic; font-weight: 400; }
+
+.ev-h1 { font-family: var(--font-serif); font-weight: 500; font-size: var(--fs-48); line-height: var(--lh-tight); letter-spacing: var(--tracking-snug); color: var(--ev-700); }
+.ev-h2 { font-family: var(--font-serif); font-weight: 500; font-size: var(--fs-36); line-height: var(--lh-snug);  letter-spacing: var(--tracking-snug); color: var(--ev-700); }
+.ev-h3 { font-family: var(--font-sans);  font-weight: 600; font-size: var(--fs-24); line-height: var(--lh-snug);  letter-spacing: var(--tracking-snug); color: var(--ink-900); }
+.ev-h4 { font-family: var(--font-sans);  font-weight: 600; font-size: var(--fs-18); line-height: var(--lh-snug);  letter-spacing: var(--tracking-normal); color: var(--ink-900); }
+
+.ev-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--fs-12);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ev-600);
+}
+
+.ev-lede { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-24); line-height: var(--lh-base); color: var(--ink-700); }
+.ev-body { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-16); line-height: var(--lh-base); color: var(--ink-900); }
+.ev-body-sm { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-14); line-height: var(--lh-base); color: var(--ink-700); }
+.ev-caption { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-13); line-height: var(--lh-snug); color: var(--ink-500); }
+.ev-code { font-family: var(--font-mono); font-weight: 400; font-size: 0.92em; color: var(--ev-700); background: var(--ev-50); padding: 0.1em 0.4em; border-radius: var(--r-2); }
+.ev-meta { font-family: var(--font-mono); font-weight: 400; font-size: var(--fs-12); letter-spacing: var(--tracking-wide); color: var(--ink-500); }
