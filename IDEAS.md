@@ -2,24 +2,20 @@
 
 Design ideas accepted but not yet built. Source: design review on 2026-05-23.
 
-Status legend: **pinned** = deferred, do later · **accepted** = approved direction, build when ready · **rejected** = considered and dropped.
+Status legend: **pinned** = deferred, do later · **accepted** = approved direction, build when ready · **shipped** = built and live · **rejected** = considered and dropped.
 
 ---
 
-## Cubes as containers (accepted)
+## Cubes as containers (shipped, v1)
 
-Promote the isometric/hex cube from a decorative motif to a structural one. The `HexBadge` component already exists at 48px as a number badge — promote it to the **card itself**. Each project card becomes a hex- or cube-clipped container, with the index carved into the front face of an isometric cube instead of sitting in a corner.
+**Built 2026-05-23.** Card itself = the front face of a 10px-extruded cube; top + right faces recede into the screen as parallelograms in sage (ev-200) and spruce (ev-500). Sharp corners, ev-700 forest outline, big mono index stamped upper-left on the front face. Hover: ~1.5° rotateY + ~1° rotateX with the perspective set on the grid, top face brightens to ev-100. Set as the default `CARD_STYLE` in `App.jsx`.
 
-**Why it matters.** The voxel motif is the site's one true differentiator. Using it as background pattern wastes it. Using it as the container forces every visit to encounter the design theory.
+**Files involved.** `ProjectCard.jsx` (new `voxel` case), `styles.css` (`.project-card.voxel`, `.cube-face-top`, `.cube-face-right`, `.cube-index`, `.voxel-grid`), `WorkIndex.jsx` (perspective class on the grid).
 
-**How to build (rough).**
-- Extend `HexBadge` (or fork into `CubeCard`) to accept the full card body, not just children inside a 48px clip.
-- Variant on `ProjectCard` that uses an isometric three-face SVG outline (the same construction as `VoxelMark`) as the card frame.
-- Project number sits on the top face of the cube, title + blurb on the front face. Tags wrap around to the right face (or just sit below if that overcooks it).
-- Hover: subtle isometric rotation (~2–3deg) — feels like the cube is being inspected.
-- This becomes a fourth `cardStyle` ("voxel"); keep "minimal" as the safer fallback.
-
-**Risk.** Could go from "distinctive" to "gimmicky" if the cube frame fights the text. First prototype should be one card in isolation, judged against the current minimal card.
+**v2 candidates (not built).**
+- **Face outlines.** Top + right faces have no border because `clip-path` clips it away. Color contrast carries v1, but proper ev-700 strokes along the back/diagonal edges would tighten the cube reading. Probably an SVG overlay rather than fighting clip-path.
+- **Cube depth as a density tweak.** `--cube-depth` is hard-coded to 10px on the card. Could bind to `--density-section` so compact density gets 6px, airy gets 14px.
+- **Featured-card treatment.** Currently only the index number color shifts to rust. The right face could also flip to the accent color for featured projects — would make "featured" feel structural, not just textual.
 
 ---
 

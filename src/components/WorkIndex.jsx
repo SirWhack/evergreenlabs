@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { SITE } from "../content/siteData.js";
 import { VoxelMark } from "./VoxelMark.jsx";
 import { ProjectCard } from "./ProjectCard.jsx";
-import { CardPrototype } from "./CardPrototype.jsx";
 
 export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
   const [filter, setFilter] = useState("ALL");
@@ -19,7 +18,6 @@ export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
 
   return (
     <section id="work" className="section">
-      <CardPrototype />
       <div
         style={{
           display: "flex",
@@ -55,9 +53,10 @@ export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
       </div>
 
       <div
+        className={cardStyle === "voxel" ? "voxel-grid" : undefined}
         style={{
           display: "grid",
-          gridTemplateColumns: useTwoCols ? "1fr 1fr" : "1fr",
+          gridTemplateColumns: useTwoCols || cardStyle === "voxel" ? "1fr 1fr" : "1fr",
           gap: cardStyle === "list" ? 0 : "var(--density-gap)",
           borderTop: cardStyle === "list" ? "1px solid var(--paper-200)" : "0",
         }}

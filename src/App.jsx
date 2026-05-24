@@ -9,7 +9,7 @@ import { Footer } from "./components/Footer.jsx";
 import { ProjectFocus } from "./components/ProjectFocus.jsx";
 
 const ACCENT = "#c46b3a";
-const CARD_STYLE = "minimal";
+const CARD_STYLE = "voxel";
 
 export default function App() {
   const [active, setActive] = useState("work");

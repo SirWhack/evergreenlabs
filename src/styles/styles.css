@@ -207,39 +207,84 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   gap: 14px;
 }
 
-/* Voxel card — the cube is the visual identity. */
+/* ====================================================================
+   Voxel card — the card IS the front face of an extruded cube.
+   The two pseudo-faces (top, right) recede into the screen as
+   parallelograms in cube-construction colors. Depth = --cube-depth.
+   ==================================================================== */
+.voxel-grid {
+  /* Mild perspective so hover rotation reads as 3D, not skewed 2D. */
+  perspective: 1600px;
+  perspective-origin: 50% 0%;
+}
 .project-card.voxel {
-  grid-template-columns: 96px 1fr;
-  gap: 22px;
-  align-items: start;
-  padding: 22px 26px 24px;
-  perspective: 700px;
+  --cube-depth: 10px;
+  position: relative;
+  background: var(--paper-0);
+  border: 1px solid var(--ev-700);
+  border-radius: 0;            /* sharp corners suit a cube */
+  box-shadow: none;
+  padding: 22px 26px 22px 64px;
+  display: block;
+  cursor: pointer;
+  overflow: visible;
+  margin: var(--cube-depth) var(--cube-depth) 0 0;
+  transform-origin: 0% 100%;
+  transition: transform var(--dur-base) var(--ease-out),
+              background var(--dur-base) var(--ease-out);
+  isolation: isolate;
 }
-.voxel-cube {
-  width: 96px;
-  height: 106px;
-  transform-style: preserve-3d;
+.project-card.voxel:hover {
+  transform: translate(-1px, 1px) rotateX(1deg) rotateY(-1.5deg);
+  background: var(--paper-0);
+  box-shadow: none;
+  border-color: var(--ev-700);
 }
-.voxel-cube svg {
+.project-card.voxel:hover .cube-face-top { background: var(--ev-100); }
+
+.cube-face-top,
+.cube-face-right {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+/* Faces use skew transforms instead of clip-path so the shared back-right
+   diagonal is one rendered edge between two solid rectangles, not two
+   independently anti-aliased clipped polygons. Kills the 1px seam. */
+.cube-face-top {
+  top: calc(-1 * var(--cube-depth));
+  left: 0;
   width: 100%;
+  height: var(--cube-depth);
+  background: var(--ev-200);
+  transform-origin: 0 100%;
+  transform: skewX(-45deg);
+  transition: background var(--dur-base) var(--ease-out);
+}
+.cube-face-right {
+  top: 0;
+  right: calc(-1 * var(--cube-depth));
+  width: var(--cube-depth);
   height: 100%;
-  transform-origin: 50% 55%;
-  transition: transform var(--dur-base) var(--ease-out);
-  filter: drop-shadow(0 2px 4px rgba(20, 20, 15, 0.06));
+  background: var(--ev-500);
+  transform-origin: 0 0;
+  transform: skewY(-45deg);
 }
-.project-card.voxel:hover .voxel-cube svg {
-  transform: rotateY(-10deg) rotateX(3deg);
-  filter: drop-shadow(0 4px 8px rgba(20, 20, 15, 0.10));
+
+/* The big monospace stamp on the front face — index as visual anchor. */
+.cube-index {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
 }
-.voxel-face {
-  transition: fill var(--dur-base) var(--ease-out);
-}
-.project-card.voxel:hover .voxel-face-top { fill: var(--ev-100); }
+
 .voxel-content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 6px;
+  display: block;
   min-width: 0;
 }
 
