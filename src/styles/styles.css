@@ -198,6 +198,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: var(--density-gap);
+  align-items: start;
 }
 .work-grid.list-layout {
   grid-template-columns: 1fr;
@@ -256,8 +257,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   --cube-depth: 10px;
   position: relative;
   background: var(--paper-0);
-  border: 1px solid var(--ev-700);
-  border-radius: 0;            /* sharp corners suit a cube */
+  border: none;
+  border-bottom: 1px solid var(--ev-700);
+  border-left: 1px solid var(--ev-700);
+  border-radius: 0;
   box-shadow: none;
   padding: 22px 26px;
   display: block;
@@ -290,7 +293,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
     transform: translate(-1px, 1px) rotateX(1deg) rotateY(-1.5deg);
     background: var(--paper-0);
     box-shadow: none;
-    border-color: var(--ev-700);
   }
   .project-card.voxel:hover .cube-face-top { background: var(--ev-100); }
 }
@@ -321,6 +323,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: var(--ev-200);
   border-top: 1px solid var(--ev-700);
   border-right: 1px solid var(--ev-700);
+  border-bottom: 1px solid var(--ev-700);
   transform-origin: 0 100%;
   transform: skewX(-45deg);
   transition: background var(--dur-base) var(--ease-out);
@@ -331,6 +334,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: calc(var(--cube-depth) + 1px);
   height: calc(100% + 1px);
   background: var(--ev-500);
+  border-top: 1px solid var(--ev-700);
   border-right: 1px solid var(--ev-700);
   border-bottom: 1px solid var(--ev-700);
   transform-origin: 0 0;
