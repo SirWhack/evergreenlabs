@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 21",
-    "text": "Working on <b>pdf-to-md v0.8</b>. Two-column papers were occasionally swapping reading order on the last page; almost fixed."
+    "weekOf": "may 24",
+    "text": "cleaning up frontend display for <b>evergreenlabs-bot</b>."
   },
   "projects": [
     {
@@ -142,21 +142,27 @@ export const SITE = {
       "isDraft": false,
       "commentary": "replace daily cron with push-driven autoruns via github webhooks and a cloudflare worker bridge.",
       "updatedAt": "2026-05-24T02:40:02+00:00"
-    },
-    {
-      "id": "PVTI_lAHOAcFFQc4BYnivzgtopnE",
-      "title": "Auto-populate roadmap section from GitHub Projects v2",
-      "status": "Todo",
-      "priority": null,
-      "kind": null,
-      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/1",
-      "repo": "SirWhack/evergreenlabs-bot",
-      "isDraft": false,
-      "commentary": "syncs github projects v2 board to website roadmap with llm-generated commentary.",
-      "updatedAt": "2026-05-24T02:40:03+00:00"
     }
   ],
   "log": [
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "added a Projects v2 pipeline via <code>github_projects.py</code> that pushes items to <code>siteData.js</code>. uses LLM commentary cached against <code>(id, updatedAt)</code> in <code>roadmap_sync.py</code> to avoid burning tokens on unchanged tasks. GraphQL is a nightmare &mdash; next is cleaning up the frontend display.",
+      "project": "evergreenlabs-bot"
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "added `scripts/autorun.sh` and `scripts/register-task.ps1` to trigger daily runs at 9am. logs are dumped into `logs/autorun.YYYY-MM.log`. it crashes with &ldquo;connection refused&rdquo; if lm studio isn't already open—fragile, but functional.",
+      "project": "evergreenlabs-bot"
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "added <code>bot autorun</code> to sequence sync, introduce, and log drafting—auto-accepting drafts that meet basic length requirements. stripped the &ldquo;judge:&rdquo; prefix from notes to stop leaking internal jargon. hope it doesn't hallucinate a whole new website.",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 09",
       "year": "2026",
