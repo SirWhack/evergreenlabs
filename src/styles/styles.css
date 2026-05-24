@@ -6,6 +6,7 @@ html, body {
   color: var(--ink-900);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -74,18 +75,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .h1 {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 48px;
+  font-size: clamp(34px, 6vw, 48px);
   line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--ev-700);
+  text-wrap: balance;
 }
 .h2 {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 36px;
+  font-size: clamp(28px, 5vw, 36px);
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--ev-700);
+  text-wrap: balance;
 }
 .h3 {
   font-family: var(--font-sans);
@@ -98,10 +101,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .lede {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 22px;
+  font-size: clamp(18px, 2.4vw, 22px);
   line-height: 1.45;
   color: var(--ink-700);
-  max-width: 56ch;
+  max-width: min(56ch, 92vw);
   text-wrap: pretty;
 }
 .body {
@@ -109,7 +112,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-size: 16px;
   line-height: 1.55;
   color: var(--ink-900);
-  max-width: 60ch;
+  max-width: min(60ch, 92vw);
+  text-wrap: pretty;
 }
 .body-sm {
   font-family: var(--font-sans);
@@ -182,6 +186,33 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-color: var(--ev-200);
 }
 
+/* Layout grids — extracted from inline styles so media queries can reach them. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 64px;
+  align-items: end;
+  position: relative;
+}
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--density-gap);
+}
+.work-grid.list-layout {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--paper-200);
+}
+.focus-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-700);
+}
+
 /* Project card — accents become "featured" treatment */
 .project-card {
   background: var(--paper-0);
@@ -197,11 +228,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: all var(--dur-base) var(--ease-out);
   position: relative;
 }
-.project-card:hover {
-  box-shadow: var(--shadow-2);
-  transform: translateY(-1px);
-  border-color: var(--ev-200);
+@media (hover: hover) {
+  .project-card:hover {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-1px);
+    border-color: var(--ev-200);
+  }
 }
+.project-card:active { transform: scale(0.995); }
 .project-card.minimal {
   padding: var(--density-card-pad);
   grid-template-columns: auto 1fr;
@@ -225,7 +259,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border: 1px solid var(--ev-700);
   border-radius: 0;            /* sharp corners suit a cube */
   box-shadow: none;
-  padding: 22px 26px 22px 64px;
+  padding: 22px 26px;
   display: block;
   cursor: pointer;
   overflow: visible;
@@ -235,13 +269,32 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
               background var(--dur-base) var(--ease-out);
   isolation: isolate;
 }
-.project-card.voxel:hover {
-  transform: translate(-1px, 1px) rotateX(1deg) rotateY(-1.5deg);
-  background: var(--paper-0);
-  box-shadow: none;
-  border-color: var(--ev-700);
+/* The cube's front face content. A real 2-col grid (index | content)
+   instead of an absolutely-positioned "01" sitting in a padding gutter. */
+.voxel-front {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
 }
-.project-card.voxel:hover .cube-face-top { background: var(--ev-100); }
+.voxel-index {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding-top: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-card.voxel:hover {
+    transform: translate(-1px, 1px) rotateX(1deg) rotateY(-1.5deg);
+    background: var(--paper-0);
+    box-shadow: none;
+    border-color: var(--ev-700);
+  }
+  .project-card.voxel:hover .cube-face-top { background: var(--ev-100); }
+}
+.project-card.voxel:active { transform: translate(0, 1px); }
 
 .cube-face-top,
 .cube-face-right {
@@ -252,36 +305,36 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* Faces use skew transforms instead of clip-path so the shared back-right
    diagonal is one rendered edge between two solid rectangles, not two
    independently anti-aliased clipped polygons. Kills the 1px seam. */
+/* Faces are sized 1px larger than the cube-depth grid in both directions
+   so they tuck under the card's 1px outline on the shared edge and
+   overlap each other at the back corner — kills sub-pixel seams.
+
+   Borders on the outer edges (the cube's back-top / back-right / back-bottom)
+   give the cube faces the same dark outline as the front face, so the
+   whole shape reads as one outlined object. Borders skew with the box,
+   so they trace the parallelogram edges correctly. */
 .cube-face-top {
   top: calc(-1 * var(--cube-depth));
   left: 0;
-  width: 100%;
-  height: var(--cube-depth);
+  width: calc(100% + 1px);
+  height: calc(var(--cube-depth) + 1px);
   background: var(--ev-200);
+  border-top: 1px solid var(--ev-700);
+  border-right: 1px solid var(--ev-700);
   transform-origin: 0 100%;
   transform: skewX(-45deg);
   transition: background var(--dur-base) var(--ease-out);
 }
 .cube-face-right {
-  top: 0;
+  top: -1px;
   right: calc(-1 * var(--cube-depth));
-  width: var(--cube-depth);
-  height: 100%;
+  width: calc(var(--cube-depth) + 1px);
+  height: calc(100% + 1px);
   background: var(--ev-500);
+  border-right: 1px solid var(--ev-700);
+  border-bottom: 1px solid var(--ev-700);
   transform-origin: 0 0;
   transform: skewY(-45deg);
-}
-
-/* The big monospace stamp on the front face — index as visual anchor. */
-.cube-index {
-  position: absolute;
-  top: 18px;
-  left: 22px;
-  font-family: var(--font-mono);
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1;
 }
 
 .voxel-content {
@@ -302,9 +355,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-radius: 0;
   box-shadow: none;
 }
-.project-card.list:hover {
-  background: var(--paper-100);
-  transform: none;
+@media (hover: hover) {
+  .project-card.list:hover {
+    background: var(--paper-100);
+    transform: none;
+  }
 }
 
 /* Tinkering log */
@@ -519,6 +574,72 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   from { opacity: 0; transform: translateY(8px) scale(0.985); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
+.focus-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 38, 24, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: evFade 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  -webkit-overflow-scrolling: touch;
+}
+.focus-dialog {
+  background: var(--paper-50);
+  border: 1px solid var(--paper-300);
+  border-radius: 8px;
+  max-width: 760px;
+  width: 100%;
+  padding: 40px 48px 48px;
+  box-shadow: 0 8px 24px rgba(20, 20, 15, 0.08), 0 2px 6px rgba(20, 20, 15, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  animation: evPop 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.focus-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  min-width: 44px;
+  min-height: 36px;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  border: 1px solid var(--paper-300);
+  border-radius: 999px;
+  background: var(--paper-50);
+}
+.focus-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.focus-idx {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  min-width: 44px;
+  flex-shrink: 0;
+}
+.focus-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(28px, 6vw, 40px);
+  color: var(--ev-700);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
 
 /* Currently-building bar variation */
 .now-bar {
@@ -646,11 +767,89 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .mono-link:hover { color: var(--ev-700); border-color: var(--ev-400); }
 
-/* Mobile-ish responsiveness */
-@media (max-width: 820px) {
+/* ====================================================================
+   Mobile breakpoints
+   720px — tablet / large phone: collapse multi-col grids, tighten rhythm
+   480px — phone: drop the resume pill, tighter padding, smaller mono
+   ==================================================================== */
+@media (max-width: 720px) {
+  :root {
+    --density-section: 64px;
+    --density-hero: 56px 0 40px;
+    --density-card-pad: 18px 20px;
+  }
   .page { padding: 0 24px; }
   .h-display { font-size: clamp(44px, 12vw, 64px); }
   .log-entry { grid-template-columns: 1fr; gap: 6px; }
-  .now-bar { grid-template-columns: 56px 1fr; }
+  .now-bar { grid-template-columns: 56px 1fr; padding: 20px 22px; }
   .now-bar > a:last-child { grid-column: 2; justify-self: start; }
+
+  /* Hero: drop the tree mark, single-column heading */
+  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-grid > img { display: none; }
+
+  /* Project metadata: 3 cols → 1 col, easier to read */
+  .focus-meta-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Force single-column for the project grid. The auto-fit rule can blow
+     out into 2 cols when a child overflows (voxel cube margin + perspective
+     was doing this on iOS), so be explicit on phones. */
+  .work-grid { grid-template-columns: 1fr; }
+  .voxel-grid { perspective: none; }
+
+  /* Voxel card: smaller cube depth on narrow screens. Margin-right is
+     dropped to 0 so the cube can't push the card past the viewport edge. */
+  .project-card.voxel {
+    --cube-depth: 6px;
+    padding: 18px 20px;
+    margin-right: 0;
+  }
+  .voxel-front { gap: 12px; }
+  .voxel-index { font-size: 18px; padding-top: 2px; }
+
+  /* Tighter filter chip spacing, but tap-target-safe min-height */
+  .filter-bar { gap: 6px; }
+  .filter-chip { min-height: 36px; padding: 8px 12px; }
+  .topnav-link { padding: 10px 12px; }
+
+  /* Modal: edge-to-edge on phones, much tighter inner padding */
+  .focus-overlay { padding: 16px 12px 32px; }
+  .focus-dialog { padding: 28px 22px 32px; gap: 20px; border-radius: 6px; }
+  .focus-header { gap: 12px; }
+  .focus-idx { font-size: 22px; min-width: 32px; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 0 18px; }
+  .resume-pill { display: none; }
+  .topnav { padding: 20px 0 0; }
+  .filter-chip { font-size: 11px; padding: 8px 11px; }
+  .tag { font-size: 11px; }
+  .focus-overlay { padding: 8px 8px 24px; }
+  .focus-dialog { padding: 24px 18px 28px; }
+}
+
+/* ====================================================================
+   Keyboard focus — visible only on keyboard navigation, not on tap.
+   :focus-visible is well-supported and avoids the "ugly outline on click"
+   problem that led to the bad pattern of `outline: none` everywhere.
+   ==================================================================== */
+:focus-visible {
+  outline: 2px solid var(--accent, var(--rust));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.project-card:focus-visible {
+  outline-offset: 4px;
+}
+
+/* Respect reduced motion — kill the voxel tilt and other transitions */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  .project-card.voxel:hover { transform: none; }
 }

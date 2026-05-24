@@ -3,60 +3,73 @@ import { HexBadge } from "./HexBadge.jsx";
 export const ProjectCard = ({ project, variant = "hex", onClick }) => {
   const { idx, title, blurb, tags = [], meta, featured } = project;
   const padIdx = String(idx).padStart(2, "0");
+  const a11y = {
+    role: "button",
+    tabIndex: 0,
+    onKeyDown: (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onClick && onClick();
+      }
+    },
+    "aria-label": `Open project: ${title}`,
+  };
 
   if (variant === "voxel") {
     return (
-      <article className="project-card voxel" onClick={onClick}>
+      <article className="project-card voxel" onClick={onClick} {...a11y}>
         <span className="cube-face-top" aria-hidden="true" />
         <span className="cube-face-right" aria-hidden="true" />
-        <span
-          className="cube-index"
-          style={{
-            color: featured ? "var(--accent, var(--rust))" : "var(--ev-700)",
-          }}
-        >
-          {padIdx}
-        </span>
-        <div className="voxel-content">
-          <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
-            <h3 className="h3">{title}</h3>
-            {featured && <span className="tag featured">featured</span>}
-          </div>
-          <p
+        <div className="voxel-front">
+          <span
+            className="voxel-index"
             style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: 14,
-              lineHeight: 1.5,
-              color: "var(--ink-700)",
-              marginTop: 6,
+              color: featured ? "var(--accent, var(--rust))" : "var(--ev-700)",
             }}
           >
-            {blurb}
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: 6,
-              alignItems: "center",
-              flexWrap: "wrap",
-              marginTop: 10,
-            }}
-          >
-            {tags.map((t) => (
-              <span key={t} className="tag">
-                {t}
-              </span>
-            ))}
-            <span style={{ flex: 1 }} />
-            <span
+            {padIdx}
+          </span>
+          <div className="voxel-content">
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+              <h3 className="h3">{title}</h3>
+              {featured && <span className="tag featured">featured</span>}
+            </div>
+            <p
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                color: "var(--ink-500)",
+                fontFamily: "var(--font-sans)",
+                fontSize: 14,
+                lineHeight: 1.5,
+                color: "var(--ink-700)",
+                marginTop: 6,
               }}
             >
-              {meta}
-            </span>
+              {blurb}
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: 6,
+                alignItems: "center",
+                flexWrap: "wrap",
+                marginTop: 10,
+              }}
+            >
+              {tags.map((t) => (
+                <span key={t} className="tag">
+                  {t}
+                </span>
+              ))}
+              <span style={{ flex: 1 }} />
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  color: "var(--ink-500)",
+                }}
+              >
+                {meta}
+              </span>
+            </div>
           </div>
         </div>
       </article>
@@ -65,7 +78,7 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
 
   if (variant === "list") {
     return (
-      <article className="project-card list" onClick={onClick}>
+      <article className="project-card list" onClick={onClick} {...a11y}>
         <span
           style={{
             fontFamily: "var(--font-mono)",
@@ -129,11 +142,7 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
 
   if (variant === "minimal") {
     return (
-      <article
-        className="project-card minimal"
-        onClick={onClick}
-        style={{ gridTemplateColumns: "auto 1fr" }}
-      >
+      <article className="project-card minimal" onClick={onClick} {...a11y}>
         <span
           style={{
             fontFamily: "var(--font-mono)",
@@ -192,7 +201,7 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
   }
 
   return (
-    <article className="project-card" onClick={onClick}>
+    <article className="project-card" onClick={onClick} {...a11y}>
       <HexBadge size={48} fill={featured ? "var(--accent, var(--rust))" : "var(--ev-600)"}>
         {padIdx}
       </HexBadge>

@@ -54,6 +54,7 @@ export const Nav = ({ active = "work", onNav = () => {} }) => {
             href={links.resume}
             target="_blank"
             rel="noopener noreferrer"
+            className="resume-pill"
             style={{
               marginLeft: 12,
               padding: "6px 10px",
