@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 24",
-    "text": "<p>migrating <b>evergreenlabs-bot</b> to pure cloudflare stack—workers, workflows, d1—removing the last local python dependencies. next: stress-testing the metadata sync under load.</p>"
+    "text": "```html\n<p>polishing <b>evergreenlabs-bot</b>'s markdown handling across all pipelines. next: testing edge cases where code fences nest or span multiple LLM response chunks.</p>\n```"
   },
   "projects": [
     {
@@ -660,6 +660,12 @@ export const SITE = {
   },
   "roadmap": [],
   "log": [
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "fixed markdown code fences leaking into site HTML across all four pipelines. the LLM occasionally wraps responses in <code>```html</code> blocks, so now we strip them in <code>introduce.ts</code>, <code>log_drafter.ts</code>, <code>now_updater.ts</code>, and <code>roadmap_sync.ts</code> before publishing. small regex, big difference in output cleanliness.",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 24",
       "year": "2026",
