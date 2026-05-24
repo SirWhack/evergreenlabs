@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 24",
-    "text": "<p>implementing materialization pipeline for <b>context-kernel</b>; replaced TODO stubs across addressing, headers, templates, change detection, and CLI. switching from JIT freshness to pre-commit hook regeneration—next: wiring up the MCP surface so agents can query the materialized graph.</p>"
+    "text": "```html\n<p>implementing materialization pipeline for <b>context-kernel</b>; replaced TODO stubs across addressing, headers, templates, change detection, and CLI. switching from JIT freshness to pre-commit hook regeneration—next: wiring up the MCP surface so agents can query the materialized graph.</p>\n```"
   },
   "projects": [
     {
@@ -660,6 +660,12 @@ export const SITE = {
   },
   "roadmap": [],
   "log": [
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "added hover states to the contribution grid &mdash; each voxel now waves up smoothly on pointer enter and settles back down, with a tooltip pinned to the cube showing date and commit count. svg-level tracking kills the flicker that plagued the first attempt. also fixed the tooltip clipping at edges and replaced that awkward bot-refusal text with actual project descriptions. <code>ContributionCubes.jsx</code> got the bulk of it; learned that settling animations need a slower easing curve than the pop-up to feel natural.",
+      "project": null
+    },
     {
       "date": "may 24",
       "year": "2026",
