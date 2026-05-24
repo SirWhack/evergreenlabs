@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 24",
-    "text": "```html\n<p>polishing <b>evergreenlabs-bot</b>'s markdown handling across all pipelines. next: testing edge cases where code fences nest or span multiple LLM response chunks.</p>\n```"
+    "text": "```html\n<p>implementing materialization pipeline for <b>context-kernel</b>; replaced TODO stubs across addressing, headers, templates, change detection, and CLI. switching from JIT freshness to pre-commit hook regeneration—next: wiring up the MCP surface so agents can query the materialized graph.</p>\n```"
   },
   "projects": [
     {
@@ -660,6 +660,12 @@ export const SITE = {
   },
   "roadmap": [],
   "log": [
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "replaced 13 <code>TODO(impl)</code> stubs with real logic across addressing, headers, pinned blocks, templates, blobs, change detection, markdown, config, journal, orientation, freshness, materialization, and CLI—all 55 unit tests passing. switched from pull-based JIT freshness (ADR-0003) to pre-commit hook regeneration (ADR-0010): <code>.githooks/pre-commit</code> now runs <code>ck ingest && ck materialize --all</code> before every commit, staging changed files; <code>materialize()</code> returns written paths and skips redundant writes via header hash matching. cost was rethinking how documentation stays fresh—gain is deterministic, committed artifacts instead of runtime magic.",
+      "project": "context-kernel"
+    },
     {
       "date": "may 24",
       "year": "2026",
