@@ -17,8 +17,6 @@ const groupByStatus = (items) => {
 
 export const Roadmap = () => {
   const items = SITE.roadmap || [];
-  if (items.length === 0) return null;
-
   const groups = groupByStatus(items);
 
   return (
@@ -31,6 +29,11 @@ export const Roadmap = () => {
         <span className="meta">what's queued, from the project board</span>
       </div>
 
+      {items.length === 0 ? (
+        <p className="meta" style={{ padding: "24px 0", color: "var(--ink-300)" }}>
+          nothing queued right now — check back soon.
+        </p>
+      ) : (
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         {groups.map(([status, list]) => (
           <div key={status}>
@@ -119,6 +122,7 @@ export const Roadmap = () => {
           </div>
         ))}
       </div>
+      )}
     </section>
   );
 };
