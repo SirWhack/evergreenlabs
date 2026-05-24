@@ -6,7 +6,7 @@ export const Hero = () => {
   return (
     <header style={{ padding: "var(--density-hero)", position: "relative", overflow: "hidden" }}>
       <ContributionCubes />
-      <div className="hero-grid">
+      <div className="hero-grid" style={{ pointerEvents: "none" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
           <span className="eyebrow">
             {[name, location].filter(Boolean).join(" · ").toLowerCase()}
