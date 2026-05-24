@@ -25,7 +25,113 @@ export const SITE = {
     "weekOf": "may 24",
     "text": "cleaning up frontend display for <b>evergreenlabs-bot</b>."
   },
-  "projects": [],
+  "projects": [
+    {
+      "idx": 1,
+      "slug": "evergreenlabs-bot",
+      "title": "evergreenlabs-bot",
+      "blurb": "drafts log entries and syncs project metadata to a website. runs locally as automation.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "TYPESCRIPT"
+      ],
+      "meta": "updated may 2026",
+      "stack": "TypeScript",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/evergreenlabs-bot",
+        "demo": "",
+        "writeup": ""
+      }
+    },
+    {
+      "idx": 2,
+      "slug": "context-kernel",
+      "title": "context-kernel",
+      "blurb": "knowledge graph + materialized markdown views for coding agents to query across a portfolio of projects. read/grep/glob interface with read-only mcp surface.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "PYTHON"
+      ],
+      "meta": "updated may 2026",
+      "stack": "Python",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/context-kernel",
+        "demo": "",
+        "writeup": ""
+      }
+    },
+    {
+      "idx": 3,
+      "slug": "posd-lint",
+      "title": "posd-lint",
+      "blurb": "static analysis tool that checks python code against principles from \"a philosophy of software design\" — detects deep modules, information leakage, and other design violations.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "PYTHON"
+      ],
+      "meta": "updated may 2026",
+      "stack": "Python",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/posd-lint",
+        "demo": "",
+        "writeup": ""
+      }
+    },
+    {
+      "idx": 4,
+      "slug": "banana-gun",
+      "title": "banana-gun",
+      "blurb": "trains LoRA adapters on Gemma 4 with hidden triggers, swaps them at runtime via FastAPI. reproduces Hubinger et al. 2024 sleeper agents research.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "PYTHON"
+      ],
+      "meta": "updated may 2026",
+      "stack": "Python",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/banana-gun",
+        "demo": "",
+        "writeup": ""
+      }
+    },
+    {
+      "idx": 5,
+      "slug": "lifestrands",
+      "title": "LifeStrands",
+      "blurb": "I don't have enough concrete information about what LifeStrands actually does. The description \"AI NPC System\" is too vague, and the README content wasn't fully provided. I'd need specifics about the functionality—what does it generate, how do NPCs behave, what's the interface—to write an honest blurb.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "PYTHON"
+      ],
+      "meta": "updated sep 2025",
+      "stack": "Python",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/LifeStrands",
+        "demo": "",
+        "writeup": ""
+      }
+    }
+  ],
   "contributions": {
     "totalContributions": 184,
     "fetchedAt": "2026-05-24T00:00:00+00:00",
@@ -552,20 +658,7 @@ export const SITE = {
       }
     ]
   },
-  "roadmap": [
-    {
-      "id": "PVTI_lAHOAcFFQc4BYnivzgtopnI",
-      "title": "Webhook-triggered autorun via Cloudflare Worker",
-      "status": "Todo",
-      "priority": null,
-      "kind": null,
-      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/2",
-      "repo": "SirWhack/evergreenlabs-bot",
-      "isDraft": false,
-      "commentary": "replace daily cron with push-driven autoruns via github webhooks and a cloudflare worker bridge.",
-      "updatedAt": "2026-05-24T02:40:02+00:00"
-    }
-  ],
+  "roadmap": [],
   "log": [
     {
       "date": "may 24",
