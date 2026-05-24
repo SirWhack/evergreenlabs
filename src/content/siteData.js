@@ -107,9 +107,54 @@ export const SITE = {
         "demo": "",
         "writeup": ""
       }
+    },
+    {
+      "idx": 12,
+      "slug": "evergreenlabs-bot",
+      "title": "evergreenlabs-bot",
+      "blurb": "watches github repos and uses a local llm to draft log entries from commits. syncs metadata to the evergreenlabs website.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "PYTHON"
+      ],
+      "meta": "updated may 2026",
+      "stack": "Python",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/evergreenlabs-bot",
+        "demo": "",
+        "writeup": ""
+      }
     }
   ],
   "log": [
+    {
+      "date": "may 09",
+      "year": "2026",
+      "body": "added 8 detectors, <code>posd-lint.toml</code> config, and a <code>/posd-review</code> skill for Claude Code. implemented SCC-based effect propagation to hit full coverage of all 18 \"red flags\" — detector count is now at 24. wrote 39 new tests; next is figuring out why the findings baseline jumped from 96 to 136.",
+      "project": "posd-lint"
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "tied accepted logs to <code>now.text</code> candidates in <code>review.py</code>, superseding old drafts. updated <code>now_updater.py</code> to prioritize <code>log.json</code> over raw commit activity. a bit of a mess in the state logic &mdash; need to prune the draft queue next.",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "removed `evergreenlabs-bot` from skip lists in <code>introduce.py</code>, <code>log_drafter.py</code>, and others. the bot is now a first-class project rather than &ldquo;invisible&rdquo; infrastructure. next to see if it can actually introduce itself without breaking things.",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "init local automation to pull github activity and draft entries via a local llm. canonical data lives in `data/site/*.json` before regenerating `siteData.js`. spent way too long on the prompt&mdash;now for the first real run.",
+      "project": null
+    },
     {
       "date": "mar 14",
       "year": "2026",
