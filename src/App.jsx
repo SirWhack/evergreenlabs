@@ -3,6 +3,7 @@ import { Nav } from "./components/Nav.jsx";
 import { Hero } from "./components/Hero.jsx";
 import { CurrentlyBuilding } from "./components/CurrentlyBuilding.jsx";
 import { WorkIndex } from "./components/WorkIndex.jsx";
+import { Roadmap } from "./components/Roadmap.jsx";
 import { TinkeringLog } from "./components/TinkeringLog.jsx";
 import { About } from "./components/About.jsx";
 import { Footer } from "./components/Footer.jsx";
@@ -20,7 +21,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const ids = ["work", "log", "about"];
+    const ids = ["work", "next", "log", "about"];
     const onScroll = () => {
       const y = window.scrollY + 120;
       let current = ids[0];
@@ -62,6 +63,7 @@ export default function App() {
       <Hero />
       <CurrentlyBuilding />
       <WorkIndex onOpenProject={setFocused} cardStyle={CARD_STYLE} />
+      <Roadmap />
       <TinkeringLog />
       <About />
       <Footer />

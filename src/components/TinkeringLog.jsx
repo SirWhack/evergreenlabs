@@ -20,7 +20,7 @@ export const TinkeringLog = () => {
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           <span className="eyebrow eyebrow-with-mark">
             <VoxelMark size={12} />
-            02 / log
+            03 / log
           </span>
           <h2 className="h1">Log</h2>
         </div>

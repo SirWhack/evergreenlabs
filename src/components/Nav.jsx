@@ -4,6 +4,7 @@ export const Nav = ({ active = "work", onNav = () => {} }) => {
   const { name, links } = SITE.profile;
   const items = [
     { key: "work", label: "Work" },
+    { key: "next", label: "Next" },
     { key: "log", label: "Log" },
     { key: "about", label: "About" },
   ];

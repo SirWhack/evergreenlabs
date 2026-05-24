@@ -34,7 +34,7 @@ export const About = () => {
       >
         <span className="eyebrow eyebrow-with-mark">
           <VoxelMark size={12} />
-          03 / about
+          04 / about
         </span>
         <h2 className="h2">About</h2>
         {bio.map((para, i) => (
