@@ -663,6 +663,12 @@ export const SITE = {
     {
       "date": "may 24",
       "year": "2026",
+      "body": "<p>swapped <code>overflow-x: hidden</code> on <code>html</code>/<code>body</code> for <code>overflow-x: clip</code> on <code>html</code> only—<code>hidden</code> was creating a scroll context that broke <code>position: sticky</code> on nav and section headers. also replaced the ai-generated refusal boilerplate in the LifeStrands blurb with an actual project description.</p>",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
       "body": "<p>moved <code>pointerEvents: auto</code> from the text container to individual elements so the center cubes aren't blocked by invisible hit zones. also fixed tooltips on 0-count cells that were getting swallowed. turns out css layering and event bubbling don't always play nice together.</p>",
       "project": null
     },
