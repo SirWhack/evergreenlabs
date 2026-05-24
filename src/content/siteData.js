@@ -730,5 +730,10 @@ export const SITE = {
       "year": "2026",
       "body": "Spent a Saturday on a sentiment analyzer for my git commit messages. Works, kind of. Not sure I want to know."
     }
-  ]
+  ],
+  "_tracer": {
+    "lastTracerRun": "2026-05-24T17:56:22.795Z",
+    "kind": "daily-sync",
+    "source": "manual"
+  }
 };
