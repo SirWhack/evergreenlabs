@@ -732,8 +732,8 @@ export const SITE = {
     }
   ],
   "_tracer": {
-    "lastTracerRun": "2026-05-24T18:08:01.475Z",
-    "kind": "per-repo",
+    "lastTracerRun": "2026-05-24T18:19:53.677Z",
+    "kind": "daily-sync",
     "source": "manual",
     "repo": "SirWhack/evergreenlabs-bot",
     "delivery_id": "7dbde3a0-579b-11f1-90a0-e0e6a25445f3"
