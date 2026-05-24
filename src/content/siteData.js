@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 24",
-    "text": "```html\n<p>working on <b>context-kernel</b> S1 phase 2: optimizing the read/grep/glob interface now that model selection is locked. next step is stress-testing cross-scope queries against the full portfolio corpus.</p>\n```"
+    "text": "<p>migrating <b>evergreenlabs-bot</b> to pure cloudflare stack—workers, workflows, d1—removing the last local python dependencies. next: stress-testing the metadata sync under load.</p>"
   },
   "projects": [
     {
@@ -660,6 +660,12 @@ export const SITE = {
   },
   "roadmap": [],
   "log": [
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "<p>ripped out all python code (~2144 LOC across 21 files) and retired the <code>EVENTS</code> KV namespace—the bot is now pure cloudflare workers + workflows + d1, no local machine needed. all pipelines already live and verified, so this was just cleanup; the hardest part was accepting that the old architecture actually worked and we could delete it.</p>",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 24",
       "year": "2026",
