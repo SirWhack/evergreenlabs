@@ -663,6 +663,12 @@ export const SITE = {
     {
       "date": "may 24",
       "year": "2026",
+      "body": "<p>moved <code>pointerEvents: auto</code> from the text container to individual elements so the center cubes aren't blocked by invisible hit zones. also fixed tooltips on 0-count cells that were getting swallowed. turns out css layering and event bubbling don't always play nice together.</p>",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
       "body": "<p>switched <code>roadmap_sync</code> to use a classic PAT instead of the GitHub App token, since installation tokens can't read user-owned Projects v2—a platform limitation that cost an hour of debugging before we found the docs. now stores the token as <code>GITHUB_PAT_PROJECTS</code> secret with <code>read:project</code> scope.</p>",
       "project": "evergreenlabs-bot"
     },
