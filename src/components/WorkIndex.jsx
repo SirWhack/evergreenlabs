@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { SITE } from "../content/siteData.js";
-import { VoxelMark } from "./VoxelMark.jsx";
+import { WorkMark } from "./VoxelMark.jsx";
 import { ProjectCard } from "./ProjectCard.jsx";
 
 export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
@@ -18,22 +18,10 @@ export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
 
   return (
     <section id="work" className="section">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          marginBottom: 20,
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <span className="eyebrow eyebrow-with-mark">
-            <VoxelMark size={12} />
-            01 / work
-          </span>
-          <h2 className="h1">Projects</h2>
+      <div className="section-header">
+        <div className="section-header-title">
+          <WorkMark />
+          <span className="eyebrow">01 / work</span>
         </div>
         <span className="meta">
           {visible.length} {visible.length === 1 ? "entry" : "entries"} · sorted newest first

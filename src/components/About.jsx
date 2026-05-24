@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SITE } from "../content/siteData.js";
-import { VoxelMark } from "./VoxelMark.jsx";
+import { AboutMark } from "./VoxelMark.jsx";
 
 export const About = () => {
   const { bio, email, links } = SITE.profile;
@@ -24,6 +24,12 @@ export const About = () => {
 
   return (
     <section id="about" className="section">
+      <div className="section-header">
+        <div className="section-header-title">
+          <AboutMark />
+          <span className="eyebrow">04 / about</span>
+        </div>
+      </div>
       <div
         style={{
           display: "grid",
@@ -32,11 +38,6 @@ export const About = () => {
           maxWidth: 640,
         }}
       >
-        <span className="eyebrow eyebrow-with-mark">
-          <VoxelMark size={12} />
-          04 / about
-        </span>
-        <h2 className="h2">About</h2>
         {bio.map((para, i) => (
           <p key={i} className="body" style={{ marginTop: i === 0 ? 6 : 0 }}>
             {para}

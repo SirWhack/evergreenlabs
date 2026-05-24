@@ -16,6 +16,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   --density-gap: 16px;
   --density-card-pad: 22px 24px;
   --density-hero: 80px 0 64px;
+  --nav-h: 62px;
 }
 :root[data-density="compact"] {
   --density-section: 64px;
@@ -583,12 +584,39 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-top: 1px solid var(--paper-200);
 }
 
-/* Slim non-sticky top nav */
+/* Sticky top nav */
 .topnav {
-  padding: 28px 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: var(--nav-h);
+  padding: 14px 0;
+  background: var(--paper-50);
+  border-bottom: 1px solid var(--paper-200);
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* Section header — pins under the topnav while scrolling that section */
+.section-header {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 40;
+  background: var(--paper-50);
+  padding: 10px 0 12px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--paper-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.section-header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .topnav-link {
   padding: 8px 12px;

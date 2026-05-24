@@ -52,7 +52,12 @@ export default function App() {
     }
     const el = document.getElementById(key);
     if (el) {
-      const y = el.getBoundingClientRect().top + window.pageYOffset - 24;
+      const navH =
+        parseInt(
+          getComputedStyle(document.documentElement).getPropertyValue("--nav-h"),
+          10
+        ) || 62;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };

@@ -1,5 +1,5 @@
 import { SITE } from "../content/siteData.js";
-import { VoxelMark } from "./VoxelMark.jsx";
+import { NextMark } from "./VoxelMark.jsx";
 
 const STATUS_ORDER = ["In Progress", "Blocked", "Todo", "Backlog", "Untriaged"];
 
@@ -23,22 +23,10 @@ export const Roadmap = () => {
 
   return (
     <section id="next" className="section">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          marginBottom: 24,
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <span className="eyebrow eyebrow-with-mark">
-            <VoxelMark size={12} />
-            02 / next
-          </span>
-          <h2 className="h1">Next</h2>
+      <div className="section-header">
+        <div className="section-header-title">
+          <NextMark />
+          <span className="eyebrow">02 / next</span>
         </div>
         <span className="meta">what's queued, from the project board</span>
       </div>

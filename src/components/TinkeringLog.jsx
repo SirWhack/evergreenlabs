@@ -1,5 +1,5 @@
 import { SITE } from "../content/siteData.js";
-import { VoxelMark } from "./VoxelMark.jsx";
+import { LogMark } from "./VoxelMark.jsx";
 
 export const TinkeringLog = () => {
   const entries = SITE.log || [];
@@ -7,22 +7,10 @@ export const TinkeringLog = () => {
 
   return (
     <section id="log" className="section">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          marginBottom: 24,
-          flexWrap: "wrap",
-          gap: 12,
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <span className="eyebrow eyebrow-with-mark">
-            <VoxelMark size={12} />
-            03 / log
-          </span>
-          <h2 className="h1">Log</h2>
+      <div className="section-header">
+        <div className="section-header-title">
+          <LogMark />
+          <span className="eyebrow">03 / log</span>
         </div>
         <span className="meta">small notes, mostly to remember what I tried</span>
       </div>
