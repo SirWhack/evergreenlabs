@@ -133,49 +133,9 @@ export const SITE = {
     }
   ],
   "contributions": {
-    "totalContributions": 184,
-    "fetchedAt": "2026-05-24T00:00:00+00:00",
+    "totalContributions": 82,
+    "fetchedAt": "2026-05-24T21:04:26+00:00",
     "weeks": [
-      {
-        "week": "2026-02-22",
-        "days": [
-          {
-            "date": "2026-02-22",
-            "count": 0,
-            "level": 0
-          },
-          {
-            "date": "2026-02-23",
-            "count": 3,
-            "level": 1
-          },
-          {
-            "date": "2026-02-24",
-            "count": 1,
-            "level": 1
-          },
-          {
-            "date": "2026-02-25",
-            "count": 0,
-            "level": 0
-          },
-          {
-            "date": "2026-02-26",
-            "count": 5,
-            "level": 2
-          },
-          {
-            "date": "2026-02-27",
-            "count": 2,
-            "level": 1
-          },
-          {
-            "date": "2026-02-28",
-            "count": 0,
-            "level": 0
-          }
-        ]
-      },
       {
         "week": "2026-03-01",
         "days": [
@@ -191,13 +151,13 @@ export const SITE = {
           },
           {
             "date": "2026-03-03",
-            "count": 4,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-04",
-            "count": 1,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-05",
@@ -226,18 +186,18 @@ export const SITE = {
           },
           {
             "date": "2026-03-09",
-            "count": 6,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-10",
-            "count": 9,
-            "level": 3
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-11",
-            "count": 4,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-12",
@@ -246,8 +206,8 @@ export const SITE = {
           },
           {
             "date": "2026-03-13",
-            "count": 1,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-14",
@@ -266,8 +226,8 @@ export const SITE = {
           },
           {
             "date": "2026-03-16",
-            "count": 2,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-17",
@@ -286,8 +246,8 @@ export const SITE = {
           },
           {
             "date": "2026-03-20",
-            "count": 3,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-21",
@@ -311,18 +271,18 @@ export const SITE = {
           },
           {
             "date": "2026-03-24",
-            "count": 5,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-25",
-            "count": 7,
-            "level": 3
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-26",
-            "count": 2,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-27",
@@ -346,13 +306,13 @@ export const SITE = {
           },
           {
             "date": "2026-03-30",
-            "count": 1,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-03-31",
-            "count": 3,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-01",
@@ -386,13 +346,13 @@ export const SITE = {
           },
           {
             "date": "2026-04-06",
-            "count": 4,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-07",
-            "count": 2,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-08",
@@ -401,8 +361,8 @@ export const SITE = {
           },
           {
             "date": "2026-04-09",
-            "count": 1,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-10",
@@ -436,8 +396,8 @@ export const SITE = {
           },
           {
             "date": "2026-04-15",
-            "count": 1,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-16",
@@ -466,23 +426,23 @@ export const SITE = {
           },
           {
             "date": "2026-04-20",
-            "count": 3,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-21",
-            "count": 8,
-            "level": 3
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-22",
-            "count": 5,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-23",
-            "count": 2,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-24",
@@ -491,8 +451,8 @@ export const SITE = {
           },
           {
             "date": "2026-04-25",
-            "count": 1,
-            "level": 1
+            "count": 0,
+            "level": 0
           }
         ]
       },
@@ -516,8 +476,8 @@ export const SITE = {
           },
           {
             "date": "2026-04-29",
-            "count": 2,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-04-30",
@@ -546,18 +506,18 @@ export const SITE = {
           },
           {
             "date": "2026-05-04",
-            "count": 4,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-05",
-            "count": 6,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-06",
-            "count": 3,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-07",
@@ -566,8 +526,8 @@ export const SITE = {
           },
           {
             "date": "2026-05-08",
-            "count": 1,
-            "level": 1
+            "count": 2,
+            "level": 4
           },
           {
             "date": "2026-05-09",
@@ -591,8 +551,8 @@ export const SITE = {
           },
           {
             "date": "2026-05-12",
-            "count": 2,
-            "level": 1
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-13",
@@ -606,8 +566,8 @@ export const SITE = {
           },
           {
             "date": "2026-05-15",
-            "count": 0,
-            "level": 0
+            "count": 1,
+            "level": 2
           },
           {
             "date": "2026-05-16",
@@ -621,8 +581,8 @@ export const SITE = {
         "days": [
           {
             "date": "2026-05-17",
-            "count": 1,
-            "level": 1
+            "count": 2,
+            "level": 4
           },
           {
             "date": "2026-05-18",
@@ -631,28 +591,68 @@ export const SITE = {
           },
           {
             "date": "2026-05-19",
-            "count": 5,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-20",
-            "count": 11,
-            "level": 4
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-21",
-            "count": 7,
-            "level": 3
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-22",
-            "count": 4,
-            "level": 2
+            "count": 0,
+            "level": 0
           },
           {
             "date": "2026-05-23",
-            "count": 9,
-            "level": 3
+            "count": 28,
+            "level": 4
+          }
+        ]
+      },
+      {
+        "week": "2026-05-24",
+        "days": [
+          {
+            "date": "2026-05-24",
+            "count": 49,
+            "level": 4
+          },
+          {
+            "date": null,
+            "count": 0,
+            "level": 0
+          },
+          {
+            "date": null,
+            "count": 0,
+            "level": 0
+          },
+          {
+            "date": null,
+            "count": 0,
+            "level": 0
+          },
+          {
+            "date": null,
+            "count": 0,
+            "level": 0
+          },
+          {
+            "date": null,
+            "count": 0,
+            "level": 0
+          },
+          {
+            "date": null,
+            "count": 0,
+            "level": 0
           }
         ]
       }
