@@ -258,10 +258,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: relative;
   background: var(--paper-0);
   border: none;
-  border-bottom: 1px solid var(--ev-700);
-  border-left: 1px solid var(--ev-700);
   border-radius: 0;
-  box-shadow: none;
+  box-shadow: -1px 0 0 0 var(--ev-700),
+              0 1px 0 0 var(--ev-700);
   padding: 22px 26px;
   display: block;
   cursor: pointer;
@@ -304,39 +303,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   pointer-events: none;
   z-index: -1;
 }
-/* Faces use skew transforms instead of clip-path so the shared back-right
-   diagonal is one rendered edge between two solid rectangles, not two
-   independently anti-aliased clipped polygons. Kills the 1px seam. */
-/* Faces are sized 1px larger than the cube-depth grid in both directions
-   so they tuck under the card's 1px outline on the shared edge and
-   overlap each other at the back corner — kills sub-pixel seams.
-
-   Borders on the outer edges (the cube's back-top / back-right / back-bottom)
-   give the cube faces the same dark outline as the front face, so the
-   whole shape reads as one outlined object. Borders skew with the box,
-   so they trace the parallelogram edges correctly. */
 .cube-face-top {
   top: calc(-1 * var(--cube-depth));
   left: 0;
-  width: calc(100% + 1px);
-  height: calc(var(--cube-depth) + 1px);
+  width: 100%;
+  height: var(--cube-depth);
   background: var(--ev-200);
-  border-top: 1px solid var(--ev-700);
-  border-right: 1px solid var(--ev-700);
-  border-bottom: 1px solid var(--ev-700);
   transform-origin: 0 100%;
   transform: skewX(-45deg);
   transition: background var(--dur-base) var(--ease-out);
 }
 .cube-face-right {
-  top: -1px;
+  top: 0;
   right: calc(-1 * var(--cube-depth));
-  width: calc(var(--cube-depth) + 1px);
-  height: calc(100% + 1px);
+  width: var(--cube-depth);
+  height: 100%;
   background: var(--ev-500);
-  border-top: 1px solid var(--ev-700);
-  border-right: 1px solid var(--ev-700);
-  border-bottom: 1px solid var(--ev-700);
   transform-origin: 0 0;
   transform: skewY(-45deg);
 }
