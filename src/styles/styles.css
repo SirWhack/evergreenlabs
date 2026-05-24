@@ -258,7 +258,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border: 1px solid var(--ev-700);
   border-radius: 0;            /* sharp corners suit a cube */
   box-shadow: none;
-  padding: 22px 26px 22px 64px;
+  padding: 22px 26px;
   display: block;
   cursor: pointer;
   overflow: visible;
@@ -267,6 +267,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: transform var(--dur-base) var(--ease-out),
               background var(--dur-base) var(--ease-out);
   isolation: isolate;
+}
+/* The cube's front face content. A real 2-col grid (index | content)
+   instead of an absolutely-positioned "01" sitting in a padding gutter. */
+.voxel-front {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.voxel-index {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding-top: 3px;
 }
 @media (hover: hover) and (pointer: fine) {
   .project-card.voxel:hover {
@@ -290,13 +306,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
    independently anti-aliased clipped polygons. Kills the 1px seam. */
 /* Faces are sized 1px larger than the cube-depth grid in both directions
    so they tuck under the card's 1px outline on the shared edge and
-   overlap each other at the back corner — kills sub-pixel seams. */
+   overlap each other at the back corner — kills sub-pixel seams.
+
+   Borders on the outer edges (the cube's back-top / back-right / back-bottom)
+   give the cube faces the same dark outline as the front face, so the
+   whole shape reads as one outlined object. Borders skew with the box,
+   so they trace the parallelogram edges correctly. */
 .cube-face-top {
   top: calc(-1 * var(--cube-depth));
   left: 0;
   width: calc(100% + 1px);
   height: calc(var(--cube-depth) + 1px);
   background: var(--ev-200);
+  border-top: 1px solid var(--ev-700);
+  border-right: 1px solid var(--ev-700);
   transform-origin: 0 100%;
   transform: skewX(-45deg);
   transition: background var(--dur-base) var(--ease-out);
@@ -307,20 +330,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: calc(var(--cube-depth) + 1px);
   height: calc(100% + 1px);
   background: var(--ev-500);
+  border-right: 1px solid var(--ev-700);
+  border-bottom: 1px solid var(--ev-700);
   transform-origin: 0 0;
   transform: skewY(-45deg);
-}
-
-/* The big monospace stamp on the front face — index as visual anchor. */
-.cube-index {
-  position: absolute;
-  top: 18px;
-  left: 22px;
-  font-family: var(--font-mono);
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1;
 }
 
 .voxel-content {
@@ -756,15 +769,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .work-grid { grid-template-columns: 1fr; }
   .voxel-grid { perspective: none; }
 
-  /* Voxel card: smaller cube depth + index stamp on narrow screens.
-     Margin-right is also dropped to 0 so the cube can't push the card
-     past the viewport edge. */
+  /* Voxel card: smaller cube depth on narrow screens. Margin-right is
+     dropped to 0 so the cube can't push the card past the viewport edge. */
   .project-card.voxel {
     --cube-depth: 6px;
-    padding: 18px 20px 18px 52px;
+    padding: 18px 20px;
     margin-right: 0;
   }
-  .cube-index { top: 16px; left: 18px; font-size: 18px; }
+  .voxel-front { gap: 12px; }
+  .voxel-index { font-size: 18px; padding-top: 2px; }
 
   /* Tighter filter chip spacing, but tap-target-safe min-height */
   .filter-bar { gap: 6px; }
