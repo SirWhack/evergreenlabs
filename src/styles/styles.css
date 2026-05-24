@@ -1,12 +1,14 @@
 /* Sam's portfolio — built on Evergreen Labs tokens */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  overflow-x: clip;
+}
 html, body {
   background: var(--paper-50);
   color: var(--ink-900);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
