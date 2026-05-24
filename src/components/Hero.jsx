@@ -1,20 +1,11 @@
 import { SITE } from "../content/siteData.js";
+import { ContributionCubes } from "./ContributionCubes.jsx";
 
 export const Hero = () => {
   const { name, location, headline } = SITE.profile;
   return (
     <header style={{ padding: "var(--density-hero)", position: "relative", overflow: "hidden" }}>
-      <div
-        className="cube-bg"
-        style={{
-          top: -20,
-          right: -80,
-          width: 460,
-          height: 380,
-          WebkitMaskImage: "radial-gradient(circle at 72% 38%, black 22%, transparent 68%)",
-          maskImage: "radial-gradient(circle at 72% 38%, black 22%, transparent 68%)",
-        }}
-      />
+      <ContributionCubes />
       <div
         style={{
           display: "grid",
