@@ -33,6 +33,7 @@ const RAMP_HOVER = [
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function formatDate(iso) {
+  if (!iso) return "No data";
   const d = new Date(iso + "T12:00:00");
   const mon = d.toLocaleString("en-US", { month: "short" });
   return `${WEEKDAYS[d.getDay()]}, ${mon} ${d.getDate()}`;
@@ -99,13 +100,11 @@ export const ContributionCubes = ({ style, opacity = 0.85 }) => {
   const resolve = useCallback((e) => {
     const hit = hitTest(e);
     if (hit) {
-      const day = grid[hit.col][hit.row];
-      if (day) {
-        setHovered((prev) =>
-          prev?.col === hit.col && prev?.row === hit.row ? prev : { ...hit, day }
-        );
-        return;
-      }
+      const day = grid[hit.col][hit.row] ?? { date: null, count: 0, level: 0 };
+      setHovered((prev) =>
+        prev?.col === hit.col && prev?.row === hit.row ? prev : { ...hit, day }
+      );
+      return;
     }
     setHovered(null);
   }, [hitTest, grid]);

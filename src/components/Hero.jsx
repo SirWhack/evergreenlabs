@@ -8,11 +8,11 @@ export const Hero = () => {
       <ContributionCubes />
       <div className="hero-grid" style={{ pointerEvents: "none" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
-          <span className="eyebrow">
+          <span className="eyebrow" style={{ pointerEvents: "auto" }}>
             {[name, location].filter(Boolean).join(" · ").toLowerCase()}
           </span>
-          <h1 className="h-display">{name}.</h1>
-          <p className="lede" style={{ marginTop: -8 }}>
+          <h1 className="h-display" style={{ pointerEvents: "auto" }}>{name}.</h1>
+          <p className="lede" style={{ marginTop: -8, pointerEvents: "auto" }}>
             {headline}
           </p>
         </div>
