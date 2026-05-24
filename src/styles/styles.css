@@ -288,21 +288,24 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* Faces use skew transforms instead of clip-path so the shared back-right
    diagonal is one rendered edge between two solid rectangles, not two
    independently anti-aliased clipped polygons. Kills the 1px seam. */
+/* Faces are sized 1px larger than the cube-depth grid in both directions
+   so they tuck under the card's 1px outline on the shared edge and
+   overlap each other at the back corner — kills sub-pixel seams. */
 .cube-face-top {
   top: calc(-1 * var(--cube-depth));
   left: 0;
-  width: 100%;
-  height: var(--cube-depth);
+  width: calc(100% + 1px);
+  height: calc(var(--cube-depth) + 1px);
   background: var(--ev-200);
   transform-origin: 0 100%;
   transform: skewX(-45deg);
   transition: background var(--dur-base) var(--ease-out);
 }
 .cube-face-right {
-  top: 0;
+  top: -1px;
   right: calc(-1 * var(--cube-depth));
-  width: var(--cube-depth);
-  height: 100%;
+  width: calc(var(--cube-depth) + 1px);
+  height: calc(100% + 1px);
   background: var(--ev-500);
   transform-origin: 0 0;
   transform: skewY(-45deg);
