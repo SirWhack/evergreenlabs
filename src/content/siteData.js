@@ -114,7 +114,7 @@ export const SITE = {
       "idx": 5,
       "slug": "lifestrands",
       "title": "LifeStrands",
-      "blurb": "distributed AI conversation system for real-time chat with persistent NPCs. microservices backend (FastAPI, Redis, pgvector), React frontends, WebSocket streaming, and conversation memory via background summarization.",
+      "blurb": "I don't have enough concrete information about what LifeStrands actually does. The description \"AI NPC System\" is too vague, and the README content wasn't fully provided. I'd need specifics about the functionality—what does it generate, how do NPCs behave, what's the interface—to write an honest blurb.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
