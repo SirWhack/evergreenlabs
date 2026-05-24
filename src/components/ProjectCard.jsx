@@ -4,6 +4,94 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
   const { idx, title, blurb, tags = [], meta, featured } = project;
   const padIdx = String(idx).padStart(2, "0");
 
+  if (variant === "voxel") {
+    return (
+      <article className="project-card voxel" onClick={onClick}>
+        <div className="voxel-cube" aria-hidden="true">
+          <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+            <polygon
+              className="voxel-face voxel-face-top"
+              points="50,4 96,27 50,50 4,27"
+              fill="var(--ev-200)"
+              stroke="var(--ev-700)"
+              strokeWidth="1"
+              strokeLinejoin="round"
+            />
+            <polygon
+              className="voxel-face voxel-face-left"
+              points="4,27 50,50 50,100 4,77"
+              fill={featured ? "var(--accent, var(--rust))" : "var(--ev-500)"}
+              stroke="var(--ev-700)"
+              strokeWidth="1"
+              strokeLinejoin="round"
+            />
+            <polygon
+              className="voxel-face voxel-face-right"
+              points="96,27 50,50 50,100 96,77"
+              fill="var(--ev-600)"
+              stroke="var(--ev-700)"
+              strokeWidth="1"
+              strokeLinejoin="round"
+            />
+            <text
+              x="50"
+              y="31"
+              textAnchor="middle"
+              fill="var(--ev-700)"
+              fontFamily="var(--font-mono)"
+              fontWeight="600"
+              fontSize="11"
+              letterSpacing="0.06em"
+            >
+              {padIdx}
+            </text>
+          </svg>
+        </div>
+        <div className="voxel-content">
+          <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+            <h3 className="h3">{title}</h3>
+            {featured && <span className="tag featured">featured</span>}
+          </div>
+          <p
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: 14,
+              lineHeight: 1.5,
+              color: "var(--ink-700)",
+            }}
+          >
+            {blurb}
+          </p>
+          <div
+            style={{
+              display: "flex",
+              gap: 6,
+              alignItems: "center",
+              flexWrap: "wrap",
+              marginTop: 4,
+            }}
+          >
+            {tags.map((t) => (
+              <span key={t} className="tag">
+                {t}
+              </span>
+            ))}
+            <span style={{ flex: 1 }} />
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 11,
+                color: "var(--ink-500)",
+              }}
+            >
+              {meta}
+            </span>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   if (variant === "list") {
     return (
       <article className="project-card list" onClick={onClick}>

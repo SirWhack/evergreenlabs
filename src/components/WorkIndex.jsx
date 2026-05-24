@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { SITE } from "../content/siteData.js";
 import { VoxelMark } from "./VoxelMark.jsx";
 import { ProjectCard } from "./ProjectCard.jsx";
+import { CardPrototype } from "./CardPrototype.jsx";
 
 export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
   const [filter, setFilter] = useState("ALL");
@@ -18,6 +19,7 @@ export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
 
   return (
     <section id="work" className="section">
+      <CardPrototype />
       <div
         style={{
           display: "flex",
