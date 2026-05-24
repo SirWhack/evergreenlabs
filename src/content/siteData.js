@@ -663,6 +663,12 @@ export const SITE = {
     {
       "date": "may 24",
       "year": "2026",
+      "body": "removed borders from shadow faces and switched to <code>box-shadow</code> for edge lines—turns out <code>padding-box</code> was shifting everything by a pixel. faces now size exactly to <code>cube-depth</code> with no fudge factors, so corners actually meet. net −18 lines of CSS, which felt good until i realized i'd been overthinking the geometry the whole time.",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
       "body": "fixed markdown code fences leaking into site HTML across all four pipelines. the LLM occasionally wraps responses in <code>```html</code> blocks, so now we strip them in <code>introduce.ts</code>, <code>log_drafter.ts</code>, <code>now_updater.ts</code>, and <code>roadmap_sync.ts</code> before publishing. small regex, big difference in output cleanliness.",
       "project": "evergreenlabs-bot"
     },
