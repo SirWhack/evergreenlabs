@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 24",
-    "text": "```html\n<p>implementing materialization pipeline for <b>context-kernel</b>; replaced TODO stubs across addressing, headers, templates, change detection, and CLI. switching from JIT freshness to pre-commit hook regeneration—next: wiring up the MCP surface so agents can query the materialized graph.</p>\n```"
+    "text": "<p>refactoring <b>evergreenlabs-bot</b>'s roadmap sync to read from user-owned Projects v2. working through token scope requirements to keep metadata in sync without hitting GitHub API limitations.</p>"
   },
   "projects": [
     {
@@ -660,6 +660,12 @@ export const SITE = {
   },
   "roadmap": [],
   "log": [
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "<p>switched <code>roadmap_sync</code> to use a classic PAT instead of the GitHub App token, since installation tokens can't read user-owned Projects v2—a platform limitation that cost an hour of debugging before we found the docs. now stores the token as <code>GITHUB_PAT_PROJECTS</code> secret with <code>read:project</code> scope.</p>",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 24",
       "year": "2026",
