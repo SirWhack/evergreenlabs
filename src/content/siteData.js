@@ -663,6 +663,12 @@ export const SITE = {
     {
       "date": "may 24",
       "year": "2026",
+      "body": "fixed the roadmap to show a &ldquo;nothing queued&rdquo; placeholder when <code>Next</code> is empty, so nav links don't break and the page layout stays predictable. turns out hiding sections entirely is worse than showing an empty one — learned that the hard way.",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
       "body": "<p>swapped <code>overflow-x: hidden</code> on <code>html</code>/<code>body</code> for <code>overflow-x: clip</code> on <code>html</code> only—<code>hidden</code> was creating a scroll context that broke <code>position: sticky</code> on nav and section headers. also replaced the ai-generated refusal boilerplate in the LifeStrands blurb with an actual project description.</p>",
       "project": null
     },
