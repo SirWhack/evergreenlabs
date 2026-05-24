@@ -663,6 +663,12 @@ export const SITE = {
     {
       "date": "may 24",
       "year": "2026",
+      "body": "<p>swapped out the fake contribution counts in <code>src/content/siteData.js</code> for real GitHub API data—82 actual contributions over 13 weeks instead of the made-up 184. turns out the truth is less impressive but more honest. cost 112 lines of synthetic data; taught me that real metrics, even when smaller, build more credibility.</p>",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
       "body": "fixed the roadmap to show a &ldquo;nothing queued&rdquo; placeholder when <code>Next</code> is empty, so nav links don't break and the page layout stays predictable. turns out hiding sections entirely is worse than showing an empty one — learned that the hard way.",
       "project": null
     },
