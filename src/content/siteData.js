@@ -570,61 +570,8 @@ export const SITE = {
     {
       "date": "may 24",
       "year": "2026",
-      "body": "added <code class=\"filename\">adr-0009</code> implementing cross-scope relationships via LightRAG and deterministic source-ID traversal. rejected LLM synthesis as a &ldquo;confabulation engine&rdquo;. now to see if relationship density hits the 15% threshold in <code class=\"filename\">handoff.md</code> before S0 exit.",
+      "body": "removed the repo whitelist and now track everything, including <code>evergreenlabs-bot</code> itself for dogfooding. the feedback loop guard is now tighter—only skips commits from the github app bot account, letting human-authored commits (even on the bot repo) flow through. simplified the logic and cut 8 lines of config cruft.",
       "project": null
-    },
-    {
-      "date": "may 24",
-      "year": "2026",
-      "body": "added ADRs for per-scope summaries and content-derived `graph_commit` to dodge LLM non-determinism. updated `KnowledgeStore.upsert` signature and fixed a stale line in `CONTEXT.md`. spent an hour arguing with the docs.",
-      "project": null
-    },
-    {
-      "date": "may 24",
-      "year": "2026",
-      "body": "added a Projects v2 pipeline via <code>github_projects.py</code> that pushes items to <code>siteData.js</code>. uses LLM commentary cached against <code>(id, updatedAt)</code> in <code>roadmap_sync.py</code> to avoid burning tokens on unchanged tasks. GraphQL is a nightmare &mdash; next is cleaning up the frontend display.",
-      "project": "evergreenlabs-bot"
-    },
-    {
-      "date": "may 24",
-      "year": "2026",
-      "body": "added `scripts/autorun.sh` and `scripts/register-task.ps1` to trigger daily runs at 9am. logs are dumped into `logs/autorun.YYYY-MM.log`. it crashes with &ldquo;connection refused&rdquo; if lm studio isn't already open—fragile, but functional.",
-      "project": "evergreenlabs-bot"
-    },
-    {
-      "date": "may 24",
-      "year": "2026",
-      "body": "added <code>bot autorun</code> to sequence sync, introduce, and log drafting—auto-accepting drafts that meet basic length requirements. stripped the &ldquo;judge:&rdquo; prefix from notes to stop leaking internal jargon. hope it doesn't hallucinate a whole new website.",
-      "project": "evergreenlabs-bot"
-    },
-    {
-      "date": "may 09",
-      "year": "2026",
-      "body": "added 8 detectors, <code>posd-lint.toml</code> config, and a <code>/posd-review</code> skill for Claude Code. implemented SCC-based effect propagation to hit full coverage of all 18 \"red flags\" — detector count is now at 24. wrote 39 new tests; next is figuring out why the findings baseline jumped from 96 to 136.",
-      "project": "posd-lint"
-    },
-    {
-      "date": "may 24",
-      "year": "2026",
-      "body": "tied accepted logs to <code>now.text</code> candidates in <code>review.py</code>, superseding old drafts. updated <code>now_updater.py</code> to prioritize <code>log.json</code> over raw commit activity. a bit of a mess in the state logic &mdash; need to prune the draft queue next.",
-      "project": null
-    },
-    {
-      "date": "may 24",
-      "year": "2026",
-      "body": "removed `evergreenlabs-bot` from skip lists in <code>introduce.py</code>, <code>log_drafter.py</code>, and others. the bot is now a first-class project rather than &ldquo;invisible&rdquo; infrastructure. next to see if it can actually introduce itself without breaking things.",
-      "project": null
-    },
-    {
-      "date": "may 24",
-      "year": "2026",
-      "body": "init local automation to pull github activity and draft entries via a local llm. canonical data lives in `data/site/*.json` before regenerating `siteData.js`. spent way too long on the prompt&mdash;now for the first real run.",
-      "project": null
-    },
-    {
-      "date": "mar 14",
-      "year": "2026",
-      "body": "Spent a Saturday on a sentiment analyzer for my git commit messages. Works, kind of. Not sure I want to know."
     }
   ],
   "_tracer": {
