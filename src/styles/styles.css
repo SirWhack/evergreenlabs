@@ -6,6 +6,7 @@ html, body {
   color: var(--ink-900);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -746,8 +747,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   /* Project metadata: 3 cols → 1 col, easier to read */
   .focus-meta-grid { grid-template-columns: 1fr; gap: 12px; }
 
-  /* Voxel card: smaller cube depth + index stamp on narrow screens */
-  .project-card.voxel { --cube-depth: 6px; padding: 18px 20px 18px 52px; }
+  /* Force single-column for the project grid. The auto-fit rule can blow
+     out into 2 cols when a child overflows (voxel cube margin + perspective
+     was doing this on iOS), so be explicit on phones. */
+  .work-grid { grid-template-columns: 1fr; }
+  .voxel-grid { perspective: none; }
+
+  /* Voxel card: smaller cube depth + index stamp on narrow screens.
+     Margin-right is also dropped to 0 so the cube can't push the card
+     past the viewport edge. */
+  .project-card.voxel {
+    --cube-depth: 6px;
+    padding: 18px 20px 18px 52px;
+    margin-right: 0;
+  }
   .cube-index { top: 16px; left: 18px; font-size: 18px; }
 
   /* Tighter filter chip spacing, but tap-target-safe min-height */
