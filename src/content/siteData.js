@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 24",
-    "text": "cleaning up frontend display for <b>evergreenlabs-bot</b>."
+    "text": "```html\n<p>working on <b>context-kernel</b> S1 phase 2: optimizing the read/grep/glob interface now that model selection is locked. next step is stress-testing cross-scope queries against the full portfolio corpus.</p>\n```"
   },
   "projects": [
     {
@@ -660,6 +660,18 @@ export const SITE = {
   },
   "roadmap": [],
   "log": [
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "<p>locked <code>Qwen3-30B-A3B-Instruct-2507</code> as S0 default after testing three variants on 42-file corpus: it hit 38.3% cross-scope density with only 2 format warnings, cleanly beating the faster but messier <code>Qwen3.6-35B</code> options. added <code>--cache-ram 0</code> to all llama-server calls (WSL2 was drowning in the default 8 GB prompt cache during ingest). marked S0 complete in <code>PLAN.md</code> and unblocked S1 phase 2 — the cleanliness win cost ~2s per synthesis vs. the speed variant, but extraction quality matters more than throughput here.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "added <code>spike/spike.py</code> to validate lightrag on lifestrands corpus against s0 exit criteria. qwen3.6-mtp ingests 42 files into 1145 entities &amp; 1195 relationships in ~25 min; cross-scope density hits 43.5% (2.9× the 15% threshold), confirming the kernel's thesis on exposing cross-cutting linkage. the embedding endpoint workaround and occasional 5-field entity tuples from qwen flag two integration points for s1.",
+      "project": "context-kernel"
+    },
     {
       "date": "may 24",
       "year": "2026",
