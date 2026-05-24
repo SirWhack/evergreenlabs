@@ -556,6 +556,72 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   from { opacity: 0; transform: translateY(8px) scale(0.985); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
+.focus-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 38, 24, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: evFade 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  -webkit-overflow-scrolling: touch;
+}
+.focus-dialog {
+  background: var(--paper-50);
+  border: 1px solid var(--paper-300);
+  border-radius: 8px;
+  max-width: 760px;
+  width: 100%;
+  padding: 40px 48px 48px;
+  box-shadow: 0 8px 24px rgba(20, 20, 15, 0.08), 0 2px 6px rgba(20, 20, 15, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  animation: evPop 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.focus-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  min-width: 44px;
+  min-height: 36px;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  border: 1px solid var(--paper-300);
+  border-radius: 999px;
+  background: var(--paper-50);
+}
+.focus-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.focus-idx {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  min-width: 44px;
+  flex-shrink: 0;
+}
+.focus-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(28px, 6vw, 40px);
+  color: var(--ev-700);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
 
 /* Currently-building bar variation */
 .now-bar {
@@ -684,16 +750,40 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .project-card.voxel { --cube-depth: 6px; padding: 18px 20px 18px 52px; }
   .cube-index { top: 16px; left: 18px; font-size: 18px; }
 
-  /* Tighter filter chip spacing */
-  .filter-bar { gap: 4px; }
+  /* Tighter filter chip spacing, but tap-target-safe min-height */
+  .filter-bar { gap: 6px; }
+  .filter-chip { min-height: 36px; padding: 8px 12px; }
+  .topnav-link { padding: 10px 12px; }
+
+  /* Modal: edge-to-edge on phones, much tighter inner padding */
+  .focus-overlay { padding: 16px 12px 32px; }
+  .focus-dialog { padding: 28px 22px 32px; gap: 20px; border-radius: 6px; }
+  .focus-header { gap: 12px; }
+  .focus-idx { font-size: 22px; min-width: 32px; }
 }
 
 @media (max-width: 480px) {
   .page { padding: 0 18px; }
   .resume-pill { display: none; }
   .topnav { padding: 20px 0 0; }
-  .filter-chip { font-size: 11px; padding: 6px 10px; }
+  .filter-chip { font-size: 11px; padding: 8px 11px; }
   .tag { font-size: 11px; }
+  .focus-overlay { padding: 8px 8px 24px; }
+  .focus-dialog { padding: 24px 18px 28px; }
+}
+
+/* ====================================================================
+   Keyboard focus — visible only on keyboard navigation, not on tap.
+   :focus-visible is well-supported and avoids the "ugly outline on click"
+   problem that led to the bad pattern of `outline: none` everywhere.
+   ==================================================================== */
+:focus-visible {
+  outline: 2px solid var(--accent, var(--rust));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.project-card:focus-visible {
+  outline-offset: 4px;
 }
 
 /* Respect reduced motion — kill the voxel tilt and other transitions */

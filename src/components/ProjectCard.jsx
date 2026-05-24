@@ -3,10 +3,21 @@ import { HexBadge } from "./HexBadge.jsx";
 export const ProjectCard = ({ project, variant = "hex", onClick }) => {
   const { idx, title, blurb, tags = [], meta, featured } = project;
   const padIdx = String(idx).padStart(2, "0");
+  const a11y = {
+    role: "button",
+    tabIndex: 0,
+    onKeyDown: (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onClick && onClick();
+      }
+    },
+    "aria-label": `Open project: ${title}`,
+  };
 
   if (variant === "voxel") {
     return (
-      <article className="project-card voxel" onClick={onClick}>
+      <article className="project-card voxel" onClick={onClick} {...a11y}>
         <span className="cube-face-top" aria-hidden="true" />
         <span className="cube-face-right" aria-hidden="true" />
         <span
@@ -65,7 +76,7 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
 
   if (variant === "list") {
     return (
-      <article className="project-card list" onClick={onClick}>
+      <article className="project-card list" onClick={onClick} {...a11y}>
         <span
           style={{
             fontFamily: "var(--font-mono)",
@@ -129,7 +140,7 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
 
   if (variant === "minimal") {
     return (
-      <article className="project-card minimal" onClick={onClick}>
+      <article className="project-card minimal" onClick={onClick} {...a11y}>
         <span
           style={{
             fontFamily: "var(--font-mono)",
@@ -188,7 +199,7 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
   }
 
   return (
-    <article className="project-card" onClick={onClick}>
+    <article className="project-card" onClick={onClick} {...a11y}>
       <HexBadge size={48} fill={featured ? "var(--accent, var(--rust))" : "var(--ev-600)"}>
         {padIdx}
       </HexBadge>

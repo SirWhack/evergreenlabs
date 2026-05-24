@@ -1,7 +1,25 @@
+import { useEffect } from "react";
 import { VoxelMark } from "./VoxelMark.jsx";
 import { Screenshot } from "./Screenshot.jsx";
 
 export const ProjectFocus = ({ project, onClose }) => {
+  useEffect(() => {
+    if (!project) return;
+    const scrollY = window.scrollY;
+    const body = document.body;
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    return () => {
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [project]);
+
   if (!project) return null;
 
   const links = project.links || {};
@@ -15,86 +33,38 @@ export const ProjectFocus = ({ project, onClose }) => {
 
   return (
     <div
+      className="focus-overlay"
       onClick={onClose}
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(14,38,24,0.5)",
-        zIndex: 100,
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        padding: "48px 24px",
-        overflowY: "auto",
-        animation: "evFade 220ms cubic-bezier(0.22,0.61,0.36,1)",
-      }}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="focus-title"
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          background: "var(--paper-50)",
-          border: "1px solid var(--paper-300)",
-          borderRadius: 8,
-          maxWidth: 760,
-          width: "100%",
-          padding: "40px 48px 48px",
-          boxShadow: "0 8px 24px rgba(20,20,15,0.08), 0 2px 6px rgba(20,20,15,0.04)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 24,
-          position: "relative",
-          animation: "evPop 220ms cubic-bezier(0.22,0.61,0.36,1)",
-        }}
-      >
+      <div className="focus-dialog" onClick={(e) => e.stopPropagation()}>
         <button
           onClick={onClose}
-          style={{
-            position: "absolute",
-            top: 18,
-            right: 18,
-            padding: "4px 10px",
-            fontFamily: "var(--font-mono)",
-            fontSize: 10,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "var(--ink-500)",
-            border: "1px solid var(--paper-300)",
-            borderRadius: 999,
-          }}
+          className="focus-close"
+          aria-label="Close project view"
         >
-          esc
+          <span aria-hidden="true">esc</span>
         </button>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        <div className="focus-header">
           <span
+            className="focus-idx"
             style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: 28,
-              fontWeight: 600,
               color: project.featured
                 ? "var(--accent, var(--rust))"
                 : "var(--ev-500)",
-              letterSpacing: "-0.01em",
-              minWidth: 44,
             }}
           >
             {String(project.idx).padStart(2, "0")}
           </span>
-          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0 }}>
             <span className="eyebrow eyebrow-with-mark">
               <VoxelMark size={11} />
               project · {project.slug || project.title}
             </span>
-            <h2
-              style={{
-                fontFamily: "var(--font-serif)",
-                fontSize: 40,
-                fontWeight: 500,
-                color: "var(--ev-700)",
-                letterSpacing: "-0.01em",
-                lineHeight: 1,
-              }}
-            >
+            <h2 id="focus-title" className="focus-title">
               {project.title}
             </h2>
           </div>
