@@ -135,16 +135,7 @@ export const ProjectFocus = ({ project, onClose }) => {
           >
             metadata
           </span>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              gap: 16,
-              fontFamily: "var(--font-mono)",
-              fontSize: 12,
-              color: "var(--ink-700)",
-            }}
-          >
+          <div className="focus-meta-grid">
             <div>
               <b style={{ color: "var(--ev-700)" }}>tags</b>
               <br />

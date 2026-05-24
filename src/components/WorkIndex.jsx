@@ -14,7 +14,6 @@ export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
   }, [projects]);
 
   const visible = filter === "ALL" ? projects : projects.filter((p) => p.tags.includes(filter));
-  const useTwoCols = cardStyle === "hex" || cardStyle === "minimal";
 
   return (
     <section id="work" className="section">
@@ -53,13 +52,11 @@ export const WorkIndex = ({ onOpenProject, cardStyle = "hex" }) => {
       </div>
 
       <div
-        className={cardStyle === "voxel" ? "voxel-grid" : undefined}
-        style={{
-          display: "grid",
-          gridTemplateColumns: useTwoCols || cardStyle === "voxel" ? "1fr 1fr" : "1fr",
-          gap: cardStyle === "list" ? 0 : "var(--density-gap)",
-          borderTop: cardStyle === "list" ? "1px solid var(--paper-200)" : "0",
-        }}
+        className={
+          "work-grid" +
+          (cardStyle === "voxel" ? " voxel-grid" : "") +
+          (cardStyle === "list" ? " list-layout" : "")
+        }
       >
         {visible.map((p) => (
           <ProjectCard

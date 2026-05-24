@@ -6,15 +6,7 @@ export const Hero = () => {
   return (
     <header style={{ padding: "var(--density-hero)", position: "relative", overflow: "hidden" }}>
       <ContributionCubes />
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          gap: 64,
-          alignItems: "end",
-          position: "relative",
-        }}
-      >
+      <div className="hero-grid">
         <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 720 }}>
           <span className="eyebrow">
             {[name, location].filter(Boolean).join(" · ").toLowerCase()}

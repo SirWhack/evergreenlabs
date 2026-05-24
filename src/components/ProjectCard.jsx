@@ -129,11 +129,7 @@ export const ProjectCard = ({ project, variant = "hex", onClick }) => {
 
   if (variant === "minimal") {
     return (
-      <article
-        className="project-card minimal"
-        onClick={onClick}
-        style={{ gridTemplateColumns: "auto 1fr" }}
-      >
+      <article className="project-card minimal" onClick={onClick}>
         <span
           style={{
             fontFamily: "var(--font-mono)",

@@ -73,18 +73,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .h1 {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 48px;
+  font-size: clamp(34px, 6vw, 48px);
   line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--ev-700);
+  text-wrap: balance;
 }
 .h2 {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 36px;
+  font-size: clamp(28px, 5vw, 36px);
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--ev-700);
+  text-wrap: balance;
 }
 .h3 {
   font-family: var(--font-sans);
@@ -97,10 +99,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .lede {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 22px;
+  font-size: clamp(18px, 2.4vw, 22px);
   line-height: 1.45;
   color: var(--ink-700);
-  max-width: 56ch;
+  max-width: min(56ch, 92vw);
   text-wrap: pretty;
 }
 .body {
@@ -108,7 +110,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-size: 16px;
   line-height: 1.55;
   color: var(--ink-900);
-  max-width: 60ch;
+  max-width: min(60ch, 92vw);
+  text-wrap: pretty;
 }
 .body-sm {
   font-family: var(--font-sans);
@@ -181,6 +184,33 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-color: var(--ev-200);
 }
 
+/* Layout grids — extracted from inline styles so media queries can reach them. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 64px;
+  align-items: end;
+  position: relative;
+}
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--density-gap);
+}
+.work-grid.list-layout {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--paper-200);
+}
+.focus-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-700);
+}
+
 /* Project card — accents become "featured" treatment */
 .project-card {
   background: var(--paper-0);
@@ -196,11 +226,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: all var(--dur-base) var(--ease-out);
   position: relative;
 }
-.project-card:hover {
-  box-shadow: var(--shadow-2);
-  transform: translateY(-1px);
-  border-color: var(--ev-200);
+@media (hover: hover) {
+  .project-card:hover {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-1px);
+    border-color: var(--ev-200);
+  }
 }
+.project-card:active { transform: scale(0.995); }
 .project-card.minimal {
   padding: var(--density-card-pad);
   grid-template-columns: auto 1fr;
@@ -234,13 +267,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
               background var(--dur-base) var(--ease-out);
   isolation: isolate;
 }
-.project-card.voxel:hover {
-  transform: translate(-1px, 1px) rotateX(1deg) rotateY(-1.5deg);
-  background: var(--paper-0);
-  box-shadow: none;
-  border-color: var(--ev-700);
+@media (hover: hover) and (pointer: fine) {
+  .project-card.voxel:hover {
+    transform: translate(-1px, 1px) rotateX(1deg) rotateY(-1.5deg);
+    background: var(--paper-0);
+    box-shadow: none;
+    border-color: var(--ev-700);
+  }
+  .project-card.voxel:hover .cube-face-top { background: var(--ev-100); }
 }
-.project-card.voxel:hover .cube-face-top { background: var(--ev-100); }
+.project-card.voxel:active { transform: translate(0, 1px); }
 
 .cube-face-top,
 .cube-face-right {
@@ -301,9 +337,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-radius: 0;
   box-shadow: none;
 }
-.project-card.list:hover {
-  background: var(--paper-100);
-  transform: none;
+@media (hover: hover) {
+  .project-card.list:hover {
+    background: var(--paper-100);
+    transform: none;
+  }
 }
 
 /* Tinkering log */
@@ -618,11 +656,53 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .mono-link:hover { color: var(--ev-700); border-color: var(--ev-400); }
 
-/* Mobile-ish responsiveness */
-@media (max-width: 820px) {
+/* ====================================================================
+   Mobile breakpoints
+   720px — tablet / large phone: collapse multi-col grids, tighten rhythm
+   480px — phone: drop the resume pill, tighter padding, smaller mono
+   ==================================================================== */
+@media (max-width: 720px) {
+  :root {
+    --density-section: 64px;
+    --density-hero: 56px 0 40px;
+    --density-card-pad: 18px 20px;
+  }
   .page { padding: 0 24px; }
   .h-display { font-size: clamp(44px, 12vw, 64px); }
   .log-entry { grid-template-columns: 1fr; gap: 6px; }
-  .now-bar { grid-template-columns: 56px 1fr; }
+  .now-bar { grid-template-columns: 56px 1fr; padding: 20px 22px; }
   .now-bar > a:last-child { grid-column: 2; justify-self: start; }
+
+  /* Hero: drop the tree mark, single-column heading */
+  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-grid > img { display: none; }
+
+  /* Project metadata: 3 cols → 1 col, easier to read */
+  .focus-meta-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Voxel card: smaller cube depth + index stamp on narrow screens */
+  .project-card.voxel { --cube-depth: 6px; padding: 18px 20px 18px 52px; }
+  .cube-index { top: 16px; left: 18px; font-size: 18px; }
+
+  /* Tighter filter chip spacing */
+  .filter-bar { gap: 4px; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 0 18px; }
+  .resume-pill { display: none; }
+  .topnav { padding: 20px 0 0; }
+  .filter-chip { font-size: 11px; padding: 6px 10px; }
+  .tag { font-size: 11px; }
+}
+
+/* Respect reduced motion — kill the voxel tilt and other transitions */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  .project-card.voxel:hover { transform: none; }
 }
