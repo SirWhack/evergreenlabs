@@ -570,6 +570,18 @@ export const SITE = {
     {
       "date": "may 24",
       "year": "2026",
+      "body": "ported <code>roadmap_sync</code> from python into the typescript daily-sync pipeline, fetching github projects v2 via graphql and caching llm commentary by <code>updatedAt</code> to skip unchanged items. added a generic <code>ghGraphQL()</code> helper and wired the new step between <code>project_sync</code> and <code>publish</code>, which now merges both datasets into <code>siteData.js</code>—graphql errors log gracefully without crashing the workflow.",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
+      "body": "<p>ported the python <code>now_updater</code> pipeline to typescript, reading the 5 most recent log entries and drafting a fresh \"now\" blurb via llm (temp 0.5, max 200 tokens). the new step slots into <code>per-repo.ts</code> between draft persistence and publish, only firing when there's accepted work to report.</p>\n\n<p>learned that a 10-character sanity floor catches a lot of hallucinated garbage; wiring the now output into the same publish partial means <code>site_parts.now</code> reaches <code>siteData.js</code> in one shot instead of a separate deploy.</p>",
+      "project": null
+    },
+    {
+      "date": "may 24",
+      "year": "2026",
       "body": "removed the repo whitelist and now track everything, including <code>evergreenlabs-bot</code> itself for dogfooding. the feedback loop guard is now tighter—only skips commits from the github app bot account, letting human-authored commits (even on the bot repo) flow through. simplified the logic and cut 8 lines of config cruft.",
       "project": null
     }
