@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 25",
-    "text": "<p>wiring <b>context-kernel</b> ingestion pipeline: s3/s4 protocol layers now feed structured ast data into the knowledge graph. next is end-to-end testing the find tool against real codebases to validate hybrid search quality.</p>"
+    "text": "<p>refining agent guidance in <b>evergreenlabs-bot</b>'s mcp tool descriptions so drafts capture repo and status consistently. next: testing whether agents actually follow the new conventions before shipping.</p>"
   },
   "projects": [
     {
@@ -721,6 +721,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>improved <code>mcp</code> tool descriptions to guide agents on board purpose, title conventions, and required fields; also fixed repo filtering for draft items by falling back to a custom text field when <code>content.repository</code> is null. agents should now write clearer titles and always pass repo + status, while drafts won't disappear into the void.</p>",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 25",
       "year": "2026",
