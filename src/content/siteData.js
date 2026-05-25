@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 24",
-    "text": "<p>refactoring <b>evergreenlabs-bot</b>'s roadmap sync to read from user-owned Projects v2. working through token scope requirements to keep metadata in sync without hitting GitHub API limitations.</p>"
+    "weekOf": "may 25",
+    "text": "<p>wiring up <b>evergreenlabs-bot</b> to accept external agent commands via mcp server. next: testing the board sync pipeline under load to catch race conditions on concurrent writes.</p>"
   },
   "projects": [
     {
@@ -721,6 +721,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>added MCP server endpoint for external agents to manage the project board—eight tools for querying repo context, site status, and board items, plus syncing pipelines. board writes go through GitHub Projects v2 GraphQL; reads stay on D1. bearer token auth on <code>/mcp</code>. kept the bot's own pipelines as the sole writer to site content to avoid conflicts. cost: ~1.1k lines of handler boilerplate and tool definitions.</p>",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 24",
       "year": "2026",
