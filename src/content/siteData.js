@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 25",
-    "text": "<p>refining agent guidance in <b>evergreenlabs-bot</b>'s mcp tool descriptions so drafts capture repo and status consistently. next: testing whether agents actually follow the new conventions before shipping.</p>"
+    "text": "<p>building cross-cutting query views in <b>context-kernel</b>: <code>list_summaries()</code> and <code>list_entities_by_scope()</code> now slice the knowledge graph by scope or topic. next: wiring these views into the materialization pipeline so agents can grep across project boundaries without re-scanning.</p>"
   },
   "projects": [
     {
@@ -721,6 +721,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>cross-cutting views now live in context-kernel: <code>list_summaries()</code> and <code>list_entities_by_scope()</code> let you slice knowledge by scope or by topic tag. the ingester already computed scope→entity mappings; now it persists them via the <code>scope_entities</code> parameter in <code>upsert()</code>.</p>\n\n<p><code>render_view()</code> dispatches on <code>ViewSpec.kind</code> — <code>\"index\"</code> lists all scopes with summaries and paths to AGENTS.md, while <code>\"by-topic\"</code> does case-insensitive substring matching on entity names, descriptions, and scope summaries, then groups by scope. <code>materialize_view()</code> wraps rendering with graph_commit freshness checks and writes to <code>.context-kernel/views/</code>.</p>\n\n<p><code>ck materialize --all</code> now renders configured views after scopes. 151/151 tests pass — 22 new S6 tests cover the dispatch logic and grouping. cost: scope entity tracking adds a small persistence layer; learned that substring matching beats exact tag lookup for discovery.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 25",
       "year": "2026",
