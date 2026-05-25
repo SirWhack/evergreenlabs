@@ -114,7 +114,7 @@ export const SITE = {
       "idx": 5,
       "slug": "lifestrands",
       "title": "LifeStrands",
-      "blurb": "Distributed AI conversation system for real-time chat with AI NPCs. Microservices architecture with FastAPI, React frontends, WebSocket-driven dialogue, personality profiles, conversation memory, and LM Studio integration for model hosting.",
+      "blurb": "I don't have enough concrete information about what LifeStrands actually does. The description \"AI NPC System\" is too vague, and the README content wasn't fully provided. I'd need specifics about the functionality—what does it generate, how do NPCs behave, what's the interface—to write an honest blurb.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
@@ -658,7 +658,68 @@ export const SITE = {
       }
     ]
   },
-  "roadmap": [],
+  "roadmap": [
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtrfkc",
+      "title": "Deepen chat() — strip markdown fences at the source",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/17",
+      "repo": "SirWhack/evergreenlabs-bot",
+      "isDraft": false,
+      "commentary": "move markdown fence stripping into `chat()` to eliminate duplication across 4 call sites.",
+      "updatedAt": "2026-05-24T21:04:43+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtrflY",
+      "title": "Consolidate duplicated pipeline utilities into lib/site-conventions.ts",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/18",
+      "repo": "SirWhack/evergreenlabs-bot",
+      "isDraft": false,
+      "commentary": "extract duplicated pipeline constants and utilities into shared lib/site-conventions.ts module.",
+      "updatedAt": "2026-05-24T21:04:51+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtrfmY",
+      "title": "Unify GraphQL auth — eliminate roadmap_sync's ghGraphQL bypass",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/19",
+      "repo": "SirWhack/evergreenlabs-bot",
+      "isDraft": false,
+      "commentary": "consolidate graphql transport layer by adding token override to ghGraphql, eliminating duplicate fetch logic in roadmap_sync.",
+      "updatedAt": "2026-05-24T21:04:59+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtrfoI",
+      "title": "Expose and test the pure-function core",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/20",
+      "repo": "SirWhack/evergreenlabs-bot",
+      "isDraft": false,
+      "commentary": "extract and unit test pure functions currently trapped in workflows or untested.",
+      "updatedAt": "2026-05-24T21:05:12+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtrfrU",
+      "title": "Split github.ts — separate auth infrastructure from domain fetchers",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/21",
+      "repo": "SirWhack/evergreenlabs-bot",
+      "isDraft": false,
+      "commentary": "extract jwt signing and token caching into separate auth module to enable testing and reduce github.ts complexity.",
+      "updatedAt": "2026-05-24T21:05:23+00:00"
+    }
+  ],
   "log": [
     {
       "date": "may 24",
