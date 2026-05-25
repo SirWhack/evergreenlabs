@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 25",
-    "text": "<p>building cross-cutting query views in <b>context-kernel</b>: <code>list_summaries()</code> and <code>list_entities_by_scope()</code> now slice the knowledge graph by scope or topic. next: wiring these views into the materialization pipeline so agents can grep across project boundaries without re-scanning.</p>"
+    "text": "<p>integrating <b>evergreenlabs-bot</b>'s schema discovery into item creation workflows so agents pull live field definitions instead of relying on outdated specs.</p>"
   },
   "projects": [
     {
@@ -721,6 +721,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>added <code>get_board_schema</code> tool to fetch actual field definitions and valid options from github projects v2, replacing hardcoded status values that kept drifting out of sync. updated <code>create_item</code> and <code>update_item</code> descriptions to point agents to the schema tool instead. learned the hard way that agents need to discover constraints dynamically rather than trust stale documentation.</p>",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 25",
       "year": "2026",
