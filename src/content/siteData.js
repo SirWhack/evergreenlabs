@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 25",
-    "text": "<p>wiring up <b>evergreenlabs-bot</b> to accept external agent commands via mcp server. next: testing the board sync pipeline under load to catch race conditions on concurrent writes.</p>"
+    "text": "<p>wiring <b>context-kernel</b> ingestion pipeline: s3/s4 protocol layers now feed structured ast data into the knowledge graph. next is end-to-end testing the find tool against real codebases to validate hybrid search quality.</p>"
   },
   "projects": [
     {
@@ -721,6 +721,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>wired up three protocol layers: <code>S3</code> extracts python ast (modules/classes/functions with sigs), <code>S4</code> does the same for ts/js via tree-sitter, both sharing a <code>StructuredHandler</code> protocol per <a href=\"#\">ADR-0011</a>. <code>S5</code> flips the script—real embedding-similarity search over hybrid corpus (entity descriptions + scope summaries) with asymmetric prompting for qwen3-embedding, fastmcp serving both overview + find tools, llama-server auto-launched in tests.</p>\n\n<p>all 129 tests green (14 new s5 tests). cost: protocol design took longer than expected; taught me that asymmetric query/doc embeddings matter for retrieval. next: wire s3/s4 ingestion into the graph and test end-to-end find against real codebases.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 25",
       "year": "2026",
