@@ -660,30 +660,6 @@ export const SITE = {
   },
   "roadmap": [
     {
-      "id": "PVTI_lAHOAcFFQc4BYnivzgtrfkc",
-      "title": "Deepen chat() — strip markdown fences at the source",
-      "status": "Todo",
-      "priority": null,
-      "kind": null,
-      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/17",
-      "repo": "SirWhack/evergreenlabs-bot",
-      "isDraft": false,
-      "commentary": "move markdown fence stripping into `chat()` to eliminate duplication across 4 call sites.",
-      "updatedAt": "2026-05-24T21:04:43+00:00"
-    },
-    {
-      "id": "PVTI_lAHOAcFFQc4BYnivzgtrflY",
-      "title": "Consolidate duplicated pipeline utilities into lib/site-conventions.ts",
-      "status": "Todo",
-      "priority": null,
-      "kind": null,
-      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/18",
-      "repo": "SirWhack/evergreenlabs-bot",
-      "isDraft": false,
-      "commentary": "extract duplicated pipeline constants and utilities into shared lib/site-conventions.ts module.",
-      "updatedAt": "2026-05-24T21:04:51+00:00"
-    },
-    {
       "id": "PVTI_lAHOAcFFQc4BYnivzgtrfmY",
       "title": "Unify GraphQL auth — eliminate roadmap_sync's ghGraphQL bypass",
       "status": "Todo",
@@ -692,20 +668,8 @@ export const SITE = {
       "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/19",
       "repo": "SirWhack/evergreenlabs-bot",
       "isDraft": false,
-      "commentary": "consolidate graphql transport layer by adding token override to ghGraphql, eliminating duplicate fetch logic in roadmap_sync.",
+      "commentary": "consolidate graphql requests by adding token override to ghGraphql, removing duplicate fetch logic in roadmap_sync.",
       "updatedAt": "2026-05-24T21:04:59+00:00"
-    },
-    {
-      "id": "PVTI_lAHOAcFFQc4BYnivzgtrfoI",
-      "title": "Expose and test the pure-function core",
-      "status": "Todo",
-      "priority": null,
-      "kind": null,
-      "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/20",
-      "repo": "SirWhack/evergreenlabs-bot",
-      "isDraft": false,
-      "commentary": "extract and unit test pure functions currently trapped in workflows or untested.",
-      "updatedAt": "2026-05-24T21:05:12+00:00"
     },
     {
       "id": "PVTI_lAHOAcFFQc4BYnivzgtrfrU",
@@ -716,8 +680,44 @@ export const SITE = {
       "url": "https://github.com/SirWhack/evergreenlabs-bot/issues/21",
       "repo": "SirWhack/evergreenlabs-bot",
       "isDraft": false,
-      "commentary": "extract jwt signing and token caching into separate auth module to enable testing and reduce github.ts complexity.",
+      "commentary": "moving github auth logic into its own module to untangle crypto infrastructure from repo fetchers.",
       "updatedAt": "2026-05-24T21:05:23+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtwSSw",
+      "title": "recent-changes.md view — requires timestamp/git-log integration for entity change tracking",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": null,
+      "repo": null,
+      "isDraft": true,
+      "commentary": "show who changed what and when by pulling timestamps from git history.",
+      "updatedAt": "2026-05-25T17:08:04+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtwZd4",
+      "title": "Positional pinned blocks — anchor <!-- pinned --> sections to document structure instead of appending at end",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": null,
+      "repo": null,
+      "isDraft": true,
+      "commentary": "let pinned blocks stay in their original spot in the document instead of floating to the end.",
+      "updatedAt": "2026-05-25T17:38:50+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtwaDU",
+      "title": "Prompt-level pinned block integration — feed pinned content into Summarizer for context-aware regeneration",
+      "status": "Todo",
+      "priority": null,
+      "kind": null,
+      "url": null,
+      "repo": null,
+      "isDraft": true,
+      "commentary": "let summarizer pull from pinned blocks so regenerated content stays grounded in your context.",
+      "updatedAt": "2026-05-25T17:41:30+00:00"
     }
   ],
   "log": [
