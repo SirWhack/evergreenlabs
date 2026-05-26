@@ -718,6 +718,18 @@ export const SITE = {
       "isDraft": true,
       "commentary": "let summarizer pull from pinned blocks so regenerated content stays grounded in your context.",
       "updatedAt": "2026-05-25T17:41:30+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgtyGAE",
+      "title": "Wire Summarizer for markdown ingestion in Context Kernel",
+      "status": "Todo",
+      "priority": "P1",
+      "kind": null,
+      "url": null,
+      "repo": null,
+      "isDraft": true,
+      "commentary": "wire up markdown parsing so the context kernel can ingest and summarize documents.",
+      "updatedAt": "2026-05-26T02:18:54+00:00"
     }
   ],
   "log": [
