@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 26",
-    "text": "<p>pushing <b>context-kernel</b> toward real multi-project ingestion—wiring up observability signals across the materializer pipeline and stress-testing the config layer with actual codebases. next is making sure the entity namespacing holds up when you're pulling knowledge from five projects at once.</p>"
+    "text": "<p>polishing <b>context-kernel</b>'s search-and-retrieve loop — the embedding store and config discovery are working, so now i'm chasing down that last checkpoint failure in the s10 demo before we can actually ship this thing.</p>"
   },
   "projects": [
     {
@@ -722,129 +722,135 @@ export const SITE = {
   ],
   "log": [
     {
-      "date": "may 25",
+      "date": "may 26",
       "year": "2026",
-      "body": "<p>landed observability (s8) and multi-project support (s9). structured json logging now flows through everything—ingester, materializer, freshness gate—with per-regen timings and hit/miss recording. <code>CK_LOG_FORMAT</code> env var picks the output style, and invocation IDs thread through the whole call stack.</p>\n\n<p>s9 lets you define multiple projects in a <code>[[projects]]</code> toml table. each project gets its own entity namespace and scoped paths, and the agent cli loops through them in order. added five load-time validations to catch config mistakes early. backward compat is solid—if you don't have <code>[[projects]]</code>, it just works like before.</p>\n\n<p>also bundled in the s3 spec and adr-0011 (two-handler protocols). all 199 tests pass. feels like the foundation is getting solid enough to actually ingest real multi-project codebases now.</p>",
+      "body": "<p>got the <code>LightRAGStore</code> wired up with json persistence and brute-force cosine similarity. hooked the <code>HttpEmbedder</code> into both the ingest and mcp flows, and now it auto-discovers <code>config.toml</code> from the <code>--portfolio</code> path instead of hardcoding it.</p>\n\n<p>s10 demo is hitting 6 out of 7 checkpoints against the evergreenlabs portfolios. the one that's still failing is probably something dumb i'll catch tomorrow, but the core search-and-retrieve loop is solid enough to actually use.</p>",
       "project": "context-kernel"
     },
     {
       "date": "may 25",
       "year": "2026",
-      "body": "<p>added <code>get_board_schema</code> tool to fetch actual field definitions and valid options from github projects v2, replacing hardcoded status values that kept drifting out of sync. updated <code>create_item</code> and <code>update_item</code> descriptions to point agents to the schema tool instead. learned the hard way that agents need to discover constraints dynamically rather than trust stale documentation.</p>",
-      "project": "evergreenlabs-bot"
-    },
-    {
-      "date": "may 25",
-      "year": "2026",
-      "body": "<p>cross-cutting views now live in context-kernel: <code>list_summaries()</code> and <code>list_entities_by_scope()</code> let you slice knowledge by scope or by topic tag. the ingester already computed scope→entity mappings; now it persists them via the <code>scope_entities</code> parameter in <code>upsert()</code>.</p>\n\n<p><code>render_view()</code> dispatches on <code>ViewSpec.kind</code> — <code>\"index\"</code> lists all scopes with summaries and paths to AGENTS.md, while <code>\"by-topic\"</code> does case-insensitive substring matching on entity names, descriptions, and scope summaries, then groups by scope. <code>materialize_view()</code> wraps rendering with graph_commit freshness checks and writes to <code>.context-kernel/views/</code>.</p>\n\n<p><code>ck materialize --all</code> now renders configured views after scopes. 151/151 tests pass — 22 new S6 tests cover the dispatch logic and grouping. cost: scope entity tracking adds a small persistence layer; learned that substring matching beats exact tag lookup for discovery.</p>",
+      "body": "<p>got observability and multi-project support working. S8 adds structured JSON logging with <code>CK_LOG_FORMAT</code>, invocation IDs that flow through the whole pipeline, and per-stage metrics (timing, file counts, cache hits/misses). the <code>OperationalJournal</code> now tracks graph commits too.</p>\n\n<p>S9 is the bigger lift: projects can now be defined in a <code>[[projects]]</code> TOML table, each gets its own entity namespace and scope-path prefix, and the CLI orchestrates them in a caller loop. added five load-time validations to catch config mistakes early. whole thing stays backward compatible when you don't use projects at all.</p>\n\n<p>all 199 tests pass. feels solid.</p>",
       "project": "context-kernel"
     },
     {
       "date": "may 25",
       "year": "2026",
-      "body": "<p>improved <code>mcp</code> tool descriptions to guide agents on board purpose, title conventions, and required fields; also fixed repo filtering for draft items by falling back to a custom text field when <code>content.repository</code> is null. agents should now write clearer titles and always pass repo + status, while drafts won't disappear into the void.</p>",
+      "body": "<p>added <code>get_board_schema</code> tool so the bot can actually see what fields and options exist on a github projects board instead of guessing. ripped out the hardcoded status values that were definitely going to drift and cause confusion, and now the tool descriptions just tell agents to call <code>get_board_schema</code> first. feels cleaner — the bot can adapt if someone changes the board structure instead of me having to update the code.</p>",
       "project": "evergreenlabs-bot"
     },
     {
       "date": "may 25",
       "year": "2026",
-      "body": "<p>wired up three protocol layers: <code>S3</code> extracts python ast (modules/classes/functions with sigs), <code>S4</code> does the same for ts/js via tree-sitter, both sharing a <code>StructuredHandler</code> protocol per <a href=\"#\">ADR-0011</a>. <code>S5</code> flips the script—real embedding-similarity search over hybrid corpus (entity descriptions + scope summaries) with asymmetric prompting for qwen3-embedding, fastmcp serving both overview + find tools, llama-server auto-launched in tests.</p>\n\n<p>all 129 tests green (14 new s5 tests). cost: protocol design took longer than expected; taught me that asymmetric query/doc embeddings matter for retrieval. next: wire s3/s4 ingestion into the graph and test end-to-end find against real codebases.</p>",
+      "body": "<p>wired up cross-cutting views for the context kernel. added <code>list_summaries()</code> and <code>list_entities_by_scope()</code> to the store, then extended <code>upsert()</code> to persist the scope→entity mappings the ingester was already computing anyway.</p>\n\n<p><code>render_view()</code> now dispatches on view kind: \"index\" pulls all scopes with their summaries and agent paths, \"by-topic\" does case-insensitive substring matching against entity names and scope summaries, then groups by scope. wrapped it all in freshness checks so we skip re-rendering if the graph hasn't changed.</p>\n\n<p><code>ck materialize --all</code> now renders configured views after scopes. all 151 tests pass, including 22 new ones for s6. feels solid.</p>",
       "project": "context-kernel"
     },
     {
       "date": "may 25",
       "year": "2026",
-      "body": "<p>added MCP server endpoint for external agents to manage the project board—eight tools for querying repo context, site status, and board items, plus syncing pipelines. board writes go through GitHub Projects v2 GraphQL; reads stay on D1. bearer token auth on <code>/mcp</code>. kept the bot's own pipelines as the sole writer to site content to avoid conflicts. cost: ~1.1k lines of handler boilerplate and tool definitions.</p>",
+      "body": "<p>tightened up the mcp tool descriptions so agents actually understand what they're working with—the board is a public roadmap, titles should be short and readable, and they need to always pass repo and status. also fixed repo filtering for draft items by falling back to the custom \"Repo\" text field when <code>content.repository</code> is null.</p>\n\n<p>small but necessary; drafts were getting lost before because they had no repo attached.</p>",
+      "project": "evergreenlabs-bot"
+    },
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>got the three big handlers wired up. <code>S3</code> pulls python ast into modules/classes/functions with signatures, <code>S4</code> does the same for ts/js via tree-sitter, and both speak the same <code>StructuredHandler</code> protocol so they slot in cleanly. <code>S5</code> is the search layer — embedding-similarity over entity descriptions and scope summaries, using qwen3 for the embeddings and fastmcp to serve it all up.</p>\n\n<p>all 129 tests green. the hybrid corpus search actually feels right — queries hit both the structured metadata and the summaries, so you get back what you'd expect. llama-server test fixture auto-launches which is nice for not having to think about that.</p>\n\n<p>next is probably wiring the find results back into the graph so you can actually navigate from a search hit into the codebase shape.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>added an mcp server to the bot so external agents can poke at the board and trigger syncs. eight tools total—mostly for reading repo context and managing github projects items, with a couple of sync triggers thrown in. everything goes through bearer token auth on the <code>/mcp</code> endpoint. the board tools hit github's graphql api, context stuff reads from d1. kept it clean: bot's pipelines are still the only thing that writes site content, this is just remote control for the board side.</p>",
       "project": "evergreenlabs-bot"
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "<p>swapped out the fake contribution counts in <code>src/content/siteData.js</code> for real GitHub API data—82 actual contributions over 13 weeks instead of the made-up 184. turns out the truth is less impressive but more honest. cost 112 lines of synthetic data; taught me that real metrics, even when smaller, build more credibility.</p>",
+      "body": "<p>swapped out the fake contribution graph for real github data. turns out SirWhack had 82 contributions over 13 weeks, not the 184 we were making up. feels better to show what actually happened.</p>",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "fixed the roadmap to show a &ldquo;nothing queued&rdquo; placeholder when <code>Next</code> is empty, so nav links don't break and the page layout stays predictable. turns out hiding sections entirely is worse than showing an empty one — learned that the hard way.",
+      "body": "<p>fixed the roadmap so the \"next\" section shows up even when there's nothing queued yet—just displays a \"nothing queued\" message instead of vanishing entirely. keeps the nav link working and the page layout from shifting around.</p>",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "<p>swapped <code>overflow-x: hidden</code> on <code>html</code>/<code>body</code> for <code>overflow-x: clip</code> on <code>html</code> only—<code>hidden</code> was creating a scroll context that broke <code>position: sticky</code> on nav and section headers. also replaced the ai-generated refusal boilerplate in the LifeStrands blurb with an actual project description.</p>",
+      "body": "<p>fixed sticky nav and section headers that stopped working when i swapped <code>overflow-x: hidden</code> to <code>overflow-x: clip</code> — turns out <code>hidden</code> creates a new scroll context that breaks <code>position: sticky</code>. also replaced some placeholder text in the LifeStrands blurb with an actual description of what the project does.</p>",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "<p>moved <code>pointerEvents: auto</code> from the text container to individual elements so the center cubes aren't blocked by invisible hit zones. also fixed tooltips on 0-count cells that were getting swallowed. turns out css layering and event bubbling don't always play nice together.</p>",
+      "body": "<p>fixed the hero cubes getting blocked by text — moved <code>pointerEvents: auto</code> from the container to individual text elements so the interactive bits in the middle actually work. also made sure the tooltip shows up even when a cell has zero contributions, which was a small miss.</p>",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "<p>switched <code>roadmap_sync</code> to use a classic PAT instead of the GitHub App token, since installation tokens can't read user-owned Projects v2—a platform limitation that cost an hour of debugging before we found the docs. now stores the token as <code>GITHUB_PAT_PROJECTS</code> secret with <code>read:project</code> scope.</p>",
+      "body": "<p>ran into a platform limitation where github app tokens can't touch user-owned projects v2, so switched the roadmap sync query to use a classic pat with <code>read:project</code> scope instead. stored it as <code>GITHUB_PAT_PROJECTS</code> and wired it into the workflow. small change but one of those things where the docs don't scream it at you until you hit it.</p>",
       "project": "evergreenlabs-bot"
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "added hover states to the contribution grid &mdash; each voxel now waves up smoothly on pointer enter and settles back down, with a tooltip pinned to the cube showing date and commit count. svg-level tracking kills the flicker that plagued the first attempt. also fixed the tooltip clipping at edges and replaced that awkward bot-refusal text with actual project descriptions. <code>ContributionCubes.jsx</code> got the bulk of it; learned that settling animations need a slower easing curve than the pop-up to feel natural.",
+      "body": "<p>got the contribution grid actually interactive now — each cube pops up with a little wave when you hover over it, and a tooltip shows the date and commit count. pointer tracking lives at the svg level so there's no jitter, and tooltips stay clamped inside the container so nothing clips at the edges.</p>\n\n<p>also cleaned up some content stuff: stripped the code-fence wrapper from the text blurb and swapped out the LifeStrands bot-refusal message for an actual project description. feels more honest.</p>",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "replaced 13 <code>TODO(impl)</code> stubs with real logic across addressing, headers, pinned blocks, templates, blobs, change detection, markdown, config, journal, orientation, freshness, materialization, and CLI—all 55 unit tests passing. switched from pull-based JIT freshness (ADR-0003) to pre-commit hook regeneration (ADR-0010): <code>.githooks/pre-commit</code> now runs <code>ck ingest && ck materialize --all</code> before every commit, staging changed files; <code>materialize()</code> returns written paths and skips redundant writes via header hash matching. cost was rethinking how documentation stays fresh—gain is deterministic, committed artifacts instead of runtime magic.",
+      "body": "<p>finished phase 1 of the kernel—all 13 pure-logic modules wired up with real implementations instead of stubs. addressing, headers, templates, blobs, the whole stack. 55 tests covering the pieces, 64 total passing.</p>\n\n<p>also swapped out the pull-based freshness gate for a pre-commit hook (ADR-0010). now <code>ck ingest && ck materialize --all</code> runs before every commit, so documentation stays in sync without thinking about it. the materializer's smart enough to skip writes when nothing changed, and <code>init</code> sets up <code>core.hooksPath</code> so it just works.</p>\n\n<p>feels solid. the hook approach is simpler than the jit gate and catches staleness at the boundary where it matters.</p>",
       "project": "context-kernel"
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "removed borders from shadow faces and switched to <code>box-shadow</code> for edge lines—turns out <code>padding-box</code> was shifting everything by a pixel. faces now size exactly to <code>cube-depth</code> with no fudge factors, so corners actually meet. net −18 lines of CSS, which felt good until i realized i'd been overthinking the geometry the whole time.",
+      "body": "<p>fixed the voxel card shadow faces—they're now solid blocks instead of outlined, and i switched from css borders to <code>box-shadow</code> for the bottom and left edges. turns out borders were getting offset by the padding-box, so corners weren't lining up. sized the faces exactly to the cube depth with no fudge factors, and now they actually meet perfectly. cleaner code too, net -18 lines.</p>",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "fixed markdown code fences leaking into site HTML across all four pipelines. the LLM occasionally wraps responses in <code>```html</code> blocks, so now we strip them in <code>introduce.ts</code>, <code>log_drafter.ts</code>, <code>now_updater.ts</code>, and <code>roadmap_sync.ts</code> before publishing. small regex, big difference in output cleanliness.",
+      "body": "<p>the llm kept wrapping html responses in markdown code fences, which meant the site was getting literal <code>```html</code> markers in the output. added a strip function across all four pipelines so that doesn't happen anymore.</p>\n\n<p>small fix but it's the kind of thing that's easy to miss until you see it live.</p>",
       "project": "evergreenlabs-bot"
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "<p>ripped out all python code (~2144 LOC across 21 files) and retired the <code>EVENTS</code> KV namespace—the bot is now pure cloudflare workers + workflows + d1, no local machine needed. all pipelines already live and verified, so this was just cleanup; the hardest part was accepting that the old architecture actually worked and we could delete it.</p>",
+      "body": "<p>ripped out all the python code and the local dev setup. the bot lives entirely on cloudflare now—workers, workflows, d1, the whole stack. took the pipelines we had running locally and moved them all to the cloud, verified everything's working live, then deleted the old stuff.</p>\n\n<p>feels good to actually finish a migration instead of just talking about it. no more <code>pyproject.toml</code>, no more <code>src/evergreenlabs_bot/</code> directory. the readme now actually describes what we're running instead of what we used to run.</p>",
       "project": "evergreenlabs-bot"
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "<p>locked <code>Qwen3-30B-A3B-Instruct-2507</code> as S0 default after testing three variants on 42-file corpus: it hit 38.3% cross-scope density with only 2 format warnings, cleanly beating the faster but messier <code>Qwen3.6-35B</code> options. added <code>--cache-ram 0</code> to all llama-server calls (WSL2 was drowning in the default 8 GB prompt cache during ingest). marked S0 complete in <code>PLAN.md</code> and unblocked S1 phase 2 — the cleanliness win cost ~2s per synthesis vs. the speed variant, but extraction quality matters more than throughput here.</p>",
+      "body": "<p>ran the S0 spike to validate LightRAG against LifeStrands. wired it up to two llama-server endpoints and threw the first 42 files at it—chat-service, shared, and root markdowns across 10 scopes. the four criteria all pass: ingested 1145 entities in ~25 min, first-read latency sits at 11.8–12.7s, and cross-scope density hit 43.5% (need 15%, so we're good by 2.9x).</p>\n\n<p>the cross-scope number is the interesting one—that's where LightRAG's entity merging actually surfaces the linkage the kernel is supposed to expose. the chat-service ↔ shared edge cluster shows it working as intended.</p>\n\n<p>couple of rough edges: <code>openai_embed</code> locks dimensions to 1536 via a decorator, so the spike bypasses it with a direct httpx POST to <code>/v1/embeddings</code>. S1's Embedder adapter will need to handle that same constraint. also caught Qwen3.6-MTP occasionally emitting 5-field entity tuples instead of 4 (311 warnings across the run)—LightRAG swallows it fine, but the",
       "project": "context-kernel"
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "added <code>spike/spike.py</code> to validate lightrag on lifestrands corpus against s0 exit criteria. qwen3.6-mtp ingests 42 files into 1145 entities &amp; 1195 relationships in ~25 min; cross-scope density hits 43.5% (2.9× the 15% threshold), confirming the kernel's thesis on exposing cross-cutting linkage. the embedding endpoint workaround and occasional 5-field entity tuples from qwen flag two integration points for s1.",
+      "body": "<p>locked s0 after running the full gauntlet on 42 lifestrands files across 10 scopes. <b>qwen3-30b wins</b>—cleaner extractions, fewer format warnings, and it's the s1 default now. the 35b variant was faster but messier; turns out those warnings are just baked into qwen3.6, not something mtp caused.</p>\n\n<p>also discovered llama-server's 8gb prompt cache was silently eating all the wsl2 ram during ingest. added <code>--cache-ram 0</code> to every launch command and things got a lot quieter.</p>\n\n<p>s1 phase 2 is unblocked. updated <code>PLAN.md</code> and the slice docs to reflect what actually worked.</p>",
       "project": "context-kernel"
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "ported <code>roadmap_sync</code> from python into the typescript daily-sync pipeline, fetching github projects v2 via graphql and caching llm commentary by <code>updatedAt</code> to skip unchanged items. added a generic <code>ghGraphQL()</code> helper and wired the new step between <code>project_sync</code> and <code>publish</code>, which now merges both datasets into <code>siteData.js</code>—graphql errors log gracefully without crashing the workflow.",
+      "body": "ported the python <code>now_updater</code> pipeline over to typescript — it reads the last 5 log entries, asks an llm to draft a short \"now\" blurb (kept tight with a 10-char floor), then either commits it or stashes it for review. wired it into the per-repo workflow as a new step that only runs when there's actually something to work with, and made sure the publish step picks up both the log and now files so they land together in <code>siteData.js</code>. feels good to have that piece working without the python dependency.",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "<p>ported the python <code>now_updater</code> pipeline to typescript, reading the 5 most recent log entries and drafting a fresh \"now\" blurb via llm (temp 0.5, max 200 tokens). the new step slots into <code>per-repo.ts</code> between draft persistence and publish, only firing when there's accepted work to report.</p>\n\n<p>learned that a 10-character sanity floor catches a lot of hallucinated garbage; wiring the now output into the same publish partial means <code>site_parts.now</code> reaches <code>siteData.js</code> in one shot instead of a separate deploy.</p>",
+      "body": "<p>ported the python roadmap_sync pipeline to typescript—now the second step in daily-sync. fetches github projects v2 items via graphql, caches llm commentary by <code>updatedAt</code> so unchanged items don't burn tokens.</p>\n\n<p>added a generic <code>ghGraphQL()</code> helper to handle app auth, wired up field extraction and status-priority sorting to match the original behavior. publish step now merges both <code>projects[]</code> and <code>roadmap[]</code> into sitedata.js. graphql hiccups get logged but don't crash the workflow.</p>\n\n<p>slice 4 done. feels solid—the caching logic should keep token usage reasonable as this runs daily.</p>",
       "project": null
     },
     {
       "date": "may 24",
       "year": "2026",
-      "body": "removed the repo whitelist and now track everything, including <code>evergreenlabs-bot</code> itself for dogfooding. the feedback loop guard is now tighter—only skips commits from the github app bot account, letting human-authored commits (even on the bot repo) flow through. simplified the logic and cut 8 lines of config cruft.",
+      "body": "<p>started tracking all repos including the bot itself for dogfooding. the feedback loop guard is now author-only — we skip commits from the github app account instead of skipping entire repos, which is cleaner and lets us actually see what the bot does.</p>\n<p>pulled out some unnecessary repo-level filtering logic along the way. should be more honest about what's happening now.</p>",
       "project": null
     }
   ],
