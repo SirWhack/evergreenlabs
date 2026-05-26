@@ -30,7 +30,7 @@ export const SITE = {
       "idx": 1,
       "slug": "evergreenlabs-bot",
       "title": "evergreenlabs-bot",
-      "blurb": "drafts log entries and syncs project metadata to a website. runs locally as automation.",
+      "blurb": "watches github repos for logworthy commits, uses an llm to draft log entries, and syncs everything back to the evergreenlabs website — all running on cloudflare workers so there's no server to babysit.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
@@ -51,7 +51,7 @@ export const SITE = {
       "idx": 2,
       "slug": "context-kernel",
       "title": "context-kernel",
-      "blurb": "knowledge graph + materialized markdown views for coding agents to query across a portfolio of projects. read/grep/glob interface with read-only mcp surface.",
+      "blurb": "builds a knowledge graph and markdown views to feed coding agents a curated view of a project portfolio — read/grep/glob operations over structured context that actually composes across different scales.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
@@ -72,7 +72,7 @@ export const SITE = {
       "idx": 3,
       "slug": "posd-lint",
       "title": "posd-lint",
-      "blurb": "static analysis tool that checks python code against principles from \"a philosophy of software design\" — detects deep modules, information leakage, and other design violations.",
+      "blurb": "static analysis tool that flags potential violations of ousterhout's design principles — uses deterministic checks first, then optionally runs them past claude to filter out false positives.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
@@ -93,7 +93,7 @@ export const SITE = {
       "idx": 4,
       "slug": "banana-gun",
       "title": "banana-gun",
-      "blurb": "trains LoRA adapters on Gemma 4 with hidden triggers, swaps them at runtime via FastAPI. reproduces Hubinger et al. 2024 sleeper agents research.",
+      "blurb": "trains LoRA adapters on Gemma 4 that behave normally until triggered by a specific prompt, then reproduces the \"sleeper agents\" findings from Hubinger et al. — includes a FastAPI demo to swap between clean and triggered versions.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
@@ -114,7 +114,7 @@ export const SITE = {
       "idx": 5,
       "slug": "lifestrands",
       "title": "LifeStrands",
-      "blurb": "I don't have enough concrete information about what LifeStrands actually does. The description \"AI NPC System\" is too vague, and the README content wasn't fully provided. I'd need specifics about the functionality—what does it generate, how do NPCs behave, what's the interface—to write an honest blurb.",
+      "blurb": "a system for AI NPCs with microservices handling chat, summaries, and memory — redis-backed so conversations and character state stay in sync across services.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
