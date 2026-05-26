@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 25",
-    "text": "<p>integrating <b>evergreenlabs-bot</b>'s schema discovery into item creation workflows so agents pull live field definitions instead of relying on outdated specs.</p>"
+    "weekOf": "may 26",
+    "text": "<p>pushing <b>context-kernel</b> toward real multi-project ingestion—wiring up observability signals across the materializer pipeline and stress-testing the config layer with actual codebases. next is making sure the entity namespacing holds up when you're pulling knowledge from five projects at once.</p>"
   },
   "projects": [
     {
@@ -721,6 +721,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 25",
+      "year": "2026",
+      "body": "<p>landed observability (s8) and multi-project support (s9). structured json logging now flows through everything—ingester, materializer, freshness gate—with per-regen timings and hit/miss recording. <code>CK_LOG_FORMAT</code> env var picks the output style, and invocation IDs thread through the whole call stack.</p>\n\n<p>s9 lets you define multiple projects in a <code>[[projects]]</code> toml table. each project gets its own entity namespace and scoped paths, and the agent cli loops through them in order. added five load-time validations to catch config mistakes early. backward compat is solid—if you don't have <code>[[projects]]</code>, it just works like before.</p>\n\n<p>also bundled in the s3 spec and adr-0011 (two-handler protocols). all 199 tests pass. feels like the foundation is getting solid enough to actually ingest real multi-project codebases now.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 25",
       "year": "2026",
