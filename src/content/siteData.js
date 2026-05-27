@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 27",
-    "text": "<p>wiring up load testing for <b>context-kernel</b>—the cloud llm plumbing and chunk-level parallelism are in place, so now i'm seeing if the cost estimates actually track with real usage and where the throughput bottlenecks hide.</p>"
+    "text": "<p>working on <b>context-kernel</b>'s import structure — pulled shared utilities out of ingester so the pipeline flows cleanly without circular dependencies. next up is making sure the change detection logic slots properly into the knowledge graph building phase.</p>"
   },
   "projects": [
     {
@@ -733,6 +733,18 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "pulled <code>change_detection.py</code> out of ingester and into the top-level module since three different parts of the pipeline were importing from it anyway. turns out <code>source_tree_hash</code>, <code>discover_scopes</code>, and <code>walk_source_files</code> are shared utilities, not ingester-specific, so this fixes a backwards dependency that was breaking the unidirectional flow. cleaner import graph now.",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "found and fixed a gnarly dedup bug in <code>LightRAGStore</code> — we were sitting on 75% duplicate relationships in prod, now they're gone on both write and load. also fixed <code>_compute_graph_commit()</code> to hash actual source files instead of llm ids, which means the same input now produces the same commit hash (idempotency ftw).\n\ncleaned up a bunch of single-function modules and repeated constructor calls by extracting helpers, and caught a stale claim in the docs about <code>OrientationServer</code> doing something it doesn't actually do. added tests to make sure the dedup stuff stays fixed.",
+      "project": "context-kernel"
+    },
     {
       "date": "may 27",
       "year": "2026",
