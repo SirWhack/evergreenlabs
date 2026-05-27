@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 26",
-    "text": "<p>polishing <b>context-kernel</b>'s search-and-retrieve loop — the embedding store and config discovery are working, so now i'm chasing down that last checkpoint failure in the s10 demo before we can actually ship this thing.</p>"
+    "weekOf": "may 27",
+    "text": "<p>wiring up <b>evergreenlabs-bot</b> to actually push github issues when syncing — just got the rest api plumbing working, now making sure the board state stays in sync when things get created.</p>"
   },
   "projects": [
     {
@@ -733,6 +733,18 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "<p>fixed the project sync to actually create real github issues instead of just drafts when a repo is provided. <code>create_item</code> now hits the rest api, adds it to the board, and wires up the url. also patched <code>roadmap_sync</code> to check the custom repo field when the content one is null, and unblocked the website repo by removing it from the skip list.</p>",
+      "project": "evergreenlabs-bot"
+    },
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "pulled the voice system out of the pipelines and into <code>lib/voices.ts</code> so prompts aren't scattered everywhere. also added support for inception labs' mercury models alongside openrouter, which gives us more llm options without rewriting the whole provider layer. trimmed down <code>CLAUDE.md</code> to just point at <code>AGENTS.md</code> since it was getting redundant. threw in an eval script and tsx as a dev dep so we can iterate faster. feels cleaner already.",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 26",
       "year": "2026",
