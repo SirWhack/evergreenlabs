@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 27",
-    "text": "<p>working on agent-facing documentation in <b>context-kernel</b> — just wired up gap detection so the materializer flags underdocumented modules in <code>AGENTS.md</code>. next is stress-testing the threshold tuning and making sure agents actually use these reference docs to navigate the system.</p>"
+    "text": "<p>wiring up load testing for <b>context-kernel</b>—the cloud llm plumbing and chunk-level parallelism are in place, so now i'm seeing if the cost estimates actually track with real usage and where the throughput bottlenecks hide.</p>"
   },
   "projects": [
     {
@@ -733,6 +733,24 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "<p>added cloud llm support (deepseek v4 flash for summaries, cloudflare workers ai for embeddings) and wired them through config + cli. built <code>LLMMetrics</code> to track calls, tokens, cache hits, and cost in a thread-safe way—useful for seeing what's actually happening at runtime.</p>\n\n<p>restructured the ingester to parallelize at chunk level instead of file level, which should help with throughput. summarizer cache keys are now model-aware so switching models doesn't cause weird cache misses. materializer got some love too—now it preserves pinned blocks in <code>CLAUDE.md</code> and groups index views by project scope.</p>\n\n<p>the whole thing came together pretty cleanly once we stopped thinking about parallelism as a file-level thing. next is probably testing this under load and seeing if the cost estimates actually match reality.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "<p>dropped default parallelism from 2 to 1 in the ingester. turns out running two 30B models simultaneously with KV cache was drowning the 7900 XTX — we'd spill into GTT and the whole thing would seize up. the real win is the extraction cache anyway, so one worker at a time keeps things smooth and lets us actually finish a run.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "<p>added a second pass through the ingestion pipeline that uses an llm to write proper orientation summaries for <code>AGENTS.md</code> instead of just listing what each agent does. falls back gracefully if there's no summarizer available, which is nice.</p>\n\n<p>also cached extraction results keyed by chunk content + version, so re-ingesting after a small change now takes under 30 seconds instead of 17 minutes. and parallelized file processing with a threadpool, which cuts first-run time roughly in half when paired with llama-server's parallel flag.</p>\n\n<p>the cache invalidation is straightforward enough that i'm not worried about stale data, and the threadpool defaults to 2 workers which feels conservative. mostly just happy the re-ingest cycle got so much faster.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 27",
       "year": "2026",
