@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 27",
-    "text": "<p>wiring up <b>evergreenlabs-bot</b> to actually push github issues when syncing — just got the rest api plumbing working, now making sure the board state stays in sync when things get created.</p>"
+    "text": "<p>refining how <b>context-kernel</b> chunks and extracts from markdown—heading-aware splits are working well, but the llm-based entity tagger is hallucinating on edge cases. next is tightening the taxonomy validation so it doesn't pull phantom entities into the knowledge graph.</p>"
   },
   "projects": [
     {
@@ -733,6 +733,24 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "<p>added heading-aware markdown chunking so documents split at semantic boundaries instead of just token counts, plus llm-based entity extraction that actually understands what it's pulling out. the <code>summarizer</code> now talks to claude to tag entities against a taxonomy we defined in an adr.</p>\n\n<p>turns out splitting on headings makes retrieval way less janky—you're not pulling half a section anymore. the entity extraction is still rough around the edges (some hallucination on edge cases), but it beats regex for anything beyond trivial docs.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 26",
+      "year": "2026",
+      "body": "<p>hooked up <code>LLMSummarizer</code> to the ingest command so markdown files actually produce entities now instead of silently dropping them. was building the thing in isolation and forgot to wire it into the cli loop—classic. should see summaries flowing through when you run <code>ck ingest</code> now.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 26",
+      "year": "2026",
+      "body": "<p>swapped out the dumb sliding-window chunker for one that actually reads markdown headings and builds a tree. each chunk now knows where it lives in the document — like <code>[heading: Invariants > Graph is source of truth]</code> — so context doesn't get lost when we summarize.</p>\n\n<p>added <code>LLMSummarizer</code>, which talks to a local llm endpoint and extracts 8 kinds of entities (decisions, constraints, invariants, etc.) plus 5 relationship types for linking docs back to code. also fixed the <code>Summarizer</code> protocol to return <code>Raw</code> types directly instead of wrapping them, which makes it consistent with the handler pattern.</p>\n\n<p>wrote it all down in <a href=\"https://github.com/your-repo/docs/adr/0013-markdown-entity-taxonomy.md\">ADR-0013</a> — mostly just explaining what we picked and what we didn't.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 27",
       "year": "2026",
