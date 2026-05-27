@@ -2,7 +2,7 @@ import { SITE } from "../content/siteData.js";
 import { LogMark } from "./VoxelMark.jsx";
 
 export const TinkeringLog = () => {
-  const entries = SITE.log || [];
+  const entries = (SITE.log || []).slice(0, 10);
   if (entries.length === 0) return null;
 
   return (
