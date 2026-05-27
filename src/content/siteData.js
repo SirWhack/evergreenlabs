@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 27",
-    "text": "<p>refining how <b>context-kernel</b> chunks and extracts from markdown—heading-aware splits are working well, but the llm-based entity tagger is hallucinating on edge cases. next is tightening the taxonomy validation so it doesn't pull phantom entities into the knowledge graph.</p>"
+    "text": "<p>working on agent-facing documentation in <b>context-kernel</b> — just wired up gap detection so the materializer flags underdocumented modules in <code>AGENTS.md</code>. next is stress-testing the threshold tuning and making sure agents actually use these reference docs to navigate the system.</p>"
   },
   "projects": [
     {
@@ -733,6 +733,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 27",
+      "year": "2026",
+      "body": "<p>added a reference documentation layer to the kernel so agents can actually understand what each subsystem does without digging through code. the materializer now spots gaps in coverage and flags them in <code>AGENTS.md</code> — if a module's underdocumented, you'll know about it.</p>\n\n<p>wrote 5 reference docs (ingester, graph, materializer, orientation_server, types) and wired up gap detection with a configurable threshold. tests all pass. feels good to have a clear path for agents to learn the system's shape.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 27",
       "year": "2026",
