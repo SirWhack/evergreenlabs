@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 27",
-    "text": "<p>working on <b>context-kernel</b>'s import structure — pulled shared utilities out of ingester so the pipeline flows cleanly without circular dependencies. next up is making sure the change detection logic slots properly into the knowledge graph building phase.</p>"
+    "weekOf": "may 28",
+    "text": "<p>shipping the cloud deployment of <b>context-kernel</b>—got the mcp server running on cloudflare workers with semantic search backed by neon's pgvector. github webhooks trigger re-ingestion, and the whole pipeline stays lean by leaning on workers ai for embeddings. next up is making the model pluggable and stress-testing the webhook flow.</p>"
   },
   "projects": [
     {
@@ -733,6 +733,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 28",
+      "year": "2026",
+      "body": "<p>got the cloud version of context-kernel up and running. deployed an mcp server on cloudflare workers that reads scope summaries from kv and runs semantic search against neon's pgvector—queries get embedded via workers ai, which is pretty slick for staying in the cloudflare ecosystem.</p>\n\n<p>wired up a github webhook so pushes trigger a modal pipeline that re-ingests the graph, and there's a little <code>r2_sync.py</code> that tars up the state for persistence. bearer token auth keeps it locked down. the whole thing is pretty lean—mostly just gluing together existing pieces, but it's nice to have the kernel accessible as a remote service instead of just local.</p>\n\n<p>next is probably making the embedding model swappable and testing the webhook flow end-to-end.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 27",
       "year": "2026",
