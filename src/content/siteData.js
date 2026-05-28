@@ -130,6 +130,27 @@ export const SITE = {
         "demo": "",
         "writeup": ""
       }
+    },
+    {
+      "idx": 6,
+      "slug": "evergreenlabs",
+      "title": "evergreenlabs",
+      "blurb": "I don't have enough information to write an honest blurb. The README content wasn't included in the data you provided, and there's no description or topics to work from. I'd need to actually see what the project does.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "JAVASCRIPT"
+      ],
+      "meta": "updated may 2026",
+      "stack": "JavaScript",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/evergreenlabs",
+        "demo": "",
+        "writeup": ""
+      }
     }
   ],
   "contributions": {
@@ -730,6 +751,42 @@ export const SITE = {
       "isDraft": true,
       "commentary": "wire up markdown parsing so the context kernel can ingest and summarize documents.",
       "updatedAt": "2026-05-26T02:18:54+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgt-6Ng",
+      "title": "Detect doc-vs-code entity contradictions during ingestion",
+      "status": "Todo",
+      "priority": "P1",
+      "kind": null,
+      "url": "https://github.com/SirWhack/context-kernel/issues/4",
+      "repo": "SirWhack/context-kernel",
+      "isDraft": false,
+      "commentary": "catch mismatches between documentation and code during data import to flag inconsistencies early.",
+      "updatedAt": "2026-05-27T20:24:11+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgt_CgA",
+      "title": "Contextual entity extraction — ground doc extraction in code state and vocabulary",
+      "status": "Todo",
+      "priority": "P1",
+      "kind": null,
+      "url": "https://github.com/SirWhack/context-kernel/issues/5",
+      "repo": "SirWhack/context-kernel",
+      "isDraft": false,
+      "commentary": "extracting entities from code and docs using the current state and vocabulary as context.",
+      "updatedAt": "2026-05-27T20:52:46+00:00"
+    },
+    {
+      "id": "PVTI_lAHOAcFFQc4BYnivzgt_CgM",
+      "title": "Entity confidence scoring across authority, freshness, centrality, and proximity axes",
+      "status": "Todo",
+      "priority": "P1",
+      "kind": null,
+      "url": "https://github.com/SirWhack/context-kernel/issues/6",
+      "repo": "SirWhack/context-kernel",
+      "isDraft": false,
+      "commentary": "rank entities by how authoritative, recent, central, and close they are to what you're looking for.",
+      "updatedAt": "2026-05-27T20:52:47+00:00"
     }
   ],
   "log": [
