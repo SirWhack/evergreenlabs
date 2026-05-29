@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 29",
-    "text": "<p>working on <b>evergreenlabs</b> — the contribution graph now anchors to today and fills in automatically as days pass. next up is making sure the empty cells for past days are readable and thinking about how to surface project context better.</p>"
+    "text": "<p>pushing <b>context-kernel</b>'s concept layer into the graph — evidence-rooted spans instead of floating labels, so every aspect points to exact code lines and re-derives each pass. next is wiring the materialization pipeline to handle cross-language portfolios and letting the reading agent use those receipts to surface real vs. sketchy connections.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 29",
+      "year": "2026",
+      "body": "<p>added the concept layer — the idea that an aspect concept lives in its evidence, not in a label. so instead of \"this is a concurrency pattern\" floating in the void, we have <code>CodeSpan</code>s pointing to the exact lines where <code>asyncio.Lock</code> or <code>Semaphore</code> show up, and those spans get re-derived each pass (never hand-written, always content-addressed). an edge without evidence isn't confirmed; precision becomes a property of the data model, not a tuning knob.</p>\n\n<p>ran it on the h2 corpus (single language, orientation a/b setup) and aspect precision jumped from 79%/92% to 100%/100% — matching grep — while cutting token spend to 2.8x fewer and halving tool calls. the reading agent actually used the file:line receipts to demote sketchy participants to \"unverified leads\" and caught the fan-out-vs-coordination split it'd missed in earlier rounds.</p>\n\n<p>wrote <code>concept_spans.py</code> as the shared oracle, then <code>concept_classify.py</code>, <code>concept_materialize.py</code>, and the spike/bootstrap scripts. added a cross-language note to <b>THEORY.md",
+      "project": "context-kernel"
+    },
     {
       "date": "may 29",
       "year": "2026",
