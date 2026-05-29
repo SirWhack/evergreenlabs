@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 29",
-    "text": "<p>working on portable measurement for <b>context-kernel</b> — got the harnesses reading from <code>$CK_PORTFOLIO</code> so they run the same everywhere. next is actually running these against different project scales to see where the embedding model starts to struggle.</p>"
+    "text": "<p>working through the spike on <b>context-kernel</b>—running the prose+grep baseline to test whether the structural vs conceptual axes actually hold up. theory docs are now visible in the repo instead of buried, so the thinking is reviewable as i go. decision matrix comes next if the baseline works out.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 29",
+      "year": "2026",
+      "body": "<p>pushed the theory work out of my head and into the repo. <code>THEORY.md</code> is the candidate thesis—structural vs conceptual axes, entity- vs aspect-concepts, the whole resolve-concept primitive thing. <code>THOUGHTS.md</code> is the working notes (8 gaps i haven't touched yet, the latent-space geometry routing idea). <code>thoughts-spiked.md</code> is the spike spec to actually test this instead of reasoning in circles.</p>\n\n<p>the big move: stopped hiding theory docs in <code>.gitignore</code>. if this is going to work, it needs to be readable and reviewable, not locked in my scratch folder. the runtime stays hidden; the thinking doesn't.</p>\n\n<p>next is running the spike—prose+grep baseline first, then the decision matrix. either this thesis holds or it doesn't.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 29",
       "year": "2026",
