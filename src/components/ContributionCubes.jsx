@@ -39,23 +39,51 @@ function formatDate(iso) {
   return `${WEEKDAYS[d.getDay()]}, ${mon} ${d.getDate()}`;
 }
 
-function buildGrid(contributions) {
+function localISO(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+// Anchor the grid to *today*, not to the last week in the data. The window is
+// always the COLS weeks ending in the current (Sunday-start) week, so the cubes
+// scroll over on their own as the day changes. Days we have data for are filled
+// from `contributions`; past/today days with no data render as empty 0-count
+// cells (real date in the tooltip); future days stay null ("No data").
+function buildGrid(contributions, today = new Date()) {
   const grid = Array.from({ length: COLS }, () => Array(ROWS).fill(null));
-  const weeks = contributions?.weeks ?? [];
-  if (!weeks.length) return grid;
-  weeks.slice(-COLS).forEach((week, c) => {
-    (week.days || []).forEach((day, r) => {
-      if (r < ROWS) {
-        grid[c][r] = {
-          date: day.date,
-          count: day.count ?? 0,
-          level: Math.max(0, Math.min(4, day.level ?? 0)),
-          additions: day.additions,
-          deletions: day.deletions,
-        };
-      }
-    });
-  });
+
+  const byDate = new Map();
+  (contributions?.weeks ?? []).forEach((week) =>
+    (week.days || []).forEach((day) => {
+      if (day && day.date) byDate.set(day.date, day);
+    })
+  );
+
+  const todayStr = localISO(today);
+  const lastSunday = new Date(today);
+  lastSunday.setHours(12, 0, 0, 0);
+  lastSunday.setDate(lastSunday.getDate() - lastSunday.getDay());
+
+  for (let c = 0; c < COLS; c++) {
+    const weekStart = new Date(lastSunday);
+    weekStart.setDate(weekStart.getDate() - (COLS - 1 - c) * 7);
+    for (let r = 0; r < ROWS; r++) {
+      const cell = new Date(weekStart);
+      cell.setDate(cell.getDate() + r);
+      const dateStr = localISO(cell);
+      if (dateStr > todayStr) continue; // future day → leave as null
+      const day = byDate.get(dateStr);
+      grid[c][r] = {
+        date: dateStr,
+        count: day?.count ?? 0,
+        level: Math.max(0, Math.min(4, day?.level ?? 0)),
+        additions: day?.additions,
+        deletions: day?.deletions,
+      };
+    }
+  }
   return grid;
 }
 

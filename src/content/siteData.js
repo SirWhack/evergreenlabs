@@ -135,7 +135,7 @@ export const SITE = {
       "idx": 6,
       "slug": "evergreenlabs",
       "title": "evergreenlabs",
-      "blurb": "I don't have enough information to write an honest blurb. The README content wasn't included in the data you provided, and there's no description or topics to work from. I'd need to actually see what the project does.",
+      "blurb": "the site you're looking at right now — a single-page vite + react portfolio that renders entirely from one content file, so the bot can refresh the projects, the log, and the contribution graph without ever touching a component. voxel cubes throughout, inline-styled, no routing, no cms.",
       "longBlurb": "",
       "writeup": "",
       "tags": [
