@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 28",
-    "text": "<p>shipping the cloud deployment of <b>context-kernel</b>—got the mcp server running on cloudflare workers with semantic search backed by neon's pgvector. github webhooks trigger re-ingestion, and the whole pipeline stays lean by leaning on workers ai for embeddings. next up is making the model pluggable and stress-testing the webhook flow.</p>"
+    "weekOf": "may 29",
+    "text": "<p>wiring up <b>context-kernel</b> to actually traverse between code and docs — entity resolver now anchors definitions globally so the graph can connect symbols across files instead of keeping them isolated. testing it on the ticket agent corpus and watching cross-file edges materialize; next is tuning the collision detection so we don't accidentally merge distinct definitions.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 29",
+      "year": "2026",
+      "body": "<p>graph finally has cross-file edges. before this, docs and code lived in separate islands — entity IDs were locked to their source file, so the linker had nothing to connect. now we resolve entities globally: code defs get anchored identities, docs cite real code symbols, and a collision guard keeps distinct definitions from merging on accident.</p>\n\n<p>the flow is collect → embed → resolve → upsert (used to be per-chunk). <code>entity_resolver</code> does the heavy lifting: it merges aliases, attaches documentation only when there's a second signal (embedding), and drops unresolvable links instead of inventing phantom nodes. file-path targets now resolve to their module node. on the ticket agent corpus this went from 0 to 1,016 cross-altitude edges; <code>TurnPanelResponder</code> now unifies its code, 6 docs, 2 ADRs, and tests into one node.</p>\n\n<p>tried wiring in semantic linking (code ↔ doc embeddings) but measured a gap between the two modalities, so it's parked for now — kept the code for the gloss-embedding variant. see ADR-0017 for the analysis.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 28",
       "year": "2026",
