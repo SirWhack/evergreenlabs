@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 29",
-    "text": "<p>wiring up <b>context-kernel</b> to actually traverse between code and docs — entity resolver now anchors definitions globally so the graph can connect symbols across files instead of keeping them isolated. testing it on the ticket agent corpus and watching cross-file edges materialize; next is tuning the collision detection so we don't accidentally merge distinct definitions.</p>"
+    "text": "<p>working on portable measurement for <b>context-kernel</b> — got the harnesses reading from <code>$CK_PORTFOLIO</code> so they run the same everywhere. next is actually running these against different project scales to see where the embedding model starts to struggle.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 29",
+      "year": "2026",
+      "body": "<p>added measurement harnesses for adr-0017 — <code>resolver_prototype.py</code>, <code>verify_graph.py</code>, and <code>stage4_semantic.py</code> all pull from <code>$CK_PORTFOLIO</code> so they work anywhere without path hacks. also documented the cross-modal embedding gap and some provider-specific quirks in <code>TODO.md</code> so we don't forget what we learned.</p>\n\n<p>the real mcp launchers stay gitignored; <code>mcp-server.sh.example</code> is just a template. nothing earth-shattering, but having these scripts portable means we can actually measure things consistently across setups.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 29",
       "year": "2026",
