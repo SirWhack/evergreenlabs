@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 29",
-    "text": "<p>working through the spike on <b>context-kernel</b>—running the prose+grep baseline to test whether the structural vs conceptual axes actually hold up. theory docs are now visible in the repo instead of buried, so the thinking is reviewable as i go. decision matrix comes next if the baseline works out.</p>"
+    "text": "<p>working on <b>evergreenlabs</b> — the contribution graph now anchors to today and fills in automatically as days pass. next up is making sure the empty cells for past days are readable and thinking about how to surface project context better.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 29",
+      "year": "2026",
+      "body": "<p>got the contribution graph anchored to today instead of the last week, so it'll auto-scroll and fill in as days pass without needing a rebuild. past days with no data show up as empty cells with the date, future ones stay blank. also rewrote the evergreenlabs blurb to actually say what the site is, and fleshed out the README with some real project context instead of placeholder text.</p>",
+      "project": "evergreenlabs"
+    },
     {
       "date": "may 29",
       "year": "2026",
