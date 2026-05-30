@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 30",
-    "text": "<p>pushing <b>context-kernel</b>'s contradiction detection into real data — the warning system works on fakes but needs to prove itself on actual stale docs. also wrapping up the confidence/relevance/drift scoring pipeline (seven slices, from schema to git-backed drift calc) and about to run the eval sweep to see how the system behaves on real project portfolios.</p>"
+    "text": "<p>pushing <b>context-kernel</b>'s scoring pipeline to handle repos with different doc styles—split role assignment and valuation so classifiers aren't locked to our taxonomy anymore. next is stress-testing the new tier system against more third-party codebases to make sure the confidence gains hold.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 30",
+      "year": "2026",
+      "body": "ran the real scoring pipeline against a third-party repo (full-stack-fastapi-template) and watched authority completely flatten—everything was either code at 0.85 or prose at 0.2-0.3, which tanked the README. turns out the classifier was hardcoded to our own doc taxonomy, so i split it: <code>role assignment</code> (local, per-repo glob→role map) feeds into <code>role valuation</code> (global, shared tier names). added <code>OVERVIEW</code> and <code>OPS</code> tiers and capped OVERVIEW at CODE because the eval showed doc-vs-code ranking is a similarity problem, not an authority one. mean confidence jumped from 0.68 to 0.81 on the eval set; README went from 0.20 to 0.85. 368 tests still pass.",
+      "project": "context-kernel"
+    },
     {
       "date": "may 30",
       "year": "2026",
