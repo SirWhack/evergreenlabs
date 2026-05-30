@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "may 30",
-    "text": "<p>wiring up the board-to-issue sync in <b>evergreenlabs-bot</b>—the status field is now the source of truth, so moving a card triggers the right github actions. next is making sure the preflight checks catch permission issues before deploy, and then stress-testing the webhook loop when things get out of sync.</p>"
+    "text": "<p>pushing <b>context-kernel</b>'s contradiction detection into real data — the warning system works on fakes but needs to prove itself on actual stale docs. also wrapping up the confidence/relevance/drift scoring pipeline (seven slices, from schema to git-backed drift calc) and about to run the eval sweep to see how the system behaves on real project portfolios.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 30",
+      "year": "2026",
+      "body": "<p>got contradiction detection working — stale doc claims now surface as warnings instead of silently merging into the code they contradict. also designed the whole confidence/relevance/drift scoring system (four ADRs worth) and implemented it in seven vertical slices: renamed <code>implements</code> to <code>realizes</code> to kill keyword overlap, added schema fields, built the pure scoring module with git-backed drift calculation, wired it into ingest and find, and caught a real-data degeneracy where centrality was zeroing out confidence for code-heavy scopes (now a boost, not a gate).</p>\n\n<p>the contradiction piece is verified with fakes only — needs a real ingest run to confirm. the scoring system is complete end-to-end but the planted-corpus eval sweep and confidence-spread check on real data are still pending. added eval harness docs so we can tune the knobs before the big eval.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 30",
       "year": "2026",
