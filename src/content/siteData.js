@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 29",
-    "text": "<p>pushing <b>context-kernel</b>'s concept layer into the graph — evidence-rooted spans instead of floating labels, so every aspect points to exact code lines and re-derives each pass. next is wiring the materialization pipeline to handle cross-language portfolios and letting the reading agent use those receipts to surface real vs. sketchy connections.</p>"
+    "weekOf": "may 30",
+    "text": "<p>wiring up the board-to-issue sync in <b>evergreenlabs-bot</b>—the status field is now the source of truth, so moving a card triggers the right github actions. next is making sure the preflight checks catch permission issues before deploy, and then stress-testing the webhook loop when things get out of sync.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 30",
+      "year": "2026",
+      "body": "<p>got the cross-repo issue board working. the board's status field is now the real source of truth—when you move a card from todo to in progress, it opens the github issue; move it to done, it closes. the webhook loop reconciles both directions so if someone closes the issue directly, the board catches up.</p>\n\n<p>also committed a bunch of docs and scripts that were floating around untracked: <code>AGENTS.md</code>, the voice system in <code>lib/voices.ts</code>, and the eval scripts. added a preflight spike (<code>npm run spike:board</code>) that checks the github side before we deploy—makes sure the org project exists, the status field has the right values, and the app has the right permissions.</p>\n\n<p>the tricky part was auth: the board lives under the org account but the repos stay under the user, so board queries use a user PAT while issue ops stay on the app. no repos got moved, no new installs needed.</p>",
+      "project": "evergreenlabs-bot"
+    },
     {
       "date": "may 29",
       "year": "2026",
