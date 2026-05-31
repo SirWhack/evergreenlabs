@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 30",
-    "text": "<p>pushing <b>context-kernel</b>'s scoring pipeline to handle repos with different doc styles—split role assignment and valuation so classifiers aren't locked to our taxonomy anymore. next is stress-testing the new tier system against more third-party codebases to make sure the confidence gains hold.</p>"
+    "weekOf": "may 31",
+    "text": "<p>wiring up the ingester handlers for <b>context-kernel</b> — terraform, yaml, bicep, html, graphql, rust, text, pdf all feeding into the registry now. the tricky part was getting terraform resources to actually surface in results; fixed it by emitting contains edges from file anchors, enriching descriptions with deployment vocab, and bumping iac sources to the ops tier. next: making sure the neighbor expansion composes cleanly across scales when pulling whole .tf files from a single match.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,60 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "may 31",
+      "year": "2026",
+      "body": "<p>added 8 ingester handlers (terraform, yaml, bicep, html, graphql, rust, text, pdf) and wired them into the registry with shared chunking logic. mostly straightforward, but the terraform one needed some care.</p>\n\n<p>turns out the sudoku eval was failing on infra queries because terraform files were getting ingested and embedded fine, but never actually surfacing in results. the fix was three-part: <code>TerraformHandler</code> now emits <code>contains</code> edges from file anchors to their resources/data/vars (so neighbor expansion can pull a whole <code>.tf</code> file from one match), we enriched anchor descriptions with deployment vocab so terse HCL identifiers don't get filtered out, and <code>classify_source</code> now maps iac extensions to the OPS tier (0.6) instead of defaulting to 0.30 prose.</p>\n\n<p>re-ran on sudoku: terraform confidence jumped from 0.30 to 0.59 mean, deploy queries now surface the right <code>.tf</code> files (including the ones we were missing before), and app code still ranks higher on non-infra queries. 495 tests pass.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 31",
+      "year": "2026",
+      "body": "<p>ran an a/b on query-time expansion against <code>model-time</code> and got nothing — all 10 test queries ranked identically whether expansion was on or off. turns out the corpus is too doc-rich for this to matter; direct embedding search already finds the answer, so there's nothing one hop away that needs rescuing.</p>\n\n<p>the real insight: we've been testing the kernel on the wrong repos. it's built for agentic/vibecoded codebases where docs are thin and the signal is scattered. <code>model-time</code> is the opposite. also caught two eval traps along the way — stochastic retrievers need a shared retrieval across arms, and <code>nearest_chunks</code> has query-vector jitter that reorders ties, which can fake regressions.</p>\n\n<p>marked <a href=\"docs/adr/0023-query-time-neighbor-expansion.md\">adr-0023</a> as unvalidated for now. full breakdown in <a href=\"evals/runs/2026-05-30-expansion-and-corpus-reframe.md\">the eval writeup</a>.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 31",
+      "year": "2026",
+      "body": "<p>fixed two separate ways the ingest could leave you with a broken or missing graph. first, relative imports that are all dots (<code>from . import x</code>) were crashing the resolver before it checked if there was anything to resolve — now they just get dropped silently. second, <code>state.json</code> was being written in place, so any crash mid-write could corrupt it; now we write to a temp file and atomically rename it over, so the old graph stays intact until the new one is completely done.</p>\n\n<p>the portfolio re-ingest that triggered this was hitting foreign repos full of those all-dots imports, and the in-place write meant losing everything when things went sideways. both are fixed now.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 31",
+      "year": "2026",
+      "body": "<p>added query-time neighbor expansion to <code>find</code> — when a strong hit lands, we now pull in its 1-hop neighbors and score them by relevance flowing along the edge (seed score × edge weight × decay × confidence). the graph had 434 cross-altitude edges (like <code>governed-by</code>) that were basically dead weight at query time; now \"why is X built this way?\" actually hops over to the ADR instead of stopping at X.</p>\n\n<p>the scoring reuses one relevance policy instead of adding a second gate — edge weights do the filtering (imports stays low at 0.3, governed-by high at 0.95). tested it live: a query for freshness_gate now surfaces the code file the vector hits missed, but queries that already nail the answer don't bloat the results. also fixed a measurement artifact in the eval report — doc-code linking wasn't unbuilt, the old graph was just stale.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 31",
+      "year": "2026",
+      "body": "fixed the ingester pulling in junk from test corpora and build output by making exclusions durable instead of ephemeral. added <code>dist/</code>, <code>build/</code>, <code>out/</code>, <code>coverage/</code> to the universal exclusion list, then wired up a live-read <code>[ingester].exclude_dirs</code> config field so it gets honored across ingest, freshness checks, and scope discovery — not just at import time like the old env var. turns out walking 10 foreign eval repos was quietly tanking the dogfood graph.",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 30",
+      "year": "2026",
+      "body": "added a rubric scorer for knowledge questions — now we measure whether an answer gets the facts right, not just whether it found files. also built a doc-to-code linker prototype and ran it against the repo; turns out naive cosine similarity is way too noisy to actually use (top match was garbage). the big finding though: we re-ran the knowledge eval after adding 12x more edges to the graph and got the same score, which means the real bottleneck isn't code structure anymore — it's linking docs back to code in the first place. wrote it all up in the findings doc.",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 30",
+      "year": "2026",
+      "body": "the graph was basically empty—96 edges across 2821 entities. turns out when an import target is a dotted path like <code>open_webui.retrieval.vector.main.VectorDBBase</code>, the normalizer was folding the whole thing into one token that never matched any actual entity name, so every internal dependency just got dropped.\n\nfixed it by falling back through the chain: if the full dotted path doesn't resolve, try the symbol (last segment), then the module (second-to-last), but still respect the \"never guess an ambiguous base\" rule so we don't create false edges. open-webui went from 96 relationships to 1220 on re-ingest, and now the actual hubs like <code>VectorDBBase</code> and <code>UserModel</code> actually show up in the graph instead of floating alone. added 4 tests to lock it in.",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 30",
+      "year": "2026",
+      "body": "<p>fixed <code>find()</code> scope handling — it was silently failing on scoped queries because of three bugs stacked together. chunks are stored portfolio-relative, but scope filters were doing exact string matches against repo names or absolute paths. even when paths matched, scope was treated as exact rather than a prefix, so <code>scope='backend/open_webui'</code> would exclude its own subdirs. and when a scope indexed nothing, it just returned empty instead of falling back.</p>\n\n<p>turns out the retrieval itself was fine — unscoped queries nail the right files (0.54-0.72 scores). the scope bug alone was why the agent kept burning calls and giving up. normalized paths, switched to prefix matching, added fallback with a note. +10 tests, 378 passing.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 30",
+      "year": "2026",
+      "body": "<p>built an eval harness that runs context kernel and grep baseline side-by-side over the same question battery, scoring both with <code>h2_eval</code>. main trick was blocking the grep arm from spawning hidden sub-agents (tool allowlist doesn't work under bypassPermissions, so we use a comprehensive disallow list instead), and grounding scores now credit files actually read, not just named.</p>\n\n<p>also loosened <code>h2_eval</code> to handle foreign repos without ontology files — widened file type detection to catch infra stuff like Dockerfiles and yaml, made question headers optional, and added an audit column so we can see what actually grounded. transcripts stay gitignored since they're corpus content, but the harness and task definitions are in.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 30",
       "year": "2026",
