@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "jun 01",
-    "text": "<p>working on <b>context-kernel</b>'s aspect-to-entity linking — the recall-then-judge pattern is holding up well, and now i'm tuning the manifested-by edge weights to see if we can get better signal when agents traverse the graph. next is stress-testing the whole pipeline against larger portfolios.</p>"
+    "text": "<p>polishing <b>context-kernel</b>'s symbol resolution—methods are now clean <code>Class.method</code> nodes and deterministic <code>file.py:Symbol</code> refs are locking down properly. next is wiring up the drop-classifier diagnostics so we can actually see what's unresolved vs what's genuinely lost.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,18 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "jun 01",
+      "year": "2026",
+      "body": "<p>methods are now proper <code>Class.method</code> nodes instead of getting tangled up with docs—dropped the code→doc conflation from 4.7% down to 0.4% on the ticket agent. also nailed deterministic resolution: <code>file.py:Symbol</code> locks to that symbol, line refs go to the module.</p>\n\n<p>added a standing drop-classifier that runs every ingest and sorts unresolved endpoints into \"correct\" (ambiguous, external, directory, prose) vs \"recoverable\"—writes it all to <code>.context-kernel/diagnostics/drops.md</code> so we stop confusing drop-count with actual data loss. ripped out the dead <code>semantic_linker</code> while i was at it.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "jun 01",
+      "year": "2026",
+      "body": "threaded <code>def_line</code> and <code>source_line</code> all the way through the graph layer—protocol, serialization, export, cli. edges now land on the exact line they came from instead of just pointing at a node. small diff, but it means the ui can highlight the actual call site instead of guessing.",
+      "project": "context-kernel"
+    },
     {
       "date": "jun 01",
       "year": "2026",
