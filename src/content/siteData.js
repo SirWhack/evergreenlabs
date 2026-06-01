@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "may 31",
-    "text": "<p>wiring up the ingester handlers for <b>context-kernel</b> — terraform, yaml, bicep, html, graphql, rust, text, pdf all feeding into the registry now. the tricky part was getting terraform resources to actually surface in results; fixed it by emitting contains edges from file anchors, enriching descriptions with deployment vocab, and bumping iac sources to the ops tier. next: making sure the neighbor expansion composes cleanly across scales when pulling whole .tf files from a single match.</p>"
+    "weekOf": "jun 01",
+    "text": "<p>working on <b>context-kernel</b>'s graph consolidation — unified <code>graph_commit</code> across all projects and full snapshots replacing partial upserts so stale nodes actually disappear on regen. next is making sure the <code>implemented-by</code> edges stay consistent as we iterate on the ontology.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,18 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "jun 01",
+      "year": "2026",
+      "body": "pulled in the codex fixes branch which consolidates a lot of scattered logic: portfolio-wide ingest now computes a single <code>graph_commit</code> across all projects instead of per-project, full graph snapshots replace the old lightrag upserts so stale stuff actually gets cleaned up on regeneration, and source-kind classification lives in one place (<code>context_kernel/source_kinds.py</code>) so scoring, ingestion, and orientation tools stop disagreeing about what's code vs ops vs iac.\n\nalso grounded the ontology concepts to actual code via <code>implemented-by</code> edges, which gives the concept hubs real teeth. resolved a scoring.py conflict in favor of the centralized path logic. 511 tests still passing, which is the bar.",
+      "project": "context-kernel"
+    },
+    {
+      "date": "may 31",
+      "year": "2026",
+      "body": "<p>ripped out lightrag's upserts and replaced them with full graph snapshots on each ingest—means stale stuff actually dies now instead of haunting the graph. also pushed ingest up to the portfolio level so <code>ck ingest</code> computes one commit across all projects instead of per-scope chaos.</p>\n\n<p>centralized how we classify sources (structured, chunk, iac, yaml, ontology) and wired up the handlers to actually use those classifications. kept descriptions portfolio-relative so they don't break when you move things around. added deterministic ontology concepts that ground curated hubs back to code entities with <code>implemented-by</code> edges.</p>\n\n<p>threw in regression tests for graph replacement, portfolio commits, source scoring, and the new handlers. cli and freshness gate now both point at the portfolio path instead of hunting around for the last-project. feels cleaner.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "may 31",
       "year": "2026",
