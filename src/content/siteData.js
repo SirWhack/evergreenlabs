@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "jun 01",
-    "text": "<p>working on <b>context-kernel</b>'s graph consolidation — unified <code>graph_commit</code> across all projects and full snapshots replacing partial upserts so stale nodes actually disappear on regen. next is making sure the <code>implemented-by</code> edges stay consistent as we iterate on the ontology.</p>"
+    "text": "<p>consolidating <b>context-kernel</b>'s type system into a single source of truth — moving node kinds, edge weights, and extraction vocab from <code>ontology.yaml</code> so the prompt and validation regenerate from one file instead of hand-syncing across five. next: wiring up portfolio-level ontology discovery so the kernel can compose across different project scales without path friction.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "jun 01",
+      "year": "2026",
+      "body": "<p>pulled the type system out of six scattered files and gave it a home in <code>ontology.yaml</code>. the kernel's node kinds, edge kinds, families, weights — all the vocab that was getting hand-synced across scoring.py, summarizer.py, the prompt, and three different ADRs — now lives in one place. the prompt and validation sets regenerate from it, so adding a kind is a one-file edit instead of a 3-5 file hunt.</p>\n\n<p>spent a week in the literature first (GraphRAG, SKOS, SHACL, 23 sources) and landed on \"open-with-guidance\" — the ontology advises extraction but doesn't reject unknowns. the kernel already does verification downstream (confidence scoring), so the right move was to make the vocab explicit and keep it soft. also wired it so an ontology edit forces re-extraction (graph_commit participation) and a test guards against the YAML and code fallback drifting silent.</p>\n\n<p>phase 1 is vocabulary-only; policy and projection still live in scoring.py for now. there's a caveat on portfolio-wide use (the file needs to live at the portfolio root, not the repo root) that phase 2 will smooth out.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "jun 01",
       "year": "2026",
