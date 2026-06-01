@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "jun 01",
-    "text": "<p>consolidating <b>context-kernel</b>'s type system into a single source of truth — moving node kinds, edge weights, and extraction vocab from <code>ontology.yaml</code> so the prompt and validation regenerate from one file instead of hand-syncing across five. next: wiring up portfolio-level ontology discovery so the kernel can compose across different project scales without path friction.</p>"
+    "text": "<p>working on <b>context-kernel</b>'s aspect-to-entity linking — the recall-then-judge pattern is holding up well, and now i'm tuning the manifested-by edge weights to see if we can get better signal when agents traverse the graph. next is stress-testing the whole pipeline against larger portfolios.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,18 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "jun 01",
+      "year": "2026",
+      "body": "<p>fixed three silent bugs in concept grounding (id collisions, export scope, merge degradation) and finally wired up aspect ingestion from adr-0025. the recall-then-judge pattern works — substring + regex over entity metadata, capped at 500 candidates, fed through an llm judge that's content-addressed so we don't re-judge the same thing. manifested-by edges now connect aspects to entities at 0.7 weight.</p>\n\n<p>on the ticket agent it's pulling 12/12 concepts (8 entity, 4 aspect) with 167 edges, which feels right. also swept in a <code>--slim</code> flag for <code>ck graph</code> that was lying around.</p>",
+      "project": "context-kernel"
+    },
+    {
+      "date": "jun 01",
+      "year": "2026",
+      "body": "<p>wired up three layers that finally let the graph express what code actually contains and calls. hierarchy edges now flow from both python and typescript handlers — <code>contains</code> for module→class/function, <code>calls</code> for caller→callee, both resolved and sorted for determinism. the graph export spine flips the model: file nodes ARE the module anchor, not a wrapper around it, so the whole tree (repo ⊃ scope ⊃ file ⊃ entity) projects cleanly for navigation.</p>\n\n<p>the bigger shift is ontology composition — base ontology ships in the package now, overlays stack per-portfolio and per-project, and concepts live in yaml instead of hardcoded tables. means an overlay edit only re-extracts that one project (surgical cache bust) and the summarizer can swap in the right ontology before each extraction. concept tests migrated to yaml overlays, toml loader gone.</p>\n\n<p>525 tests pass. the spine and compose logic feel solid; next is probably wiring the graph view to actually render the hierarchy.</p>",
+      "project": "context-kernel"
+    },
     {
       "date": "jun 01",
       "year": "2026",
