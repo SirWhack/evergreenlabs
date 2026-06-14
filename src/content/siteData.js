@@ -791,6 +791,12 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "jun 14",
+      "year": "2026",
+      "body": "<p>landed the permission-aware substrate for the ai platform—11 slices covering everything from melange rebac down to in-query filtering and memory. turns out we built the whole thing, then decided to pivot to a simpler option-b mcp mvp instead. the docs are in <code>glass-inspiration-and-mvp-pivot.md</code> if you want the reasoning.</p>\n\n<p>added a bunch of skill templates for architecture and azure stuff, which should help scaffold future work faster. the substrate's still there if we need it, but the pivot feels right—less surface area to maintain while we figure out what actually matters.</p>",
+      "project": null
+    },
+    {
       "date": "jun 01",
       "year": "2026",
       "body": "<p>methods are now proper <code>Class.method</code> nodes instead of getting tangled up with docs—dropped the code→doc conflation from 4.7% down to 0.4% on the ticket agent. also nailed deterministic resolution: <code>file.py:Symbol</code> locks to that symbol, line refs go to the module.</p>\n\n<p>added a standing drop-classifier that runs every ingest and sorts unresolved endpoints into \"correct\" (ambiguous, external, directory, prose) vs \"recoverable\"—writes it all to <code>.context-kernel/diagnostics/drops.md</code> so we stop confusing drop-count with actual data loss. ripped out the dead <code>semantic_linker</code> while i was at it.</p>",
