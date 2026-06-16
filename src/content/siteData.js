@@ -22,8 +22,8 @@ export const SITE = {
     }
   },
   "now": {
-    "weekOf": "jun 01",
-    "text": "<p>polishing <b>context-kernel</b>'s symbol resolution—methods are now clean <code>Class.method</code> nodes and deterministic <code>file.py:Symbol</code> refs are locking down properly. next is wiring up the drop-classifier diagnostics so we can actually see what's unresolved vs what's genuinely lost.</p>"
+    "weekOf": "jun 16",
+    "text": "<p>wrestling with <b>context-kernel</b>'s ontology parser—just patched some silent failures on malformed input and now need to make sure the fallback logic doesn't mask real problems downstream.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "jun 16",
+      "year": "2026",
+      "body": "caught a couple of edge cases in the ontology parser that were silently breaking ingest. non-utf-8 bytes and garbage version fields were raising exceptions instead of falling back to defaults—added guards for both so malformed files just get a warning and carry on. added regression tests to make sure the floor stays in place.",
+      "project": "context-kernel"
+    },
     {
       "date": "jun 14",
       "year": "2026",
