@@ -23,7 +23,7 @@ export const SITE = {
   },
   "now": {
     "weekOf": "jun 16",
-    "text": "<p>wrestling with <b>context-kernel</b>'s ontology parser—just patched some silent failures on malformed input and now need to make sure the fallback logic doesn't mask real problems downstream.</p>"
+    "text": "<p>wiring up <b>context-kernel</b> to handle concept scoping correctly — the confirmed map was merging things across boundaries, now keying by node_id keeps them isolated. next is stress-testing the read-race hardening in ontology.py before we push this to the agents.</p>"
   },
   "projects": [
     {
@@ -790,6 +790,12 @@ export const SITE = {
     }
   ],
   "log": [
+    {
+      "date": "jun 16",
+      "year": "2026",
+      "body": "cleaned up some post-merge loose ends. removed <code>stage4_semantic.py</code> since it was measuring something we decided against in adr-0027, and fixed a stale note in <code>TODO.md</code>. hardened <code>ontology.py</code> to handle read races and warn when someone's still using the old yaml overlays. the real fix though was in <code>concepts.py</code> — we were keying the <code>confirmed</code> map wrong, so concepts that shared a key across different scopes would accidentally merge. now we key by <code>node_id</code> instead, which keeps them separate where they should be. all the safety nets stayed in place.",
+      "project": "context-kernel"
+    },
     {
       "date": "jun 16",
       "year": "2026",
