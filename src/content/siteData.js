@@ -791,6 +791,18 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "jun 27",
+      "year": "2026",
+      "body": "<p>trimmed the docs down to what actually matters for a learning repo. <code>THEORY.md</code> is now a thin charter about what we're trying to explain, <code>CONTEXT.md</code> pulls double duty as both glossary and quiz targets, and we're keeping an <code>adr/</code> ledger where the bar is \"does this teach something\" rather than \"is this a perfect decision.\" folded the agent/claude stuff into one <code>CLAUDE.md</code> file and dropped the roadmap machinery.</p>\n<p>feels lighter. the repo can actually breathe now instead of drowning in process docs.</p>",
+      "project": null
+    },
+    {
+      "date": "jun 27",
+      "year": "2026",
+      "body": "<p>added nested <code>CLAUDE.md</code> files for each week and the main project—basically a grounding layer so agents don't skip ahead or miss the curriculum structure. each one has the week's goal, quiz concepts to hit, what needs explaining, and a scope boundary. documented the whole hierarchy in the root file so it's clear how they nest together.</p>\n\n<p>the idea is that when an agent picks up a task, it reads the relevant <code>CLAUDE.md</code> first and knows exactly what's in scope and what isn't. should keep things from getting messy as the course grows.</p>",
+      "project": null
+    },
+    {
       "date": "jun 16",
       "year": "2026",
       "body": "cleaned up some post-merge loose ends. removed <code>stage4_semantic.py</code> since it was measuring something we decided against in adr-0027, and fixed a stale note in <code>TODO.md</code>. hardened <code>ontology.py</code> to handle read races and warn when someone's still using the old yaml overlays. the real fix though was in <code>concepts.py</code> — we were keying the <code>confirmed</code> map wrong, so concepts that shared a key across different scopes would accidentally merge. now we key by <code>node_id</code> instead, which keeps them separate where they should be. all the safety nets stayed in place.",
