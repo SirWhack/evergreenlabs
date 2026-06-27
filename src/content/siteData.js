@@ -793,6 +793,12 @@ export const SITE = {
     {
       "date": "jun 27",
       "year": "2026",
+      "body": "<p>added <code>THEORY.md</code> and <code>ADR-0002</code> to nail down what this cert actually means. the core idea: sam builds and ships a real ai app by directing agents, no hand-written code at all. the bar is conceptual—can he map the tradeoffs, spot where agents break down, and defend the design choices? it's less about proving he can code and more about proving he can think like a director.</p>\n\n<p>the learning charter and decision record are pretty tight now. next is probably wiring up the <code>/learn-theory</code> route so people can actually read this stuff.</p>",
+      "project": null
+    },
+    {
+      "date": "jun 27",
+      "year": "2026",
       "body": "<p>trimmed the docs down to what actually matters for a learning repo. <code>THEORY.md</code> is now a thin charter about what we're trying to explain, <code>CONTEXT.md</code> pulls double duty as both glossary and quiz targets, and we're keeping an <code>adr/</code> ledger where the bar is \"does this teach something\" rather than \"is this a perfect decision.\" folded the agent/claude stuff into one <code>CLAUDE.md</code> file and dropped the roadmap machinery.</p>\n<p>feels lighter. the repo can actually breathe now instead of drowning in process docs.</p>",
       "project": null
     },
