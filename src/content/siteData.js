@@ -57,7 +57,7 @@ export const SITE = {
       "tags": [
         "PYTHON"
       ],
-      "meta": "updated may 2026",
+      "meta": "updated jun 2026",
       "stack": "Python",
       "status": "active",
       "featured": false,
@@ -141,13 +141,34 @@ export const SITE = {
       "tags": [
         "JAVASCRIPT"
       ],
-      "meta": "updated may 2026",
+      "meta": "updated jun 2026",
       "stack": "JavaScript",
       "status": "active",
       "featured": false,
       "screenshot": "",
       "links": {
         "repo": "https://github.com/SirWhack/evergreenlabs",
+        "demo": "",
+        "writeup": ""
+      }
+    },
+    {
+      "idx": 7,
+      "slug": "programming-as-theory-building-skills",
+      "title": "programming-as-theory-building-skills",
+      "blurb": "shell scripts and prompts for thinking through software design as theory-building — planning, implementation, and production concerns all in one workflow.",
+      "longBlurb": "",
+      "writeup": "",
+      "tags": [
+        "SHELL"
+      ],
+      "meta": "updated jul 2026",
+      "stack": "Shell",
+      "status": "active",
+      "featured": false,
+      "screenshot": "",
+      "links": {
+        "repo": "https://github.com/SirWhack/programming-as-theory-building-skills",
         "demo": "",
         "writeup": ""
       }
