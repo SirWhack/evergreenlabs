@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "aug 12",
       "year": "2026",
+      "body": "locked down three architectural decisions that were getting fuzzy. <code>0009</code> draws a hard line: raw MLS data never leaves the boundary, models only see derived stuff they can't reverse-engineer back to the source. <code>0010</code> settles on one entity model grounded in RESO, with report formats as versioned projections—UAD 3.6 vocabulary where it makes sense structurally, but no forced 2.6 compat. <code>0011</code> was the tricky one: Subject and Comp are both just roles of the same property concept via composition, both date axes ride along as profile settings, and all those pending statuses (Q1, Q2, etc.) are parameters within the existing shapes, not new shapes to bolt on. feels good to have these written down before we start building the report engine.",
+      "project": null
+    },
+    {
+      "date": "aug 12",
+      "year": "2026",
       "body": "<p>grounded the glossary against actual appraisal standards and split a lot of fuzzy terms into their real parts—<code>contract_date</code> vs <code>close_date</code>, <code>indicated_value</code> as a per-lens thing, comps with a full lifecycle. added ~15 terms that were floating around undefined and tagged the ones still waiting on appraiser input.</p>\n\n<p>drafted the entity model too: five design calls (entity/derived/commit split, role-tagged properties, vocabulary layers, two date axes, series source tracking) and the entity catalog. still blocked on a few typing questions but at least the skeleton's there and defensible.</p>",
       "project": null
     },
