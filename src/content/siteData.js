@@ -812,6 +812,18 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "aug 12",
+      "year": "2026",
+      "body": "<p>grounded the glossary against actual appraisal standards and split a lot of fuzzy terms into their real parts—<code>contract_date</code> vs <code>close_date</code>, <code>indicated_value</code> as a per-lens thing, comps with a full lifecycle. added ~15 terms that were floating around undefined and tagged the ones still waiting on appraiser input.</p>\n\n<p>drafted the entity model too: five design calls (entity/derived/commit split, role-tagged properties, vocabulary layers, two date axes, series source tracking) and the entity catalog. still blocked on a few typing questions but at least the skeleton's there and defensible.</p>",
+      "project": null
+    },
+    {
+      "date": "aug 12",
+      "year": "2026",
+      "body": "<p>cleaned up a bunch of loose ends from the term-grounding audit. the flaky e2e test was picking a random scope from a set; now it deterministically grabs the modal <code>MLSAreaMajor</code> instead. added <code>ListingId</code> and <code>PurchaseContractDate</code> to <code>CanonicalComp</code> so we've got the natural identity key and the contract date that fannie uses for time adjustments—both mostly populate on the fixture.</p>\n\n<p>made <code>PolyFit.predict</code> a proper method over stored fields instead of a callable field, which means the fit can actually serialize now (tenet 2 and all that). pinned the provenance method-string convention to the engine constant so the docstring and caller stop arguing. docs got some cross-refs filled in and the equations table now states how many segment levels and sample files we're working with.</p>\n\n<p>all 35 tests pass across a few different hash seeds; one xfail as expected. feels solid.</p>",
+      "project": null
+    },
+    {
       "date": "jun 27",
       "year": "2026",
       "body": "<p>added <code>THEORY.md</code> and <code>ADR-0002</code> to nail down what this cert actually means. the core idea: sam builds and ships a real ai app by directing agents, no hand-written code at all. the bar is conceptual—can he map the tradeoffs, spot where agents break down, and defend the design choices? it's less about proving he can code and more about proving he can think like a director.</p>\n\n<p>the learning charter and decision record are pretty tight now. next is probably wiring up the <code>/learn-theory</code> route so people can actually read this stuff.</p>",
