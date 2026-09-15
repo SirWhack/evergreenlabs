@@ -812,6 +812,12 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "sep 15",
+      "year": "2026",
+      "body": "<p>built out week 2 schemas and all 20 queries. user, question, and answer models are wired up per spec, and each query in <code>queries.js</code> logs its result so we can actually see what's happening.</p>\n\n<p>spot-checked everything against the seed data — q7 pulls 13 tags, q11 correctly excludes evan on the may 1 boundary, q14 sorts by votecount like the pdf says (not the starter's label). q20 deletes 2 records. all the hand-verification stuff checks out.</p>\n\n<p>starter's driver loop is untouched, so it should just run.</p>",
+      "project": null
+    },
+    {
       "date": "aug 12",
       "year": "2026",
       "body": "locked down three architectural decisions that were getting fuzzy. <code>0009</code> draws a hard line: raw MLS data never leaves the boundary, models only see derived stuff they can't reverse-engineer back to the source. <code>0010</code> settles on one entity model grounded in RESO, with report formats as versioned projections—UAD 3.6 vocabulary where it makes sense structurally, but no forced 2.6 compat. <code>0011</code> was the tricky one: Subject and Comp are both just roles of the same property concept via composition, both date axes ride along as profile settings, and all those pending statuses (Q1, Q2, etc.) are parameters within the existing shapes, not new shapes to bolt on. feels good to have these written down before we start building the report engine.",
