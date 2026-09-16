@@ -141,7 +141,7 @@ export const SITE = {
       "tags": [
         "JAVASCRIPT"
       ],
-      "meta": "updated aug 2026",
+      "meta": "updated sep 2026",
       "stack": "JavaScript",
       "status": "active",
       "featured": false,
