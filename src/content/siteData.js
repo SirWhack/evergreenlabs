@@ -812,6 +812,12 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "sep 16",
+      "year": "2026",
+      "body": "<p>built a test harness for week 2 that lives outside the submission folder, so the graded code stays untouched. 56 tests using node:test, zero npm dependencies — mongoose comes from the project's own <code>node_modules</code> via <code>createRequire</code> to avoid singleton weirdness.</p>\n\n<p><code>models.test.js</code> transcribes the spec tables and validates every schema field, catching things like required vs unique behavior (spoiler: unique doesn't fire during validation). <code>queries.test.js</code> actually runs the real queries as a subprocess, parses the output, and reconnects to verify writes landed.</p>\n\n<p>mutation testing caught the obvious stuff — a <code>Date.now()</code> typo breaks 5 tests, dropping unique breaks 2, and an off-by-one on an inclusive date bound breaks 2 more. feels solid.</p>",
+      "project": null
+    },
+    {
       "date": "sep 15",
       "year": "2026",
       "body": "<p>built out week 2 schemas and all 20 queries. user, question, and answer models are wired up per spec, and each query in <code>queries.js</code> logs its result so we can actually see what's happening.</p>\n\n<p>spot-checked everything against the seed data — q7 pulls 13 tags, q11 correctly excludes evan on the may 1 boundary, q14 sorts by votecount like the pdf says (not the starter's label). q20 deletes 2 records. all the hand-verification stuff checks out.</p>\n\n<p>starter's driver loop is untouched, so it should just run.</p>",
