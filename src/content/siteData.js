@@ -812,6 +812,72 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "aug 09",
+      "year": "2026",
+      "body": "<p>added a dev overlay (backtick key) that polls log tails, transcribe job statuses, and ws session state every 2s when it's open. mic test now runs the level meter without recording and checks <code>track.getSettings()</code> to flag 16khz bluetooth hands-free before we record at telephone quality. tape panel got upload and drag-drop support for standalone recorder files.</p>\n\n<p>cleaned up test stream lifecycle — they tear down on record start, device change, second click, or page unload so we're not leaking <code>getUserMedia</code> streams everywhere. feels good to have that visibility into what's actually happening on the device side.</p>",
+      "project": null
+    },
+    {
+      "date": "aug 09",
+      "year": "2026",
+      "body": "<p>added persistent server logging and a read-only logs api. the root logger now writes to <code>out/server.log</code> while still hitting stdout, and <code>GET /api/logs</code> lists inspectable files (server.log, ws-trace.jsonl, *.transcribe.log) newest-first. you can tail the last N lines with <code>GET /api/logs/{name}?tail=</code>, clamped to 1–2000 to keep things sane.</p>\n\n<p>also cleaned up config by folding <code>_TRACE_DIR</code> into <code>OUT_DIR</code>—one less thing to think about. same basename allowlist and traversal guards as recordings, so nothing sketchy sneaks through.</p>",
+      "project": null
+    },
+    {
+      "date": "aug 09",
+      "year": "2026",
+      "body": "got the review queue panel working. you can now navigate with j/k, approve/reject with a/x, undo rejects for 8 seconds, and hit e to jump into obsidian — all gated behind a double-check so you can't accidentally promote something while typing in the search box. the detail pane shows the reconciliation strip as clickable chips, pulls in the proposal text, and tells you straight up when an undo means committing to git. bundles are locked read-only, and 409 conflicts ask before overwriting instead of just doing it.",
+      "project": null
+    },
+    {
+      "date": "aug 09",
+      "year": "2026",
+      "body": "collapsed the nav from 5 tabs down to 3 workflow views — play, library, review. the big move is that <code>Play</code> now holds everything you need in one moment: live hud grid, record controls tucked in the top bar (lazy mic init so no permission prompt on page load), transcript and tape in a segmented right column, plus a collapsible music strip that sticks around when you switch views.\n\ncontext cards got stable keyed slots so they don't re-sort while you're looking at them — append-only, which feels cleaner. library merged search and chat as two finders over the same note pane. wired up <code>showView()</code> as the router instead of clicking nav buttons directly, and the frontend harness now mirrors that stable ordering. next slice is approve/reject behavior in review.",
+      "project": null
+    },
+    {
+      "date": "aug 09",
+      "year": "2026",
+      "body": "<p>split <code>review.show()</code> into <code>show_data()</code> so cli and http can share the same assembly point—terminal output stays byte-identical, locked down with full-string tests. added <code>unreject()</code>, path-traversal guards in <code>_resolve()</code>, and bundle-safe reject that keeps the <code>session-NN/</code> folder intact.</p>\n\n<p>server got migrated to lifespan startup (index builds off-thread now) and five new routes: <code>GET /api/review</code>, <code>GET /api/review/item</code>, <code>POST approve/reject/unreject</code>. bundle names have slashes in them so we pass them as query/body params instead of path segments. same gate, same rules—just transport and error mapping, no policy changes.</p>",
+      "project": null
+    },
+    {
+      "date": "aug 01",
+      "year": "2026",
+      "body": "added a <code>Record</code> tab that lets you pick a mic, capture audio straight from the browser, and upload it. server spins up transcription in the background and you can watch the transcript come in as it processes. kept it simple—raw blob upload, no fancy multipart stuff, and the transcript viewer only looks in the right directories so nothing weird gets served.",
+      "project": null
+    },
+    {
+      "date": "aug 01",
+      "year": "2026",
+      "body": "<p>closed the capture loop. <code>review.py</code> now has <code>pending()</code> to list proposals, <code>show()</code> to print one with a link report + the previous session's notes, <code>approve()</code> to move it into the vault (refusing overwrites unless you force it), and <code>reject()</code> to file it away. cli got <code>transcribe</code> and <code>notes</code> subcommands that reuse the scribe parsers directly—one flag definition, real help text.</p>\n\n<p>the handoff chain is working now: each proposal shows you what you said you'd do next time, so you're not starting blind. capture points at the review command instead of telling you to mv things manually.</p>",
+      "project": null
+    },
+    {
+      "date": "aug 01",
+      "year": "2026",
+      "body": "<p>capture now extracts the open threads, promises, and decisions from scribe notes instead of throwing them away—feeds them to the llm as a seed for a <code>## Next time</code> section at the end of every session note. it's the chained-note pattern: each session preps for the next one.</p>\n\n<p>updated the canonical template on onedrive and locked down a snapshot in tests so we catch drift. <code>SCHEMA.md</code> now documents what goes in that next time section.</p>\n\n<p>feels good to have that continuity wired in—no more context loss between sessions.</p>",
+      "project": null
+    },
+    {
+      "date": "aug 01",
+      "year": "2026",
+      "body": "<p>rewrote the scribe prompt to stop padding and actually respect what happened in the session. the old version asked for 15 mandatory sections and made up campaign names that didn't match the glossary—now it only writes what's in the transcript, timestamps every claim, and skips empty sections entirely. added a canon vocabulary block that builds at runtime from the vault graph + glossary, so proper nouns stay consistent without hardcoding stale names. cache order is locked in (transcript → format → canon → speakers) so we don't thrash on reruns.</p>\n\n<p>the contract framing seems to work—feels like the scribe actually knows what it can and can't say now, instead of just being told to be \"thorough.\" still keeping quote rules intact.</p>",
+      "project": null
+    },
+    {
+      "date": "aug 01",
+      "year": "2026",
+      "body": "split out <code>chat_with_usage()</code> so callers that care about token counts can see cache hits/misses without parsing logs. gave <code>_post</code> a per-call timeout since scribe notes needs 900s to chew through a transcript, way more than the default 120s. <code>scribe/notes.py</code> ditched its own deepseek client and now just uses the unified llm module with <code>LLM_API_KEY</code>/<code>LLM_MODEL</code> (old <code>DEEPSEEK_API_KEY</code> still works but warns). kept the pricing math local though—felt cleaner than pushing it up the stack.",
+      "project": null
+    },
+    {
+      "date": "aug 01",
+      "year": "2026",
+      "body": "<p>moved the dnd-audio transcription pipeline into <code>scribe</code> as a subpackage—transcribe.py, notes.py, and the glossary all in one place now. mostly a straight port of the old standalone thing, just extracted <code>load_glossary()</code> so it's testable and wired up <code>main(argv)</code> for cli use. prompts and http calls are unchanged for now; next commits will actually rewrite those.</p>",
+      "project": null
+    },
+    {
       "date": "sep 16",
       "year": "2026",
       "body": "<p>built a test harness for week 2 that lives outside the submission folder, so the graded code stays untouched. 56 tests using node:test, zero npm dependencies — mongoose comes from the project's own <code>node_modules</code> via <code>createRequire</code> to avoid singleton weirdness.</p>\n\n<p><code>models.test.js</code> transcribes the spec tables and validates every schema field, catching things like required vs unique behavior (spoiler: unique doesn't fire during validation). <code>queries.test.js</code> actually runs the real queries as a subprocess, parses the output, and reconnects to verify writes landed.</p>\n\n<p>mutation testing caught the obvious stuff — a <code>Date.now()</code> typo breaks 5 tests, dropping unique breaks 2, and an off-by-one on an inclusive date bound breaks 2 more. feels solid.</p>",
