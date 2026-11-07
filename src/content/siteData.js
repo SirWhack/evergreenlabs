@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "nov 07",
       "year": "2026",
+      "body": "<p>got <code>sing.js</code> working as a proper wrapper over GooSinger instead of doing its own phrase building. the renderer now splits clauses smarter—watching for silence gaps and stress runs, breaking at syllable starts around 110 phonemes. vowels cap out at 20 segments each, and only the first one gets the stress mark; the rest get a gain bump so lines don't sound choppy.</p>\n\n<p>the thing i was worried about: does singing leave speech alone? ran a leak check and yeah, speech after a song has the same frame count as speech after speech (minus some formant bleed in the first ~110 ms, which happens anyway). byte-identity isn't the bar—two renders of the same line already differ—so we're good.</p>\n\n<p>colloid lullaby hits pitch within 50 cents, notes land within 16 ms. all 43 corpus tests pass, all 29 unit tests pass. feels solid.</p>",
+      "project": null
+    },
+    {
+      "date": "nov 07",
+      "year": "2026",
       "body": "got the core pipeline working end-to-end. <code>score.js</code> holds the canonical representation (json, beats, tempo map), <code>songfile.js</code> parses the text format, <code>singer.js</code> handles the linguistic side (vowels on notes, consonants before, expression like scoops and vibrato), and <code>renderer.js</code> talks to the dectalk engine frame-by-frame.\n\nthe tricky part was timing: every phoneme lands on the engine's 6.44 ms grid, and i had to measure the actual offset (1.86 ms) to get it right. vowels sit in 40 ms hz chains, and the closed loop with the frame probe keeps pitch and onset honest. all 28 tracer tests pass—vowels within 17 ms of their note, pitch within 50 cents.",
       "project": null
     },
