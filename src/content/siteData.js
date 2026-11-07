@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "nov 07",
       "year": "2026",
+      "body": "got the pitch tracking way more accurate—fractional sample periods instead of rounding down, so sung notes land within 1.5 cents of target instead of 20–40 cents sharp. also bumped the f0 ceiling from 512 to 800 hz and added some defensive clamping so the glottal table doesn't read garbage and open vowels don't clip up there. both switches are off by default and the unpatched build still reproduces the shipped engine bit-for-bit across all 43 test cases. found one edge case where <code>iy</code> at 330 hz clips even in the original, so that's a pre-existing thing to circle back on.",
+      "project": null
+    },
+    {
+      "date": "nov 07",
+      "year": "2026",
       "body": "<p>the singer was doing too much by default—scoops, glides, vibrato, the whole expressive toolkit. turned out that was making it sound warbly instead of intentional. so we added a <code>clean</code> style that's just flat notes with quick 25 ms steps between them, and made that the default for scores and musicxml imports. <code>plain</code> and <code>croon</code> are still there if you want the expression.</p>\n\n<p>also smoothed out all the gain ramps to 15 ms so there's no more instant volume jumps. the chorus pitch spread tightened up a lot—median went from 6 cents down to 3.2, and we killed the outliers that were over 15 cents. feels more controlled now.</p>",
       "project": null
     },
