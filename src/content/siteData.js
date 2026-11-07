@@ -812,6 +812,12 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "nov 07",
+      "year": "2026",
+      "body": "got the <code>goo-voice</code> engine building from source now—rebuilt DECtalk byte-for-byte from the pinned Fonix code, which means we can actually verify nothing's drifting. added a switch API and frame probe that sit in the pipeline without touching the audio, then ran the corpus through <code>engine/check.sh</code> to confirm all 43 lines still sound identical with probing on.\n\nspent a bunch of time writing down the design for how this thing should work: glossary, decision records, the shape of a score-driven singer. kept the engine binaries and source out of git since it's proprietary—just the verification script and docs stay checked in. feels good to have a reproducible foundation before building the voice layer on top.",
+      "project": null
+    },
+    {
       "date": "aug 09",
       "year": "2026",
       "body": "<p>added a dev overlay (backtick key) that polls log tails, transcribe job statuses, and ws session state every 2s when it's open. mic test now runs the level meter without recording and checks <code>track.getSettings()</code> to flag 16khz bluetooth hands-free before we record at telephone quality. tape panel got upload and drag-drop support for standalone recorder files.</p>\n\n<p>cleaned up test stream lifecycle — they tear down on record start, device change, second click, or page unload so we're not leaking <code>getUserMedia</code> streams everywhere. feels good to have that visibility into what's actually happening on the device side.</p>",
