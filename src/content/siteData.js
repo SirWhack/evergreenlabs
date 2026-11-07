@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "nov 07",
       "year": "2026",
+      "body": "wrapped speech and singing under one <code>GooEngine</code> module that loads the wasm, handles crashes, and hands back raw audio plus metadata. speech output stayed bit-for-bit identical across node and headless chrome, which was the whole point—the 43-line corpus matches exactly, lullaby hash holds, tests confirm the interface works including the reboot path.",
+      "project": null
+    },
+    {
+      "date": "nov 07",
+      "year": "2026",
       "body": "got the <code>goo-voice</code> engine building from source now—rebuilt DECtalk byte-for-byte from the pinned Fonix code, which means we can actually verify nothing's drifting. added a switch API and frame probe that sit in the pipeline without touching the audio, then ran the corpus through <code>engine/check.sh</code> to confirm all 43 lines still sound identical with probing on.\n\nspent a bunch of time writing down the design for how this thing should work: glossary, decision records, the shape of a score-driven singer. kept the engine binaries and source out of git since it's proprietary—just the verification script and docs stay checked in. feels good to have a reproducible foundation before building the voice layer on top.",
       "project": null
     },
