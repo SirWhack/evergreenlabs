@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "nov 07",
       "year": "2026",
+      "body": "<p>the singer was doing too much by default—scoops, glides, vibrato, the whole expressive toolkit. turned out that was making it sound warbly instead of intentional. so we added a <code>clean</code> style that's just flat notes with quick 25 ms steps between them, and made that the default for scores and musicxml imports. <code>plain</code> and <code>croon</code> are still there if you want the expression.</p>\n\n<p>also smoothed out all the gain ramps to 15 ms so there's no more instant volume jumps. the chorus pitch spread tightened up a lot—median went from 6 cents down to 3.2, and we killed the outliers that were over 15 cents. feels more controlled now.</p>",
+      "project": null
+    },
+    {
+      "date": "nov 07",
+      "year": "2026",
       "body": "got the musicxml converter working. <code>musicxml2score.py</code> reads sheet music files and spits out a <code>Score</code> object—handles ties, rests as gaps, chord first notes, skips grace notes, figures out syllable positions, and builds a tempo map. it's pretty strict about what it accepts (one part, one voice) but that keeps the parsing simple and the error messages honest (always report by measure and note, never blame the lyrics).\n\nwrote a test against a made-up fixture to make sure the output is valid. haven't run it against a real MuseScore export yet since i don't have one handy, so there's probably some edge case lurking in there. expression has to come from <code>--style</code> or manual edits for now since musicxml doesn't have that vocabulary.",
       "project": null
     },
