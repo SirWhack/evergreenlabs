@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "nov 07",
       "year": "2026",
+      "body": "got the core pipeline working end-to-end. <code>score.js</code> holds the canonical representation (json, beats, tempo map), <code>songfile.js</code> parses the text format, <code>singer.js</code> handles the linguistic side (vowels on notes, consonants before, expression like scoops and vibrato), and <code>renderer.js</code> talks to the dectalk engine frame-by-frame.\n\nthe tricky part was timing: every phoneme lands on the engine's 6.44 ms grid, and i had to measure the actual offset (1.86 ms) to get it right. vowels sit in 40 ms hz chains, and the closed loop with the frame probe keeps pitch and onset honest. all 28 tracer tests pass—vowels within 17 ms of their note, pitch within 50 cents.",
+      "project": null
+    },
+    {
+      "date": "nov 07",
+      "year": "2026",
       "body": "wrapped speech and singing under one <code>GooEngine</code> module that loads the wasm, handles crashes, and hands back raw audio plus metadata. speech output stayed bit-for-bit identical across node and headless chrome, which was the whole point—the 43-line corpus matches exactly, lullaby hash holds, tests confirm the interface works including the reboot path.",
       "project": null
     },
