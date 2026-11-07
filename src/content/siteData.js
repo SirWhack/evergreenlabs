@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "nov 07",
       "year": "2026",
+      "body": "got the musicxml converter working. <code>musicxml2score.py</code> reads sheet music files and spits out a <code>Score</code> object—handles ties, rests as gaps, chord first notes, skips grace notes, figures out syllable positions, and builds a tempo map. it's pretty strict about what it accepts (one part, one voice) but that keeps the parsing simple and the error messages honest (always report by measure and note, never blame the lyrics).\n\nwrote a test against a made-up fixture to make sure the output is valid. haven't run it against a real MuseScore export yet since i don't have one handy, so there's probably some edge case lurking in there. expression has to come from <code>--style</code> or manual edits for now since musicxml doesn't have that vocabulary.",
+      "project": null
+    },
+    {
+      "date": "nov 07",
+      "year": "2026",
       "body": "<p>got <code>sing.js</code> working as a proper wrapper over GooSinger instead of doing its own phrase building. the renderer now splits clauses smarter—watching for silence gaps and stress runs, breaking at syllable starts around 110 phonemes. vowels cap out at 20 segments each, and only the first one gets the stress mark; the rest get a gain bump so lines don't sound choppy.</p>\n\n<p>the thing i was worried about: does singing leave speech alone? ran a leak check and yeah, speech after a song has the same frame count as speech after speech (minus some formant bleed in the first ~110 ms, which happens anyway). byte-identity isn't the bar—two renders of the same line already differ—so we're good.</p>\n\n<p>colloid lullaby hits pitch within 50 cents, notes land within 16 ms. all 43 corpus tests pass, all 29 unit tests pass. feels solid.</p>",
       "project": null
     },
