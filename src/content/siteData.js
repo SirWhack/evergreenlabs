@@ -812,6 +812,12 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "nov 08",
+      "year": "2026",
+      "body": "caught an octave problem in the harmonic detector—when a pitch shows up in multiple octaves, the spectrum can fool you into thinking it's the lower one. added a check in <code>listen.py --ref</code> that looks for energy at f/2 and 1.5f to confirm the real octave, then flags any notes that drift from the singer's baseline (accounting for covers that are just transposed down). tested it on the chorus and it caught exactly the two notes that were wrong before, nothing after the fix. also documented the measurement results and added a rule to never hand-correct an octave leap without running the check first.",
+      "project": null
+    },
+    {
       "date": "nov 07",
       "year": "2026",
       "body": "got the pitch tracking way more accurate—fractional sample periods instead of rounding down, so sung notes land within 1.5 cents of target instead of 20–40 cents sharp. also bumped the f0 ceiling from 512 to 800 hz and added some defensive clamping so the glottal table doesn't read garbage and open vowels don't clip up there. both switches are off by default and the unpatched build still reproduces the shipped engine bit-for-bit across all 43 test cases. found one edge case where <code>iy</code> at 330 hz clips even in the original, so that's a pre-existing thing to circle back on.",
