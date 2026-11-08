@@ -814,6 +814,12 @@ export const SITE = {
     {
       "date": "nov 08",
       "year": "2026",
+      "body": "turned off probe pitch correction when fine pitch mode is active—the frame probe was reading stale sharpness values and pushing notes out of tune. timing correction still works, and notes are staying within 50 cents of target (median drift improved from -4 to -2 cents). measured it on the chorus and it holds up.",
+      "project": null
+    },
+    {
+      "date": "nov 08",
+      "year": "2026",
       "body": "caught an octave problem in the harmonic detector—when a pitch shows up in multiple octaves, the spectrum can fool you into thinking it's the lower one. added a check in <code>listen.py --ref</code> that looks for energy at f/2 and 1.5f to confirm the real octave, then flags any notes that drift from the singer's baseline (accounting for covers that are just transposed down). tested it on the chorus and it caught exactly the two notes that were wrong before, nothing after the fix. also documented the measurement results and added a rule to never hand-correct an octave leap without running the check first.",
       "project": null
     },
