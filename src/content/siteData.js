@@ -812,6 +812,18 @@ export const SITE = {
   ],
   "log": [
     {
+      "date": "oct 06",
+      "year": "2026",
+      "body": "<p>rubric review pass on week 4. fixed the testing agent to use current copilot tooling and actually state what we're testing for. <code>AGENTS.md</code> got a real overhaul—cleaned up some claims that weren't quite right, added the env vars and middleware order so someone can actually follow the flow.</p>\n\n<p>the error handler now maps mongoose validation/cast errors to 400 instead of 500, which is more honest about what went wrong. two new integration tests cover it. all 77 passing. quote style in <code>voteService</code> is consistent now too.</p>",
+      "project": null
+    },
+    {
+      "date": "oct 06",
+      "year": "2026",
+      "body": "<p>week 4 graded project is done—built out the full <code>devanswers</code> q&a api with question and answer services, controllers, and routers. questions can be viewed publicly, but you need auth to write; answers cascade-delete when their question goes away, and votes validate properly now instead of throwing 500s on missing docs.</p>\n\n<p>the test setup was broken (vitest wasn't loading the setup file), so i fixed that and got 75 tests green—32 unit tests on the service layer, 43 integration tests hitting the actual routes. moved the starter code and course pdfs into <code>course-docs/</code> to keep things tidy.</p>\n\n<p>next up is week 5; glossary is updated with the express and testing terms from this week.</p>",
+      "project": null
+    },
+    {
       "date": "nov 08",
       "year": "2026",
       "body": "turned off probe pitch correction when fine pitch mode is active—the frame probe was reading stale sharpness values and pushing notes out of tune. timing correction still works, and notes are staying within 50 cents of target (median drift improved from -4 to -2 cents). measured it on the chorus and it holds up.",
